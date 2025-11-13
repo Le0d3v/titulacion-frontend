@@ -1,0 +1,16 @@
+import { CircleCheck, ExternalLink, Link, Lock, User } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import CambiarPassword from "../components/CambiarPassword";
+import DatosPersonales from "../components/DatosPersonales";
+
+export default function Settings() {
+  return (
+    <div className="">
+      <h1 className="text-center text-3xl font-black">Configuración</h1>
+      <div className="mt-5 px-8">
+        <DatosPersonales />
+        <CambiarPassword />
+      </div>
+    </div>
+  );
+}
