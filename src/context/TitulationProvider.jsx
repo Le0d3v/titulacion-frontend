@@ -1,6 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import clienterAxios from "../config/axios";
-import useSWR from "swr";
 
 const TitulationContext = createContext();
 

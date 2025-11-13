@@ -2,8 +2,12 @@ import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import { Outlet } from "react-router-dom";
 import { User } from "lucide-react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function UserLayout() {
+  const { user } = useAuth({ middleware: "auth" });
   const mediaQuery = window.matchMedia("(max-width: 768px)");
   return (
     <div className="h-screen flex">
@@ -14,7 +18,7 @@ export default function UserLayout() {
               src={mediaQuery ? `/img/logo_dark.png` : `/img/logo.png`}
               alt="imagen-logo"
               className="mx-auto"
-            />  
+            />
           </div>
         </div>
         <Navigation index="0" />
@@ -24,7 +28,17 @@ export default function UserLayout() {
               <User className="w-4 h-4 text-gray-300" />
             </div>
             <div className="ml-3 hidden lg:block">
-              <p className="text-xs text-gray-300">Oscar Rafael</p>
+              <p className="text-xs text-gray-300">
+                {user ? (
+                  <p className="text-xs text-gray-300">
+                    {user.name + " " + user.apellido_paterno}
+                  </p>
+                ) : (
+                  <p className="text-xs text-gray-300">
+                    Usuario no autenticado
+                  </p>
+                )}
+              </p>
             </div>
           </div>
         </div>
@@ -37,6 +51,7 @@ export default function UserLayout() {
           </div>
         </main>
       </div>
+      <ToastContainer />
     </div>
   );
 }

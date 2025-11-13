@@ -38,7 +38,7 @@ export default function Admin() {
 
   return (
     <>
-      <div className="text-center text-3xl font-black">Administradores</div>
+        
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center">
         <p className="text-sm text-gray-100 mt-5 md:mt-0">
           Administradores Totales:

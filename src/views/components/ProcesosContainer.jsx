@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
-import { useProceso } from "../../hooks/useProceso";
+import BarraProgreso from "./BarraProgreso";
 
 export default function ProcesosContainer({ procesos }) {
-  const { porcentajes, actividadesCompletadas, actividadesPendientes } =
-    useProceso(procesos);
-
   return (
     <div className="w-full">
       <div className="mt-3 w-full p-3 bg-gray-400/50 rounded-xl">
@@ -65,40 +62,12 @@ export default function ProcesosContainer({ procesos }) {
                 </div>
               </div>
               <div className="mt-1">
-                <h1 className="text-center font-bold text-emerald-300 text-lg">
-                  Porcentaje del Proceso:
+                <h1 className="text-center font-bold text-emerald-400 text-xl">
+                  Porcentaje de Avance
                 </h1>
-                <div className="flex gap-3 text-black">
-                  <div className="w-1/4">
-                    <p className="text-center text-sm">
-                      Actividades Pendientes:
-                    </p>
-                    <p className="text-2xl font-bold text-red-400 text-center">
-                      {" " + actividadesPendientes[index]}
-                    </p>
-                  </div>
-                  <div className="w-2/4">
-                    <p className="text-center text-sm text-emerald-300">
-                      {`${porcentajes[index]}%`}
-                    </p>
-                    <div className="relative w-full h-4 bg-gray-200 rounded mt-1">
-                      <div
-                        className="absolute h-full bg-green-500 rounded"
-                        style={{ width: `${porcentajes[index] || 0}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                  <div className="w-1/4">
-                    <p className="text-center text-sm">
-                      Actividades Completadas:
-                    </p>
-                    <p className="text-2xl font-bold text-blue-400 text-center">
-                      {" " + actividadesCompletadas[index]}
-                    </p>
-                  </div>
-                </div>
+                <BarraProgreso proceso={proceso.proceso} />
               </div>
-              <div className="flex w-full justify-center">
+              <div className="flex w-full justify-center mt-2">
                 <button className="p-1 bg-blue-500 text-white font-bold rounded cursor-pointer hover:bg-blue-700 hover:-translate-y-1 transition">
                   Ver Más
                 </button>
