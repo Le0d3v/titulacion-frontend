@@ -1,55 +1,10 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
+import { useProceso } from "../../hooks/useProceso";
 
 export default function ProcesosContainer({ procesos }) {
-  // Estado para almacenar los porcentajes de completado y actividades
-  const [porcentajes, setPorcentajes] = useState([]);
-  const [actividadesCompletadas, setActividadesCompletadas] = useState([]);
-  const [actividadesPendientes, setActividadesPendientes] = useState([]);
-
-  // Función para calcular el porcentaje de completado y actividades
-  const calcularDatosProceso = (proceso) => {
-    const actividades = [
-      "validacion_memoria_estadia",
-      "encuesta_egresados",
-      "validacion_datos_personales",
-      "carga_imagen",
-      "pago_donacion",
-      "pago_titulo",
-    ];
-
-    const completadas = actividades.filter(
-      (actividad) => proceso[actividad] === 1
-    ).length;
-    const totalActividades = actividades.length;
-    const pendientes = totalActividades - completadas;
-
-    const porcentajeCompletado = Math.round(
-      (completadas / totalActividades) * 100
-    );
-
-    return {
-      porcentajeCompletado,
-      completadas,
-      pendientes,
-    };
-  };
-
-  // Efecto para actualizar los datos cuando cambian los procesos
-  useEffect(() => {
-    const nuevosDatos = procesos.map((proceso) =>
-      calcularDatosProceso(proceso.proceso)
-    );
-    const nuevosPorcentajes = nuevosDatos.map(
-      (data) => data.porcentajeCompletado
-    );
-    const nuevasCompletadas = nuevosDatos.map((data) => data.completadas);
-    const nuevasPendientes = nuevosDatos.map((data) => data.pendientes);
-
-    setPorcentajes(nuevosPorcentajes);
-    setActividadesCompletadas(nuevasCompletadas);
-    setActividadesPendientes(nuevasPendientes);
-  }, [procesos]);
+  const { porcentajes, actividadesCompletadas, actividadesPendientes } =
+    useProceso(procesos);
 
   return (
     <div className="w-full">

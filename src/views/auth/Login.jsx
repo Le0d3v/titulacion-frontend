@@ -10,7 +10,7 @@ export default function Login() {
 
   const [errores, setErrores] = useState([]);
   const [cargando, setCargando] = useState(false);
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
+  const [showPassword, setShowPassword] = useState(false);
 
   const { login } = useAuth({
     middleware: "guest",
