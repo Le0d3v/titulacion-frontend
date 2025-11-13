@@ -1,14 +1,9 @@
 import clienteAxios from "../../config/axios";
 import useSWR from "swr";
-
-import { useState, useEffect } from "react";
 import Loader from "../components/Loader";
 import ProcesosContainer from "../components/ProcesosContainer";
 
 export default function Processes() {
-  const [buscadorTsu, setBuscadorTsu] = useState([]);
-  const [buscadorIng, setBuscadorIng] = useState([]);
-
   const fetcher = () =>
     clienteAxios("/api/students/all").then((data) => data.data);
 
