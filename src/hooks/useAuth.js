@@ -5,7 +5,7 @@ import clienteAxios from "../config/axios";
 
 export const useAuth = ({ middleware, url }) => {
   const token = localStorage.getItem("AUTH_TOKEN");
-  
+
   const navigate = useNavigate();
 
   const {
@@ -58,10 +58,16 @@ export const useAuth = ({ middleware, url }) => {
       navigate(url);
     }
 
+    if (middleware === "guest" && user && user.admin) {
+      navigate("/admin");
+    }
+
     if (middleware === "auth" && error) {
       navigate("/");
     }
   }, [user, error]);
+
+  console.log(user);
 
   return {
     login,

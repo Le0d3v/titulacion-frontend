@@ -14,7 +14,7 @@ export default function Login() {
 
   const { login } = useAuth({
     middleware: "guest",
-    url: "admin",
+    url: "home",
   });
 
   const handleSubmit = async (e) => {
