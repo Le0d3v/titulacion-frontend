@@ -67,8 +67,6 @@ export const useAuth = ({ middleware, url }) => {
     }
   }, [user, error]);
 
-  console.log(user);
-
   return {
     login,
     logout,

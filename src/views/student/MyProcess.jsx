@@ -15,8 +15,9 @@ export default function MyProcess() {
   const [errores, setErrores] = useState([]);
   const [cargando, setCargando] = useState(false);
   const referenciaRef = createRef();
+  const memoriaRef = createRef();
+  const comprobanteRef = createRef();
   const token = localStorage.getItem("AUTH_TOKEN");
-
   const shouldFetch = Boolean(user?.id);
 
   const fetcher = () =>
@@ -74,6 +75,68 @@ export default function MyProcess() {
     }
   };
 
+  const handleSubmitMemoria = async (e) => {
+    e.preventDefault();
+    setCargando(true);
+
+    const formData = new FormData();
+    formData.append("id", user.id);
+    formData.append("pdf", memoriaRef.current.files[0]); // <--- EL ARCHIVO REAL
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/archivo/memoria/store",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(data.message);
+      setErrores([]);
+      setCargando(false);
+      toast.success(data.message);
+    } catch (error) {
+      setErrores(Object.values(error.response.data.errors));
+      setCargando(false);
+
+      setTimeout(() => setErrores([]), 5000);
+    }
+  };
+
+  const handleSubmitComprobante = async (e) => {
+    e.preventDefault();
+    setCargando(true);
+
+    const formData = new FormData();
+    formData.append("id", user.id);
+    formData.append("pdf", comprobanteRef.current.files[0]); // <--- EL ARCHIVO REAL
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/archivo/comprobante/store",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(data.message);
+      setErrores([]);
+      setCargando(false);
+      toast.success(data.message);
+    } catch (error) {
+      setErrores(Object.values(error.response.data.errors));
+      setCargando(false);
+
+      setTimeout(() => setErrores([]), 5000);
+    }
+  };
+
   return (
     <>
       <div className="text-center text-3xl font-black">Mi Proceso</div>
@@ -98,7 +161,11 @@ export default function MyProcess() {
             <form
               encType="multipart/form-data"
               className="w-full max-w-md mx-auto space-y-4 p-4 bg-gray-200 mt-3 shadow-md rounded-xl"
+              onSubmit={handleSubmitMemoria}
             >
+              {errores.map((error, i) => (
+                <Alerta key={i}>{error}</Alerta>
+              ))}
               <label className="block text-gray-700 font-semibold">
                 Memoria de Estadía (PDF):
               </label>
@@ -115,15 +182,23 @@ export default function MyProcess() {
                  hover:file:bg-blue-700
                  cursor-pointer
                  bg-gray-50 border border-gray-300 rounded-lg p-2"
+                  ref={memoriaRef}
                 />
               </div>
               <div className="">
                 <button
                   type="submit"
-                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center"
+                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
+                  disabled={cargando}
                 >
-                  <Send size={18} />
-                  <p>Enviar</p>
+                  {cargando ? (
+                    <ClipLoader color="#ffffff" size={24} className="" />
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      <p>Enviar</p>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
@@ -280,7 +355,11 @@ export default function MyProcess() {
             <form
               encType="multipart/form-data"
               className="w-full max-w-md mx-auto space-y-4 p-4 bg-gray-200 mt-3 shadow-md rounded-xl"
+              onSubmit={handleSubmitComprobante}
             >
+              {errores.map((error, i) => (
+                <Alerta key={i}>{error}</Alerta>
+              ))}
               <label className="block text-gray-700 font-semibold">
                 Comprobante (PDF):
               </label>
@@ -297,15 +376,23 @@ export default function MyProcess() {
                  hover:file:bg-blue-700
                  cursor-pointer
                  bg-gray-50 border border-gray-300 rounded-lg p-2"
+                  ref={comprobanteRef}
                 />
               </div>
               <div className="">
                 <button
                   type="submit"
-                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center"
+                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
+                  disabled={cargando}
                 >
-                  <Send size={18} />
-                  <p>Enviar</p>
+                  {cargando ? (
+                    <ClipLoader color="#ffffff" size={24} className="" />
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      <p>Enviar</p>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
@@ -357,22 +444,7 @@ export default function MyProcess() {
                   ref={referenciaRef}
                 />
               </div>
-              <div className="">
-                <button
-                  type="submit"
-                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
-                  disabled={cargando}
-                >
-                  {cargando ? (
-                    <ClipLoader color="#ffffff" size={24} className="" />
-                  ) : (
-                    <>
-                      <Send size={18} />
-                      <p>Enviar</p>
-                    </>
-                  )}
-                </button>
-              </div>
+              <div className=""></div>
             </form>
             <div className="mt-3">
               <p className="font-bold text-gray-800 text-lg mb-1">
