@@ -5,9 +5,17 @@ import Loader from "../components/Loader";
 import BarraProgreso from "../../views/components/BarraProgreso";
 import Estado from "../components/Estado";
 import { NotebookPen, Send, User } from "lucide-react";
+import { useState, createRef } from "react";
+import Alerta from "../components/Alerta";
+import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 export default function MyProcess() {
   const { user } = useAuth({ middleware: "auth" });
+  const [errores, setErrores] = useState([]);
+  const [cargando, setCargando] = useState(false);
+  const referenciaRef = createRef();
+  const token = localStorage.getItem("AUTH_TOKEN");
 
   const shouldFetch = Boolean(user?.id);
 
@@ -32,15 +40,38 @@ export default function MyProcess() {
 
   const proceso = data?.data?.[0]?.proceso ?? null;
 
-  const formatearEstado = (estado) => {
-    const estados = {
-      0: "Pendiente",
-      1: "Completado",
-      2: "En Revisión",
-      3: "Rechazado",
+  const hanldeSubmitReferencia = async (e) => {
+    e.preventDefault();
+    setCargando(true);
+
+    const datos = {
+      id: user.id,
+      referencia_pago: referenciaRef.current.value,
     };
 
-    return estados[estado] || "Desconocido";
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/archivo/referencia/store",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(data.message);
+      setErrores([]);
+      setCargando(false);
+      await toast.success(data.message);
+    } catch (error) {
+      setErrores(Object.values(error.response.data.errors));
+      setCargando(false);
+
+      setTimeout(() => {
+        setErrores([]);
+      }, 5000);
+    }
   };
 
   return (
@@ -302,12 +333,16 @@ export default function MyProcess() {
             </h1>
             <p className="mt-3 font-bold">
               Estado: {"  "}
-              <Estado estado={proceso.validacion_memoria_estadia} />
+              <Estado estado={proceso.pago_titulo} />
             </p>
             <form
               encType="multipart/form-data"
               className="w-full max-w-md mx-auto space-y-4 p-4 bg-gray-200 mt-3 shadow-md rounded-xl"
+              onSubmit={hanldeSubmitReferencia}
             >
+              {errores.map((error, i) => (
+                <Alerta key={i}>{error}</Alerta>
+              ))}
               <label className="block text-gray-700 font-semibold">
                 Refrencia de Pago (20 digitos):
               </label>
@@ -315,18 +350,27 @@ export default function MyProcess() {
               <div className="relative">
                 <input
                   type="tel"
-                  placeholder="Ingresa tu refernecia"
+                  placeholder="Coloca tu referencia"
                   className="block w-full text-sm text-gray-700 bg-gray-50 border border-gray-300 rounded-lg p-2 
                     focus:border-blue-600 focus:ring-blue-600"
+                  required
+                  ref={referenciaRef}
                 />
               </div>
               <div className="">
                 <button
                   type="submit"
-                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center"
+                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
+                  disabled={cargando}
                 >
-                  <Send size={18} />
-                  <p>Enviar</p>
+                  {cargando ? (
+                    <ClipLoader color="#ffffff" size={24} className="" />
+                  ) : (
+                    <>
+                      <Send size={18} />
+                      <p>Enviar</p>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
