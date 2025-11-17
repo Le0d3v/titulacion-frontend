@@ -9,8 +9,8 @@ import Loader from "../components/Loader";
 import BarraProgreso from "../components/BarraProgreso";
 import Estado from "../components/Estado";
 import Alerta from "../components/Alerta";
+import FormularioValidacion from "./FormularioValidacion";
 import FormularioArchivo from "../components/FormularioArchivo";
-
 
 export default function MyProcess() {
   const { user } = useAuth({ middleware: "auth" });
@@ -25,6 +25,7 @@ export default function MyProcess() {
   const [cargandoComprobante, setCargandoComprobante] = useState(false);
   const [erroresImagen, setErroresImagen] = useState([]);
   const [cargandoImagen, setCargandoImagen] = useState(false);
+  const [modalValidacionOpen, setModalValidacionOpen] = useState(false);
 
   // Refs
   const referenciaRef = createRef();
@@ -221,12 +222,13 @@ export default function MyProcess() {
             </p>
 
             <div className="my-10 w-full flex justify-center">
-              <button className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center">
+              <button
+                onClick={() => setModalValidacionOpen(true)}
+                className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center"
+              >
                 <User /> Validar Datos Personales
               </button>
             </div>
-
-            {/* COMENTARIOS */}
             <div className="mt-3">
               <p className="font-bold text-gray-800 text-lg mb-1">
                 Comentarios:
@@ -242,7 +244,6 @@ export default function MyProcess() {
             </div>
           </div>
 
-          {/* ENCUESTA */}
           <div className="w-full p-2 rounded-lg bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Encuesta de Egresados
@@ -257,7 +258,6 @@ export default function MyProcess() {
               </button>
             </div>
 
-            {/* COMENTARIOS */}
             <div className="mt-3">
               <p className="font-bold text-gray-800 text-lg mb-1">
                 Comentarios:
@@ -398,6 +398,12 @@ export default function MyProcess() {
           </div>
         </div>
       </div>
+      <FormularioValidacion
+        open={modalValidacionOpen}
+        onClose={() => setModalValidacionOpen(false)}
+        user={user}
+        token={token}
+      />
     </>
   );
 }
