@@ -1,14 +1,16 @@
+import { useState, createRef } from "react";
+import useSWR from "swr";
+import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
+import { NotebookPen, Send, User } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import clienteAxios from "../../config/axios";
-import useSWR from "swr";
 import Loader from "../components/Loader";
-import BarraProgreso from "../../views/components/BarraProgreso";
+import BarraProgreso from "../components/BarraProgreso";
 import Estado from "../components/Estado";
-import { NotebookPen, Send, User } from "lucide-react";
-import { useState, createRef } from "react";
 import Alerta from "../components/Alerta";
-import { toast } from "react-toastify";
-import { ClipLoader } from "react-spinners";
+import FormularioArchivo from "../components/FormularioArchivo";
+
 
 export default function MyProcess() {
   const { user } = useAuth({ middleware: "auth" });
@@ -187,49 +189,14 @@ export default function MyProcess() {
             <p className="mt-3 font-bold">
               Estado: <Estado estado={proceso.validacion_memoria_estadia} />
             </p>
-
-            <form
-              encType="multipart/form-data"
-              className="w-full max-w-md mx-auto space-y-4 p-4 bg-gray-200 mt-3 shadow-md rounded-xl"
+            <FormularioArchivo
+              label="Memoria de Estadía (Archivo PDF)"
+              accept="application/pdf"
+              loading={cargandoMemoria}
+              errors={erroresMemoria}
               onSubmit={handleSubmitMemoria}
-            >
-              {erroresMemoria.map((error, i) => (
-                <Alerta key={i}>{error}</Alerta>
-              ))}
-
-              <label className="block text-gray-700 font-semibold">
-                Memoria de Estadía (PDF):
-              </label>
-
-              <input
-                type="file"
-                accept="application/pdf"
-                ref={memoriaRef}
-                className="block w-full text-sm text-gray-700 
-                 file:mr-4 file:py-2 file:px-4
-                 file:rounded-lg file:border-0
-                 file:text-sm file:font-semibold
-                 file:bg-blue-600 file:text-white
-                 hover:file:bg-blue-700
-                 cursor-pointer bg-gray-50 border border-gray-300 rounded-lg p-2"
-                required
-              />
-
-              <button
-                type="submit"
-                disabled={cargandoMemoria}
-                className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 
-                hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
-              >
-                {cargandoMemoria ? (
-                  <ClipLoader color="#ffffff" size={24} />
-                ) : (
-                  <>
-                    <Send size={18} /> Enviar
-                  </>
-                )}
-              </button>
-            </form>
+              inputRef={memoriaRef}
+            />
             <div className="mt-3">
               <p className="font-bold text-gray-800 text-lg mb-1">
                 Comentarios:
@@ -245,7 +212,6 @@ export default function MyProcess() {
             </div>
           </div>
 
-          {/* VALIDACIÓN DATOS */}
           <div className="w-full p-2 rounded-lg bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Validación de Datos Personales
@@ -308,9 +274,7 @@ export default function MyProcess() {
           </div>
         </div>
 
-        {/* SEGUNDA FILA */}
         <div className="w-full p-1 flex flex-col md:flex-row gap-5 mt-3">
-          {/* FORM IMAGEN */}
           <div className="w-full p-2 rounded-lg bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Carga de Imágen para Titulación
@@ -319,48 +283,14 @@ export default function MyProcess() {
               Estado: <Estado estado={proceso.carga_imagen} />
             </p>
 
-            <form
-              encType="multipart/form-data"
-              className="w-full max-w-md mx-auto space-y-4 p-4 bg-gray-200 mt-3 shadow-md rounded-xl"
+            <FormularioArchivo
+              label="Carga de Imágen (.jpg / .jpeg)"
+              accept="image/jpeg, image/jpg"
+              loading={cargandoImagen}
+              errors={erroresImagen}
               onSubmit={handleSubmitImagen}
-            >
-              {erroresImagen.map((error, i) => (
-                <Alerta key={i}>{error}</Alerta>
-              ))}
-
-              <label className="block text-gray-700 font-semibold">
-                Imágen (jpg/jpeg):
-              </label>
-
-              <input
-                type="file"
-                accept="image/jpeg, image/jpg"
-                ref={imagenRef}
-                className="block w-full text-sm text-gray-700 
-                 file:mr-4 file:py-2 file:px-4
-                 file:rounded-lg file:border-0
-                 file:text-sm file:font-semibold
-                 file:bg-blue-600 file:text-white
-                 hover:file:bg-blue-700
-                 cursor-pointer bg-gray-50 border border-gray-300 rounded-lg p-2"
-                required
-              />
-
-              <button
-                type="submit"
-                disabled={cargandoImagen}
-                className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 
-                hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
-              >
-                {cargandoImagen ? (
-                  <ClipLoader color="#ffffff" size={24} />
-                ) : (
-                  <>
-                    <Send size={18} /> Enviar
-                  </>
-                )}
-              </button>
-            </form>
+              inputRef={imagenRef}
+            />
 
             <div className="mt-3">
               <p className="font-bold text-gray-800 text-lg mb-1">
@@ -385,48 +315,14 @@ export default function MyProcess() {
               Estado: <Estado estado={proceso.pago_donacion} />
             </p>
 
-            <form
-              encType="multipart/form-data"
-              className="w-full max-w-md mx-auto space-y-4 p-4 bg-gray-200 mt-3 shadow-md rounded-xl"
+            <FormularioArchivo
+              label="Comprobante (Archivo PDF)"
+              accept="application/pdf"
+              loading={cargandoComprobante}
+              errors={erroresComprobante}
               onSubmit={handleSubmitComprobante}
-            >
-              {erroresComprobante.map((error, i) => (
-                <Alerta key={i}>{error}</Alerta>
-              ))}
-
-              <label className="block text-gray-700 font-semibold">
-                Comprobante (PDF):
-              </label>
-
-              <input
-                type="file"
-                accept="application/pdf"
-                ref={comprobanteRef}
-                className="block w-full text-sm text-gray-700 
-                 file:mr-4 file:py-2 file:px-4
-                 file:rounded-lg file:border-0
-                 file:text-sm file:font-semibold
-                 file:bg-blue-600 file:text-white
-                 hover:file:bg-blue-700
-                 cursor-pointer bg-gray-50 border border-gray-300 rounded-lg p-2"
-                required
-              />
-
-              <button
-                type="submit"
-                disabled={cargandoComprobante}
-                className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 
-                hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
-              >
-                {cargandoComprobante ? (
-                  <ClipLoader color="#ffffff" size={24} />
-                ) : (
-                  <>
-                    <Send size={18} /> Enviar
-                  </>
-                )}
-              </button>
-            </form>
+              inputRef={comprobanteRef}
+            />
 
             <div className="mt-3">
               <p className="font-bold text-gray-800 text-lg mb-1">
