@@ -366,6 +366,7 @@ export default function MyProcess() {
                 ref={referenciaRef}
                 className="block w-full text-sm text-gray-700 bg-gray-50 border border-gray-300 rounded-lg p-2 
                     focus:border-blue-600 focus:ring-blue-600"
+                defaultValue={data?.data?.[0]?.archivo?.referencia_pago}
               />
               <button
                 type="submit"
