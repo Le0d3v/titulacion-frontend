@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { use, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import clienteAxios from "../../config/axios";
 import Alerta from "../components/Alerta";
@@ -18,7 +18,6 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
   const fechaNacimientoRef = createRef();
   const curpRef = createRef();
   const rfcRef = createRef();
-  const matriculaRef = createRef();
   const generoRef = createRef();
   const estadoCivilRef = createRef();
   const emailRef = createRef();
@@ -34,12 +33,23 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
 
     const datos = {
       id: user.id,
-      
+      name: nameRef.current.value,
+      apellido_paterno: apPaternoRef.current.value,
+      apellido_materno: apMaternoRef.current.value,
+      fecha_nacimiento: fechaNacimientoRef.current.value,
+      curp: curpRef.current.value,
+      rfc: rfcRef.current.value,
+      genero: generoRef.current.value,
+      estado_civil: estadoCivilRef.current.value,
+      email: emailRef.current.value,
+      telefono: telRef.current.value,
+      telefono_emergencia_1: telEmergencia1Ref.current.value,
+      telefono_emergencia_2: telEmergencia2Ref.current.value,
     };
 
     try {
-      const { data } = await clienteAxios.post(
-        "https://servidor-externo.com/api/validar-datos",
+      const { data } = await clienteAxios.put(
+        `/api/students/all/${user.id}`,
         datos,
         {
           headers: {
@@ -56,7 +66,8 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
       if (error.response?.data?.errors) {
         setErroresValidacion(Object.values(error.response.data.errors));
       } else {
-        setErroresValidacion(["No se pudo conectar con el servidor externo"]);
+        toast.error("No se pudo conectar con el servidor externo");
+        console.log(error);
       }
 
       setTimeout(() => setErroresValidacion([]), 5000);
@@ -81,8 +92,8 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
         <div className="text-gray-700 my-3 text-center md:text-start md:flex md:gap-1">
           <p>
             Verifica que tus datos personales sean correctos y coincidan con tus
-            documentos oficiales. Si hay datos que no puedes modificar, contacta
-            a
+            documentos oficiales. Si hay datos que sno puedes modificar,
+            contacta a
           </p>
           <span className="text-emerald-400 font-semibold flex justify-center md:justify-start gap-1">
             <NavLink
@@ -99,12 +110,7 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
         {erroresValidacion.length > 0 && (
           <div className="my-3">
             {erroresValidacion.map((err, i) => (
-              <p
-                key={i}
-                className="bg-red-500 text-white p-2 rounded font-semibold mb-2"
-              >
-                {err}
-              </p>
+              <Alerta key={i}>{err}</Alerta>
             ))}
           </div>
         )}
@@ -144,11 +150,6 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
               inputRef={curpRef}
             />
             <InputDato label="RFC:" defaultValue={user.rfc} inputRef={rfcRef} />
-            <InputDato
-              label="Matrícula:"
-              defaultValue={user.matricula}
-              inputRef={matriculaRef}
-            />
             <InputDato
               label="Género:"
               defaultValue={user.genero}
