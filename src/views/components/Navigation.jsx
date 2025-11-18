@@ -13,7 +13,7 @@ import {
 
 export default function Navigation({ index }) {
   const { user } = useAuth({ middleware: "auth" });
-  
+
   if (index == "1") {
     return (
       <nav className="mt-5 px-2">
@@ -94,21 +94,6 @@ export default function Navigation({ index }) {
           <ShieldUser className="w-6 h-6 lg:mr-3" />
           <span className="sm:block md:hidden lg:block text-xl md:text-sm">
             Admins
-          </span>
-        </NavLink>
-        <NavLink
-          to="/admin/reports"
-          className={({ isActive }) =>
-            `flex items-center p-5 md:p-3 mb-1 text-sm rounded-lg gap-1 transition-all group ${
-              isActive
-                ? "bg-emerald-500/30 border-l-4 border-green-400 font-black"
-                : "hover:-translate-y-1"
-            }`
-          }
-        >
-          <BarChart3 className="w-6 h-6 lg:mr-3" />
-          <span className="sm:block md:hidden lg:block text-xl md:text-sm">
-            Reportes
           </span>
         </NavLink>
         <NavLink

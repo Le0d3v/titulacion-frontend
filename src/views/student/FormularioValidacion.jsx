@@ -154,11 +154,13 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
               label="Género:"
               defaultValue={user.genero}
               inputRef={generoRef}
+              disabled={false}
             />
             <InputDato
               label="Estado Civil:"
               defaultValue={user.estado_civil}
               inputRef={estadoCivilRef}
+              disabled={false}
             />
           </div>
 
@@ -168,21 +170,25 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
               label="Correo Electrónico:"
               defaultValue={user.email}
               inputRef={emailRef}
+              disabled={false}
             />
             <InputDato
               label="Número de Teléfono:"
               defaultValue={user.telefono}
               inputRef={telRef}
+              disabled={false}
             />
             <InputDato
               label="Número Telefónico de Emergencia (1):"
               defaultValue={user.telefono_emergencia_1}
               inputRef={telEmergencia1Ref}
+              disabled={false}
             />
             <InputDato
               label="Número Telefónico de Emergencia (2):"
               defaultValue={user.telefono_emergencia_2}
               inputRef={telEmergencia2Ref}
+              disabled={false}
             />
           </div>
 
@@ -217,7 +223,13 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
   );
 }
 
-function InputDato({ label, defaultValue, inputRef, type = "text" }) {
+function InputDato({
+  label,
+  defaultValue,
+  inputRef,
+  type = "text",
+  disabled = true,
+}) {
   return (
     <div className="w-full">
       <label className="text-emerald-500 font-semibold">{label}</label>
@@ -225,7 +237,10 @@ function InputDato({ label, defaultValue, inputRef, type = "text" }) {
         ref={inputRef}
         type={type}
         defaultValue={defaultValue}
-        className="w-full mt-1 bg-gray-50 text-gray-900 border border-gray-300 p-2 rounded-lg focus:border-emerald-500 focus:ring-emerald-500"
+        disabled={disabled}
+        className={`w-full mt-1 bg-gray-50 text-gray-900 border border-gray-300 p-2 rounded-lg focus:border-emerald-500 focus:ring-emerald-500 ${
+          disabled ? "bg-red-100 cursor-not-allowed" : ""
+        }`}
       />
     </div>
   );

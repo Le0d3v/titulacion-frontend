@@ -44,10 +44,6 @@ const router = createBrowserRouter([
         element: <Admin />,
       },
       {
-        path: "/admin/reports",
-        element: <Reports />,
-      },
-      {
         path: "/admin/settings",
         element: <Setings />,
       },
