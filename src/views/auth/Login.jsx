@@ -3,6 +3,7 @@ import { createRef, useState } from "react";
 import Alerta from "../components/Alerta";
 import { useAuth } from "../../hooks/useAuth";
 import { ClipLoader } from "react-spinners";
+import { useEffect } from "react";
 
 export default function Login() {
   const matriculaRef = createRef();
@@ -11,6 +12,10 @@ export default function Login() {
   const [errores, setErrores] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    setCargando(false);
+  }, []);
 
   const { login } = useAuth({
     middleware: "guest",
@@ -26,8 +31,7 @@ export default function Login() {
       password: passwordRef.current.value,
     };
 
-    await login(datos, setErrores);
-    setCargando(false);
+    await login(datos, setErrores, setCargando);
   };
 
   return (

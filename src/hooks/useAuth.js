@@ -24,13 +24,14 @@ export const useAuth = ({ middleware, url }) => {
       })
   );
 
-  const login = async (datos, setErrores) => {
+  const login = async (datos, setErrores, setCargando) => {
     try {
       const { data } = await clienteAxios.post("/api/login", datos);
       setErrores([]);
       await mutate();
       localStorage.setItem("AUTH_TOKEN", data.token);
     } catch (error) {
+      setCargando(false);
       setErrores(Object.values(error.response.data.errors));
 
       setTimeout(() => {
