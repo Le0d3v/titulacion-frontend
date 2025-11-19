@@ -56,7 +56,7 @@ export default function BarraProgreso({ proceso }) {
         </p>
       </div>
       <div className="md:w-2/4 w-full">
-        <h1 className="my-1 text-center text-gray-200 font-bold">
+        <h1 className="my-1 text-center text-gray-700 font-bold">
           Progreso Total:
         </h1>
         <p className="text-center text-emerald-400 font-bold my-1">

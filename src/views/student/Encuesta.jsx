@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import clienteAxios from "../../config/axios";
 import { toast } from "react-toastify";
-import { Send, X, ClipboardList } from "lucide-react";
+import { Send, X, ClipboardList, CircleCheck } from "lucide-react";
 
 export default function Encuesta({ open, onClose, user, token }) {
   const [cargandoEncuesta, setCargandoEncuesta] = useState(false);
@@ -60,10 +60,6 @@ export default function Encuesta({ open, onClose, user, token }) {
             Encuesta de Egresados
           </h1>
         </div>
-        <p className="text-gray-700 my-3 text-center md:text-start">
-          Contesta cada una de las preguntas con total sinceridad, tu identidad
-          será anónima.
-        </p>
         {erroresEncuesta.length > 0 && (
           <div className="my-3">
             {erroresEncuesta.map((err, i) => (
@@ -73,6 +69,10 @@ export default function Encuesta({ open, onClose, user, token }) {
         )}
         {user.proceso.encuesta_egresados === 0 ? (
           <>
+            <p className="text-gray-700 my-3 text-center md:text-start">
+              Contesta cada una de las preguntas con total sinceridad, tu
+              identidad será anónima.
+            </p>
             <form onSubmit={handleSubmitEncuesta} className="mt-5">
               {pagina === 1 && (
                 <>
@@ -238,9 +238,13 @@ export default function Encuesta({ open, onClose, user, token }) {
           </>
         ) : (
           <>
-            <p className="my-2 p-3 bg-green-400 text-white font-bold uppercase border-l-8 border-green-600 rounded-lg w-64">
-              Ya has respondido
-            </p>
+            <div
+              className="my-2 px-2 py-3 bg-green-400 text-white font-bold uppercase border-l-8 border-green-600 
+              rounded-lg w-66 flex gap-2 items-center"
+            >
+              <CircleCheck size={25} />
+              <p>Ya has respondido</p>
+            </div>
             <div className="mt-5">
               <button
                 type="button"
