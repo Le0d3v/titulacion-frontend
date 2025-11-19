@@ -11,6 +11,7 @@ import Estado from "../components/Estado";
 import Alerta from "../components/Alerta";
 import FormularioValidacion from "./FormularioValidacion";
 import FormularioArchivo from "../components/FormularioArchivo";
+import Encuesta from "./Encuesta";
 
 export default function MyProcess() {
   const { user } = useAuth({ middleware: "auth" });
@@ -25,6 +26,7 @@ export default function MyProcess() {
   const [cargandoComprobante, setCargandoComprobante] = useState(false);
   const [erroresImagen, setErroresImagen] = useState([]);
   const [cargandoImagen, setCargandoImagen] = useState(false);
+
   const [modalValidacionOpen, setModalValidacionOpen] = useState(false);
   const [modalEncuestaOpen, setModalEncuestaOpen] = useState(false);
 
@@ -50,6 +52,7 @@ export default function MyProcess() {
   if (error) return <div>Error al cargar los datos.</div>;
 
   const proceso = data?.data?.[0]?.proceso ?? null;
+  const usuario = data?.data?.[0];
 
   const hanldeSubmitReferencia = async (e) => {
     e.preventDefault();
@@ -254,7 +257,10 @@ export default function MyProcess() {
             </p>
 
             <div className="my-10 w-full flex justify-center">
-              <button className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center">
+              <button
+                className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center"
+                onClick={() => setModalEncuestaOpen(true)}
+              >
                 <NotebookPen /> Realizar Encuesta
               </button>
             </div>
@@ -404,6 +410,13 @@ export default function MyProcess() {
         open={modalValidacionOpen}
         onClose={() => setModalValidacionOpen(false)}
         user={user}
+        token={token}
+      />
+
+      <Encuesta
+        open={modalEncuestaOpen}
+        onClose={() => setModalEncuestaOpen(false)}
+        user={usuario}
         token={token}
       />
     </>

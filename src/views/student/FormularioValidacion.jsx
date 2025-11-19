@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import clienteAxios from "../../config/axios";
 import Alerta from "../components/Alerta";
