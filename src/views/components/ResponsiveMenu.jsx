@@ -1,8 +1,21 @@
 import Navigation from "./Navigation";
 import { Bell, User, LogOut, Moon, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import { ClipLoader } from "react-spinners";
+import { useState } from "react";
 
 export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
+  const { logout } = useAuth({ middleware: "auth" });
+  const [cargando, setCargando] = useState(false);
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    setCargando(true);
+    await logout();
+    setCargando(false);
+  };
+
   return (
     <>
       <div
@@ -34,13 +47,20 @@ export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
           </div>
         </div>
         <div className="mt-10">
-          <NavLink
-            to="/"
-            className="flex gap-1 text-lg justify-center items-center bg-emerald-500 rounded-lg text-white font-bold hover:bg-emerald-600 p-2 transition hover:-translate-y-1"
+          <button
+            className="flex items-center justify-center gap-1 text-sm bg-emerald-500 rounded-lg text-white font-bold hover:bg-emerald-600 p-2 transition hover:-translate-y-1 cursor-pointer w-full"
+            onClick={handleLogout}
+            disabled={cargando}
           >
-            <p>Cerrar Sesión</p>
-            <LogOut className="w-10" />
-          </NavLink>
+            {cargando ? (
+              <ClipLoader color="#ffffff" size={20} className="m-0" />
+            ) : (
+              <>
+                <p>Cerrar Sesión</p>
+                <LogOut className="w-5" />
+              </>
+            )}
+          </button>
         </div>
       </div>
     </>

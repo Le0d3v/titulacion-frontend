@@ -26,6 +26,7 @@ export default function MyProcess() {
   const [erroresImagen, setErroresImagen] = useState([]);
   const [cargandoImagen, setCargandoImagen] = useState(false);
   const [modalValidacionOpen, setModalValidacionOpen] = useState(false);
+  const [modalEncuestaOpen, setModalEncuestaOpen] = useState(false);
 
   // Refs
   const referenciaRef = createRef();
