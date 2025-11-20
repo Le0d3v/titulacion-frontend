@@ -32,6 +32,10 @@ const router = createBrowserRouter([
         element: <Processes />,
       },
       {
+        path: "/admin/processes/:proceso",
+        element: <Processes />,
+      },
+      {
         path: "/admin/students",
         element: <Students />,
       },

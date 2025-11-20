@@ -219,8 +219,8 @@ export default function Files() {
           ) : (
             <p>No hay comprobante disponible.</p>
           )}
-          {archivo?.imagen_titulacion != null ||
-          archivo?.imagen_titulacion != undefined ? (
+          {archivo?.imagen_titulacion !== null ||
+          archivo?.imagen_titulacion !== undefined ? (
             <div className="mt-5">
               <h2 className="text-center text-blue-400 font-bold">Acciones</h2>
               <div className="flex justify-center p-1">
