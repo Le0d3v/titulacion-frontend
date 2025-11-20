@@ -1,19 +1,256 @@
-import { X, Trash, CircleCheck } from "lucide-react";
+import { X, CircleCheck } from "lucide-react";
 import BarraProgreso from "../components/BarraProgreso";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import PDFViewer from "../components/PDFViewer";
 import Estado from "../components/Estado";
 import Alerta from "../components/Alerta";
+import clienteAxios from "../../config/axios";
+import { toast } from "react-toastify";
 
 export default function ModalProceso({ open, onClose, proceso }) {
   if (!open || !proceso) return null;
 
-  const [memoriaLoading, setMemoriaLoading] = useState(false);
+  const token = localStorage.getItem("AUTH_TOKEN");
+
+  const [memoriaAceptarLoading, setMemoriaAceptarLoading] = useState(false);
+  const [memoriaRechazarLoading, setMemoriaRechazarLoading] = useState(false);
+  const [comprobanteAceptarLoading, setComprobanteAceptarLoading] =
+    useState(false);
+  const [comprobanteRechazarLoading, setComprobanteRechazarLoading] =
+    useState(false);
+  const [imagenAceptarLoading, setImagenAceptarLoading] = useState(false);
+  const [imagenRechazarLoading, setImagenRechazarLoading] = useState(false);
+  const [referenciaAceptarLoading, setReferenciaAceptarLoading] =
+    useState(false);
+  const [referenciaRechazarLoading, setReferenciaRechazarLoading] =
+    useState(false);
 
   const baseURL = import.meta.env.VITE_API_URL;
 
-  const handleSubmitAprobarMemoria = async (e) => {};
+  const handleSubmitAprobarMemoria = async (e) => {
+    e.preventDefault();
+    setMemoriaAceptarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/memoria/aprobar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setMemoriaAceptarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setMemoriaAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
+
+  const handleSubmitRechazarMemoria = async (e) => {
+    e.preventDefault();
+    setMemoriaRechazarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/memoria/rechazar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setMemoriaRechazarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setMemoriaAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
+
+  const handleSubmitAprobarComprobante = async (e) => {
+    e.preventDefault();
+    setComprobanteAceptarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/comprobante/aprobar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setComprobanteAceptarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setComprobanteAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
+
+  const handleSubmitRechazarComprobante = async (e) => {
+    e.preventDefault();
+    setComprobanteRechazarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/comprobante/rechazar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setComprobanteRechazarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setComprobanteAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
+
+  const handleSubmitAprobarImagen = async (e) => {
+    e.preventDefault();
+    setImagenAceptarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/imagen/aprobar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setImagenAceptarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setImagenAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
+
+  const handleSubmitRechazarImagen = async (e) => {
+    e.preventDefault();
+    setImagenRechazarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/imagen/rechazar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setImagenRechazarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setImagenAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
+
+  const handleSubmitAprobarReferencia = async (e) => {
+    e.preventDefault();
+    setReferenciaAceptarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/referencia/aprobar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setReferenciaAceptarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setReferenciaAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
+
+  const handleSubmitRechazarReferencia = async (e) => {
+    e.preventDefault();
+    setReferenciaRechazarLoading(true);
+
+    const datos = {
+      id: proceso.id,
+    };
+
+    try {
+      const { data } = await clienteAxios.post(
+        "/api/proceso/referencia/rechazar",
+        datos,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setReferenciaRechazarLoading(false);
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+      setReferenciaAceptarLoading(false);
+      toast.error(data.message);
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
@@ -39,7 +276,6 @@ export default function ModalProceso({ open, onClose, proceso }) {
           </h2>
 
           <div className="flex flex-col md:flex-row gap-5 w-full">
-            {/* TARJETA 1 */}
             <div
               className="p-5 border border-emerald-300 rounded-xl w-full shadow-md 
             hover:shadow-lg transition-all bg-gray-100 hover:-translate-y-1"
@@ -75,14 +311,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form onSubmit={handleSubmitRechazarMemoria}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={memoriaRechazarLoading}
                             className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
                             hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {memoriaRechazarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
@@ -95,11 +331,11 @@ export default function ModalProceso({ open, onClose, proceso }) {
                         <form onSubmit={handleSubmitAprobarMemoria}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={memoriaAceptarLoading}
                             className="px-2 py-1 rounded bg-green-500 text-white font-bold cursor-pointer
                             hover:bg-green-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {memoriaAceptarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
@@ -114,8 +350,6 @@ export default function ModalProceso({ open, onClose, proceso }) {
                 </>
               )}
             </div>
-
-            {/* TARJETA 2 */}
             <div
               className="p-5 border border-emerald-300 rounded-xl w-full shadow-md 
             hover:shadow-lg transition-all bg-gray-100 hover:-translate-y-1"
@@ -129,8 +363,6 @@ export default function ModalProceso({ open, onClose, proceso }) {
                 <Estado estado={proceso.proceso.validacion_datos_personales} />
               </div>
             </div>
-
-            {/* TARJETA 3 */}
             <div
               className="p-5 border border-emerald-300 rounded-xl w-full shadow-md 
             hover:shadow-lg transition-all bg-gray-100 hover:-translate-y-1"
@@ -145,10 +377,7 @@ export default function ModalProceso({ open, onClose, proceso }) {
               </div>
             </div>
           </div>
-
-          {/* GRUPO 2 */}
           <div className="flex flex-col md:flex-row gap-5 w-full mt-5">
-            {/* TARJETA 4 */}
             <div
               className="p-5 border border-emerald-300 rounded-xl w-full shadow-md 
             hover:shadow-lg transition-all bg-gray-100 hover:-translate-y-1"
@@ -184,14 +413,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form onSubmit={handleSubmitRechazarComprobante}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={comprobanteRechazarLoading}
                             className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
                             hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {comprobanteRechazarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
@@ -201,14 +430,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
                           </button>
                         </form>
 
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form onSubmit={handleSubmitAprobarComprobante}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={comprobanteAceptarLoading}
                             className="px-2 py-1 rounded bg-green-500 text-white font-bold cursor-pointer
                             hover:bg-green-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {comprobanteAceptarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
@@ -223,8 +452,6 @@ export default function ModalProceso({ open, onClose, proceso }) {
                 </>
               )}
             </div>
-
-            {/* TARJETA 5 */}
             <div
               className="p-5 border border-emerald-300 rounded-xl w-full shadow-md 
             hover:shadow-lg transition-all bg-gray-100 hover:-translate-y-1"
@@ -264,14 +491,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form onSubmit={handleSubmitRechazarImagen}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={imagenRechazarLoading}
                             className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
                             hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {imagenRechazarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
@@ -281,14 +508,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
                           </button>
                         </form>
 
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form onSubmit={handleSubmitAprobarImagen}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={imagenAceptarLoading}
                             className="px-2 py-1 rounded bg-green-500 text-white font-bold cursor-pointer
                             hover:bg-green-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {imagenAceptarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
@@ -303,8 +530,6 @@ export default function ModalProceso({ open, onClose, proceso }) {
                 </>
               )}
             </div>
-
-            {/* TARJETA 6 */}
             <div
               className="p-5 border border-emerald-300 rounded-xl w-full shadow-md 
             hover:shadow-lg transition-all bg-gray-100 hover:-translate-y-1"
@@ -338,14 +563,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form onSubmit={handleSubmitRechazarReferencia}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={referenciaRechazarLoading}
                             className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
                             hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {referenciaRechazarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
@@ -355,14 +580,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
                           </button>
                         </form>
 
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form onSubmit={handleSubmitAprobarReferencia}>
                           <button
                             type="submit"
-                            disabled={memoriaLoading}
+                            disabled={referenciaAceptarLoading}
                             className="px-2 py-1 rounded bg-green-500 text-white font-bold cursor-pointer
                             hover:bg-green-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
                           >
-                            {memoriaLoading ? (
+                            {referenciaAceptarLoading ? (
                               <ClipLoader color="#ffffff" size={24} />
                             ) : (
                               <>
