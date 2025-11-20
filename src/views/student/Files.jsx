@@ -7,6 +7,7 @@ import PDFViewer from "../components/PDFViewer";
 import { Trash } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Alerta from "../components/Alerta";
 import { NavLink } from "react-router-dom";
 
 export default function Files() {
@@ -113,147 +114,150 @@ export default function Files() {
           <h2 className="text-center text-emerald-500 font-bold text-2xl">
             Memoria de Estadía
           </h2>
-          <p className="my-3 text-gray-600">Archivo Adjunto:</p>
           {archivo?.memoria_estadia === null ||
           archivo?.memoria_estadia === undefined ? (
-            <p>No hay archivo adjuntado.</p>
-          ) : (
-            <PDFViewer url={baseURL + archivo.memoria_estadia} />
-          )}
-          {archivo?.memoria_estadia !== null ||
-          archivo?.memoria_estadia !== undefined ? (
             <div className="mt-5">
-              <h2 className="text-center text-blue-400 font-bold">Acciones</h2>
-              <div className="flex justify-center p-1">
-                <div className="flex gap-1">
-                  <form onSubmit={handleSubmitDeleteMemoria}>
-                    <button
-                      type="submit"
-                      disabled={memoriaLoading}
-                      className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
-                    hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
-                    >
-                      {memoriaLoading ? (
-                        <ClipLoader color="#ffffff" size={24} />
-                      ) : (
-                        <>
-                          <Trash size={18} /> Elminar
-                        </>
-                      )}
-                    </button>
-                  </form>
-                  <NavLink to={"/home/my-process"}>
-                    <p
-                      className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
-                  hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
-                    >
-                      Enviar Otro Archivo
-                    </p>
-                  </NavLink>
-                </div>
-              </div>
+              <Alerta>No hay archivo adjuntado.</Alerta>
             </div>
           ) : (
-            <></>
+            <>
+              <p className="my-3 text-gray-600">Archivo Adjunto:</p>
+              <PDFViewer url={baseURL + archivo.memoria_estadia} />
+              <div className="mt-5">
+                <h2 className="text-center text-blue-400 font-bold">
+                  Acciones
+                </h2>
+                <div className="flex justify-center p-1">
+                  <div className="flex gap-1">
+                    <form onSubmit={handleSubmitDeleteMemoria}>
+                      <button
+                        type="submit"
+                        disabled={memoriaLoading}
+                        className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
+                      hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
+                      >
+                        {memoriaLoading ? (
+                          <ClipLoader color="#ffffff" size={24} />
+                        ) : (
+                          <>
+                            <Trash size={18} /> Elminar
+                          </>
+                        )}
+                      </button>
+                    </form>
+                    <NavLink to={"/home/my-process"}>
+                      <p
+                        className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+                    hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
+                      >
+                        Enviar Otro Archivo
+                      </p>
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
         </div>
         <div className="p-2 bg-white rounded w-full text-black">
           <h2 className="text-center text-emerald-500 font-bold text-2xl">
             Comprobante de Donación
           </h2>
-          <p className="my-3 text-gray-600">Archivo Adjunto:</p>
           {!archivo?.comprobante_donacion ? (
-            <p>No hay comprobante disponible.</p>
-          ) : (
-            <PDFViewer url={baseURL + archivo.comprobante_donacion} />
-          )}
-          {archivo?.comprobante_donacion != null ||
-          archivo?.comprobante_donacion != undefined ? (
             <div className="mt-5">
-              <h2 className="text-center text-blue-400 font-bold">Acciones</h2>
-              <div className="flex justify-center p-1">
-                <div className="flex gap-1">
-                  <form onSubmit={handleSubmitDeleteComprobante}>
-                    <button
-                      type="submit"
-                      disabled={comprobanteLoading}
-                      className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
-                    hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
-                    >
-                      {comprobanteLoading ? (
-                        <ClipLoader color="#ffffff" size={24} />
-                      ) : (
-                        <>
-                          <Trash size={18} /> Elminar
-                        </>
-                      )}
-                    </button>
-                  </form>
-                  <NavLink to={"/home/my-process"}>
-                    <p
-                      className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
-                  hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
-                    >
-                      Enviar Otro Archivo
-                    </p>
-                  </NavLink>
-                </div>
-              </div>
+              <Alerta>No hay comprobante adjuntado.</Alerta>
             </div>
           ) : (
-            <></>
+            <>
+              <p className="my-3 text-gray-600">Archivo Adjunto:</p>
+              <PDFViewer url={baseURL + archivo.comprobante_donacion} />
+              <div className="mt-5">
+                <h2 className="text-center text-blue-400 font-bold">
+                  Acciones
+                </h2>
+                <div className="flex justify-center p-1">
+                  <div className="flex gap-1">
+                    <form onSubmit={handleSubmitDeleteComprobante}>
+                      <button
+                        type="submit"
+                        disabled={comprobanteLoading}
+                        className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
+                      hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
+                      >
+                        {comprobanteLoading ? (
+                          <ClipLoader color="#ffffff" size={24} />
+                        ) : (
+                          <>
+                            <Trash size={18} /> Elminar
+                          </>
+                        )}
+                      </button>
+                    </form>
+                    <NavLink to={"/home/my-process"}>
+                      <p
+                        className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+                    hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
+                      >
+                        Enviar Otro Archivo
+                      </p>
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
         </div>
         <div className="p-2 bg-white rounded w-full text-black">
           <h2 className="text-center text-emerald-500 font-bold text-2xl">
             Imágen para Titulación
           </h2>
-          <p className="my-3 text-gray-600">Archivo Adjunto:</p>
           {archivo?.imagen_titulacion ? (
-            <iframe
-              src={baseURL + archivo.imagen_titulacion}
-              width="100%"
-              height="275px"
-              title="Imágen"
-            />
-          ) : (
-            <p>No hay comprobante disponible.</p>
-          )}
-          {archivo?.imagen_titulacion !== null ||
-          archivo?.imagen_titulacion !== undefined ? (
-            <div className="mt-5">
-              <h2 className="text-center text-blue-400 font-bold">Acciones</h2>
-              <div className="flex justify-center p-1">
-                <div className="flex gap-1">
-                  <form onSubmit={handleSubmitDeleteImagen}>
-                    <button
-                      type="submit"
-                      disabled={imagenLoading}
-                      className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
-                    hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
-                    >
-                      {imagenLoading ? (
-                        <ClipLoader color="#ffffff" size={24} />
-                      ) : (
-                        <>
-                          <Trash size={18} /> Elminar
-                        </>
-                      )}
-                    </button>
-                  </form>
-                  <NavLink to={"/home/my-process"}>
-                    <p
-                      className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
-                  hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
-                    >
-                      Enviar Otro Archivo
-                    </p>
-                  </NavLink>
+            <>
+              <p className="my-3 text-gray-600">Archivo Adjunto:</p>
+              <iframe
+                src={baseURL + archivo.imagen_titulacion}
+                width="100%"
+                height="275px"
+                title="Imágen"
+              />
+              <div className="mt-5">
+                <h2 className="text-center text-blue-400 font-bold">
+                  Acciones
+                </h2>
+                <div className="flex justify-center p-1">
+                  <div className="flex gap-1">
+                    <form onSubmit={handleSubmitDeleteImagen}>
+                      <button
+                        type="submit"
+                        disabled={imagenLoading}
+                        className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
+                      hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
+                      >
+                        {imagenLoading ? (
+                          <ClipLoader color="#ffffff" size={24} />
+                        ) : (
+                          <>
+                            <Trash size={18} /> Elminar
+                          </>
+                        )}
+                      </button>
+                    </form>
+                    <NavLink to={"/home/my-process"}>
+                      <p
+                        className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+                    hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
+                      >
+                        Enviar Otro Archivo
+                      </p>
+                    </NavLink>
+                  </div>
                 </div>
               </div>
-            </div>
+            </>
           ) : (
-            <></>
+            <div className="mt-5">
+              <Alerta>No hay Imágen adjuntada.</Alerta>
+            </div>
           )}
         </div>
       </div>
