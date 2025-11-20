@@ -122,7 +122,11 @@ export default function Files() {
           ) : (
             <>
               <p className="my-3 text-gray-600">Archivo Adjunto:</p>
-              <PDFViewer url={baseURL + archivo.memoria_estadia} />
+              <PDFViewer
+                url={
+                  baseURL + "/storage/pdfs/memorias/" + archivo.memoria_estadia
+                }
+              />
               <div className="mt-5">
                 <h2 className="text-center text-blue-400 font-bold">
                   Acciones
@@ -170,7 +174,13 @@ export default function Files() {
           ) : (
             <>
               <p className="my-3 text-gray-600">Archivo Adjunto:</p>
-              <PDFViewer url={baseURL + archivo.comprobante_donacion} />
+              <PDFViewer
+                url={
+                  baseURL +
+                  "/storage/pdfs/comprobantes/" +
+                  archivo.comprobante_donacion
+                }
+              />
               <div className="mt-5">
                 <h2 className="text-center text-blue-400 font-bold">
                   Acciones
@@ -214,11 +224,10 @@ export default function Files() {
           {archivo?.imagen_titulacion ? (
             <>
               <p className="my-3 text-gray-600">Archivo Adjunto:</p>
-              <iframe
-                src={baseURL + archivo.imagen_titulacion}
-                width="100%"
-                height="275px"
-                title="Imágen"
+              <img
+                src={baseURL + `/storage/imagenes/` + archivo.imagen_titulacion}
+                alt="imagen-titulacion"
+                className="w-full h-72"
               />
               <div className="mt-5">
                 <h2 className="text-center text-blue-400 font-bold">
