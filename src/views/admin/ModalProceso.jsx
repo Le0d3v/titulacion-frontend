@@ -52,7 +52,13 @@ export default function ModalProceso({ open, onClose, proceso }) {
               ) : (
                 <>
                   <p className="my-3 text-gray-600">Archivo Adjunto:</p>
-                  <PDFViewer url={baseURL + proceso.archivo.memoria_estadia} />
+                  <PDFViewer
+                    url={
+                      baseURL +
+                      "/storage/pdfs/memorias/" +
+                      proceso.archivo.memoria_estadia
+                    }
+                  />
                   <div className="mt-5">
                     <h2 className="text-center text-blue-400 font-bold">
                       Acciones
@@ -125,13 +131,19 @@ export default function ModalProceso({ open, onClose, proceso }) {
                 <p>Estado: </p>
                 <Estado estado={proceso.proceso.pago_donacion} />
               </div>
-              {proceso?.archivo?.comprobante_pago === null ||
-              proceso?.archivo?.comprobante_pago === undefined ? (
+              {proceso?.archivo?.comprobante_donacion === null ||
+              proceso?.archivo?.comprobante_donacion === undefined ? (
                 <Alerta>No hay archivo adjuntado</Alerta>
               ) : (
                 <>
                   <p className="my-3 text-gray-600">Archivo Adjunto:</p>
-                  <PDFViewer url={baseURL + proceso.archivo.comprobante_pago} />
+                  <PDFViewer
+                    url={
+                      baseURL +
+                      "/storage/pdfs/comprobantes/" +
+                      proceso.archivo.comprobante_donacion
+                    }
+                  />
                   <div className="mt-5">
                     <h2 className="text-center text-blue-400 font-bold">
                       Acciones
@@ -192,8 +204,14 @@ export default function ModalProceso({ open, onClose, proceso }) {
               ) : (
                 <>
                   <p className="my-3 text-gray-600">Archivo Adjunto:</p>
-                  <PDFViewer
-                    url={baseURL + proceso.archivo.imagen_titulacion}
+                  <img
+                    src={
+                      baseURL +
+                      `/storage/imagenes/` +
+                      proceso?.archivo?.imagen_titulacion
+                    }
+                    alt="imagen-titulacion"
+                    className="w-full h-72"
                   />
                   <div className="mt-5">
                     <h2 className="text-center text-blue-400 font-bold">
@@ -250,7 +268,7 @@ export default function ModalProceso({ open, onClose, proceso }) {
               {proceso?.archivo?.referencia_pago === null ||
               proceso?.archivo?.referencia_pago === undefined ? (
                 <div className="mt-5">
-                  <Alerta>No hay archivo adjuntado.</Alerta>
+                  <Alerta>No hay referencia registrada</Alerta>
                 </div>
               ) : (
                 <>

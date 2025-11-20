@@ -206,7 +206,7 @@ export default function Files() {
                     <NavLink to={"/home/my-process"}>
                       <p
                         className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
-                    hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
+                      hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
                       >
                         Enviar Otro Archivo
                       </p>
