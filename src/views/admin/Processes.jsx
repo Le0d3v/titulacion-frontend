@@ -7,9 +7,13 @@ export default function Processes() {
   const fetcher = () =>
     clienteAxios("/api/students/all").then((data) => data.data);
 
-  const { data, error, isLoading } = useSWR("/api/students/all", fetcher, {
-    refreshInterval: 1000,
-  });
+  const { data, error, isLoading, mutate } = useSWR(
+    "/api/students/all",
+    fetcher,
+    {
+      refreshInterval: 1000,
+    }
+  );
 
   if (isLoading) return <Loader />;
 

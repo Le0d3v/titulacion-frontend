@@ -8,8 +8,12 @@ import Alerta from "../components/Alerta";
 import clienteAxios from "../../config/axios";
 import { toast } from "react-toastify";
 
-export default function ModalProceso({ open, onClose, proceso }) {
-  if (!open || !proceso) return null;
+export default function ModalProceso({ open, onClose, procesoId, procesos }) {
+  if (!open || !procesoId || !procesos) return null;
+
+  const proceso = procesos.find((p) => p.id === procesoId);
+
+  if (!proceso) return null;
 
   const token = localStorage.getItem("AUTH_TOKEN");
 
@@ -52,7 +56,7 @@ export default function ModalProceso({ open, onClose, proceso }) {
     } catch (error) {
       console.log(error);
       setMemoriaAceptarLoading(false);
-      toast.error(data.message);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 
@@ -79,8 +83,8 @@ export default function ModalProceso({ open, onClose, proceso }) {
       toast.success(data.message);
     } catch (error) {
       console.log(error);
-      setMemoriaAceptarLoading(false);
-      toast.error(data.message);
+      setMemoriaRechazarLoading(false);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 
@@ -108,7 +112,7 @@ export default function ModalProceso({ open, onClose, proceso }) {
     } catch (error) {
       console.log(error);
       setComprobanteAceptarLoading(false);
-      toast.error(data.message);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 
@@ -135,8 +139,8 @@ export default function ModalProceso({ open, onClose, proceso }) {
       toast.success(data.message);
     } catch (error) {
       console.log(error);
-      setComprobanteAceptarLoading(false);
-      toast.error(data.message);
+      setComprobanteRechazarLoading(false);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 
@@ -164,7 +168,7 @@ export default function ModalProceso({ open, onClose, proceso }) {
     } catch (error) {
       console.log(error);
       setImagenAceptarLoading(false);
-      toast.error(data.message);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 
@@ -191,8 +195,8 @@ export default function ModalProceso({ open, onClose, proceso }) {
       toast.success(data.message);
     } catch (error) {
       console.log(error);
-      setImagenAceptarLoading(false);
-      toast.error(data.message);
+      setImagenRechazarLoading(false);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 
@@ -220,7 +224,7 @@ export default function ModalProceso({ open, onClose, proceso }) {
     } catch (error) {
       console.log(error);
       setReferenciaAceptarLoading(false);
-      toast.error(data.message);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 
@@ -247,8 +251,8 @@ export default function ModalProceso({ open, onClose, proceso }) {
       toast.success(data.message);
     } catch (error) {
       console.log(error);
-      setReferenciaAceptarLoading(false);
-      toast.error(data.message);
+      setReferenciaRechazarLoading(false);
+      toast.error(error?.response?.data?.message || "Error");
     }
   };
 

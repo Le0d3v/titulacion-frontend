@@ -5,10 +5,10 @@ import ModalProceso from "../admin/ModalProceso";
 
 export default function ProcesosContainer({ procesos }) {
   const [showModalProceso, setShowModalProceso] = useState(false);
-  const [procesoSeleccionado, setProcesoSeleccionado] = useState(null);
+  const [procesoSeleccionadoId, setProcesoSeleccionadoId] = useState(null);
 
   const handleVerMas = (proceso) => {
-    setProcesoSeleccionado(proceso);
+    setProcesoSeleccionadoId(proceso.id);
     setShowModalProceso(true);
   };
 
@@ -89,12 +89,11 @@ export default function ProcesosContainer({ procesos }) {
           ))}
         </div>
       </div>
-
-      {/* Modal Externo */}
       <ModalProceso
         open={showModalProceso}
         onClose={() => setShowModalProceso(false)}
-        proceso={procesoSeleccionado}
+        procesoId={procesoSeleccionadoId}
+        procesos={procesos}
       />
     </div>
   );

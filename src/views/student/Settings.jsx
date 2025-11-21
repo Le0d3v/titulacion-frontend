@@ -1,5 +1,3 @@
-import { CircleCheck, ExternalLink, Link, Lock, User } from "lucide-react";
-import { NavLink } from "react-router-dom";
 import CambiarPassword from "../components/CambiarPassword";
 import DatosPersonales from "../components/DatosPersonales";
 

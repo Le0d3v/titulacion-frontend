@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import useTitulation from "../../hooks/useTitulation";
-import AdminModal from "../components/AdminModal";
+import AdminModal from "./AdminModal";
 
 export default function Admin() {
   const token = localStorage.getItem("AUTH_TOKEN");
@@ -38,7 +38,6 @@ export default function Admin() {
 
   return (
     <>
-        
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center">
         <p className="text-sm text-gray-100 mt-5 md:mt-0">
           Administradores Totales:
@@ -50,7 +49,7 @@ export default function Admin() {
           <Search />
           <input
             type="text"
-            placeholder="Buscar Estudiante"
+            placeholder="Buscar Administrador"
             className="p-1"
             onChange={handleSearchAdmin}
           />
