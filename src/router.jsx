@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "./views/auth/Login";
 import UserLayout from "./views/layouts/UserLayout";
 import Home from "./views/student/Home";
@@ -7,7 +7,6 @@ import Dashboard from "./views/admin/Dashboard";
 import Processes from "./views/admin/Processes";
 import Students from "./views/admin/Students";
 import Admin from "./views/admin/Admin";
-import Reports from "./views/admin/Reports";
 import Setings from "./views/admin/Setings";
 import MyProcess from "./views/student/MyProcess";
 import Files from "./views/student/Files";
@@ -74,6 +73,10 @@ const router = createBrowserRouter([
         element: <Settings />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Navigate to="/" replace />,
   },
 ]);
 

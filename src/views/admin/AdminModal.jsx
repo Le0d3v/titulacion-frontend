@@ -5,12 +5,10 @@ export default function AdminModal({ open, onClose, admin }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-      {/* Modal Container */}
       <div
         className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-white 
         rounded-2xl shadow-2xl p-6 animate-in fade-in zoom-in duration-300 border border-gray-200"
       >
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 bg-gray-100 hover:bg-gray-200 rounded-full 
@@ -18,8 +16,6 @@ export default function AdminModal({ open, onClose, admin }) {
         >
           <X className="w-5 h-5 text-gray-600" />
         </button>
-
-        {/* Header */}
         <div className="flex items-center gap-3 mb-6">
           <div className="p-2 rounded-full bg-emerald-500 text-white shadow">
             <Info className="w-7 h-7" />
@@ -28,10 +24,7 @@ export default function AdminModal({ open, onClose, admin }) {
             Información del Administrador
           </h1>
         </div>
-
-        {/* GRID PRINCIPAL */}
         <div className="space-y-6">
-          {/* Personal Data */}
           <div className="border border-blue-300 bg-blue-50 rounded-xl shadow-sm p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="p-2 bg-blue-500 text-white rounded-full shadow">
@@ -41,8 +34,6 @@ export default function AdminModal({ open, onClose, admin }) {
                 Datos Personales
               </h2>
             </div>
-
-            {/* Campos */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 ["Nombre", admin.name],
@@ -63,8 +54,6 @@ export default function AdminModal({ open, onClose, admin }) {
               ))}
             </div>
           </div>
-
-          {/* Address */}
           <div className="border border-emerald-300 bg-emerald-50 rounded-xl shadow-sm p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="p-2 bg-emerald-500 text-white rounded-full shadow">
@@ -74,8 +63,6 @@ export default function AdminModal({ open, onClose, admin }) {
                 Datos de Domicilio
               </h2>
             </div>
-
-            {/* Campos */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 ["Calle", admin.domicilio.calle],
@@ -96,8 +83,6 @@ export default function AdminModal({ open, onClose, admin }) {
               ))}
             </div>
           </div>
-
-          {/* Contact */}
           <div className="border border-cyan-300 bg-cyan-50 rounded-xl shadow-sm p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="p-2 bg-cyan-500 text-white rounded-full shadow">
@@ -107,8 +92,6 @@ export default function AdminModal({ open, onClose, admin }) {
                 Datos de Contacto
               </h2>
             </div>
-
-            {/* Campos */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
                 ["Teléfono", admin.telefono],
@@ -126,8 +109,6 @@ export default function AdminModal({ open, onClose, admin }) {
             </div>
           </div>
         </div>
-
-        {/* Footer */}
         <div className="flex justify-center mt-6">
           <button
             onClick={onClose}

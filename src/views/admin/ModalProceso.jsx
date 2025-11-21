@@ -257,7 +257,7 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-3">
       <div
         className="bg-white w-full max-w-7xl p-6 rounded-xl shadow-xl text-black 
         max-h-[90vh] overflow-y-auto"
