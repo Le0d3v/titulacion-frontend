@@ -126,7 +126,7 @@ export default function Home() {
             <h2 className="text-center text-xl font-bold text-black">
               Actividades:
             </h2>
-            <div className="mt-3 w-full flex felx-col md:flex-row gap-3">
+            <div className="mt-3 w-full flex flex-col md:flex-row gap-3">
               <div className="p-2 bg-indigo-300 border-2 border-indigo-600 text-white rounded w-full">
                 <p className="text-center font-bold text-lg">
                   Validación de Memoria de Estadía
@@ -157,7 +157,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="mt-3 w-full flex felx-col md:flex-row gap-3">
+            <div className="mt-3 w-full flex flex-col md:flex-row gap-3">
               <div className="p-2 bg-purple-300 border-2 border-purple-600 text-white rounded w-full">
                 <p className="text-center font-bold text-lg">
                   Imágen para Titulo Profesional
