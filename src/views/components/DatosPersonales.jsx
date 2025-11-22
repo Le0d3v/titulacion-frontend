@@ -92,7 +92,6 @@ export default function DatosPersonales() {
   );
 }
 
-// Componente reutilizable para mostrar datos de usuario
 const UserData = ({ label, value }) => (
   <div className="w-full">
     <label className="text-sm text-gray-300">{label}</label>

@@ -16,12 +16,6 @@ export default function Admin() {
     refreshInterval: 1000,
   });
 
-  useEffect(() => {
-    if (data) {
-      setSearchAdmins(data.data);
-    }
-  }, [data]);
-
   if (isLoading) return <Loader />;
 
   const admins = data.data;
@@ -35,6 +29,12 @@ export default function Admin() {
     );
     setSearchAdmins(filteredAdmins);
   };
+
+  useEffect(() => {
+    if (data) {
+      setSearchAdmins(data.data);
+    }
+  }, [data]);
 
   return (
     <>

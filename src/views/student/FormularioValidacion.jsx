@@ -78,17 +78,13 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
   return (
     <div className="fixed inset-0 bg-gray-900/70 bg-opacity-60 flex items-center justify-center z-50">
       <div className="bg-white w-full max-w-7xl p-6 rounded-xl shadow-xl text-black">
-        {/* Encabezado */}
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-full bg-emerald-500">
             <User className="text-white" />
           </div>
           <h1 className="text-xl font-bold text-black">
-            Validar Datos Personales
           </h1>
         </div>
-
-        {/* Descripción */}
         <div className="text-gray-700 my-3 text-center md:text-start md:flex md:gap-1">
           <p>
             Verifica que tus datos personales sean correctos y coincidan con tus
@@ -105,8 +101,6 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
             </NavLink>
           </span>
         </div>
-
-        {/* Errores */}
         {erroresValidacion.length > 0 && (
           <div className="my-3">
             {erroresValidacion.map((err, i) => (
@@ -114,8 +108,6 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
             ))}
           </div>
         )}
-
-        {/* FORMULARIO */}
         <form onSubmit={handleSubmitValidacion} className="mt-5">
           {/* Bloque 1 */}
           <div className="flex flex-col lg:flex-row gap-5 my-5 w-full">
