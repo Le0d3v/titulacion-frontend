@@ -47,9 +47,13 @@ export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
             <User className="w-4 h-4 text-gray-300" />
           </div>
           <div className="ml-3 sm:block md:hidden lg:block">
-            <p className="text-lg text-gray-300">
-              {user.name + " " + user.apellido_paterno}
-            </p>
+            {user ? (
+              <p className="text-xs text-gray-300">
+                {user.name + " " + user.apellido_paterno}
+              </p>
+            ) : (
+              <p className="text-xs text-gray-300">Usuario no autenticado</p>
+            )}
           </div>
         </div>
         <div className="mt-5">
