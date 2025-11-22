@@ -6,7 +6,7 @@ import { ClipLoader } from "react-spinners";
 import { useState } from "react";
 
 export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
-  const { logout } = useAuth({ middleware: "auth" });
+  const { logout, user } = useAuth({ middleware: "auth" });
   const [cargando, setCargando] = useState(false);
 
   const handleLogout = async (e) => {
@@ -31,8 +31,12 @@ export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
           </div>
         </div>
         <div className="mt-3">
-          <img src="/img/logo.png" alt="imagen-logo" className="mx-auto w-32" />
-          <h1 className="text-white text-2xl font-bold">
+          <img
+            src="/img/logo_dark.png"
+            alt="imagen-logo"
+            className="mx-auto w-32"
+          />
+          <h1 className="text-white text-2xl font-bold text-center mt-1">
             Universidad Tecnológica de Huejotzingo
           </h1>
         </div>
@@ -43,10 +47,12 @@ export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
             <User className="w-4 h-4 text-gray-300" />
           </div>
           <div className="ml-3 sm:block md:hidden lg:block">
-            <p className="text-xs text-gray-300">Oscar Rafael</p>
+            <p className="text-lg text-gray-300">
+              {user.name + " " + user.apellido_paterno}
+            </p>
           </div>
         </div>
-        <div className="mt-10">
+        <div className="mt-5">
           <button
             className="flex items-center justify-center gap-1 text-sm bg-emerald-500 rounded-lg text-white font-bold hover:bg-emerald-600 p-2 transition hover:-translate-y-1 cursor-pointer w-full"
             onClick={handleLogout}
