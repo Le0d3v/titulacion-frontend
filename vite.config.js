@@ -10,7 +10,12 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["favicon.ico", "robots.txt"],
+      includeAssets: [
+        "favicon.ico",
+        "robots.txt",
+        "img/logo.png",
+        "img/logo_dark.png",
+      ],
       manifest: {
         name: "UTH - Modulo de Titulacion",
         short_name: "UTH Titulacion",
@@ -32,11 +37,11 @@ export default defineConfig({
             type: "image/png",
           },
         ],
-        workbox: {
-          navigateFallback: "/index.html",
-          clientsClaim: true,
-          skipWaiting: true,
-        },
+      },
+      workbox: {
+        navigateFallback: "/index.html",
+        clientsClaim: true,
+        skipWaiting: true,
       },
     }),
   ],

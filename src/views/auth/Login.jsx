@@ -8,16 +8,14 @@ import useOnlineStatus from "../../hooks/useOnlineStatus";
 import OfflinePage from "../layouts/OfflinePage";
 
 export default function Login() {
-  const matriculaRef = createRef();
-  const passwordRef = createRef();
-
   const online = useOnlineStatus();
 
-  // si NO hay conexión → offline view
   if (!online) {
     return <OfflinePage />;
   }
 
+  const matriculaRef = createRef();
+  const passwordRef = createRef();
   const [errores, setErrores] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
