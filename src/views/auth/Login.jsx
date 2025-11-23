@@ -4,10 +4,22 @@ import Alerta from "../components/Alerta";
 import { useAuth } from "../../hooks/useAuth";
 import { ClipLoader } from "react-spinners";
 import { useEffect } from "react";
+import useOnlineStatus from "../../hooks/useOnlineStatus";
+import OfflinePage from "./OfflinePage";
 
 export default function Login() {
   const matriculaRef = createRef();
   const passwordRef = createRef();
+
+  const isOnline = useOnlineStatus(() => {
+    // cuando vuelve el internet
+    console.log("Internet volvió, regresando a login...");
+  });
+
+  // si NO hay conexión → offline view
+  if (!isOnline) {
+    return <OfflinePage />;
+  }
 
   const [errores, setErrores] = useState([]);
   const [cargando, setCargando] = useState(false);
@@ -24,6 +36,8 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!online) return;
     setCargando(true);
 
     const datos = {
@@ -46,6 +60,11 @@ export default function Login() {
           </h1>
           <p className="text-green-200">Iniciar Sesión</p>
         </div>
+        {!online && (
+          <div className="w-full p-3 bg-red-900/40 text-center rounded mb-4 text-white">
+            Sin conexión a internet
+          </div>
+        )}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
           <form
             className="space-y-6"
