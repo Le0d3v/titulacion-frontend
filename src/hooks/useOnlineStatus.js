@@ -8,7 +8,6 @@ export default function useOnlineStatus(onBackOnline) {
       const online = navigator.onLine;
       setIsOnline(online);
 
-      // Si volvió online y hay callback
       if (online && typeof onBackOnline === "function") {
         onBackOnline();
       }

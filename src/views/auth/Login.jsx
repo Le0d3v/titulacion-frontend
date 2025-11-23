@@ -1,4 +1,4 @@
-import { User, Lock, Eye, EyeOff } from "lucide-react"; // Importa Eye y EyeOff
+import { User, Lock, Eye, EyeOff } from "lucide-react";
 import { createRef, useState } from "react";
 import Alerta from "../components/Alerta";
 import { useAuth } from "../../hooks/useAuth";
@@ -48,7 +48,7 @@ export default function Login() {
       <div className="w-full max-w-md">
         <div className="text-center mb-5">
           <div className="mx-auto flex items-center justify-center">
-            <img src="../img/logo_dark.png" alt="" className="w-40" />
+            <img src="/img/logo_dark.png" className="w-40" />
           </div>
           <h1 className="text-3xl font-bold text-white mb-4 w-full">
             Universidad Tecnológica de Huejotzingo
