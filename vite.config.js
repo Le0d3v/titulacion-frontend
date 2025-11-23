@@ -16,6 +16,10 @@ export default defineConfig({
         "img/logo.png",
         "img/logo_dark.png",
       ],
+      devOptions: {
+        enabled: true, // <= esto activa el SW en modo dev
+      },
+
       manifest: {
         name: "UTH - Modulo de Titulacion",
         short_name: "UTH Titulacion",
