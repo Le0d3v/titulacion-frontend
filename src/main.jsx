@@ -5,6 +5,9 @@ import { RouterProvider } from "react-router-dom";
 import router from "./router.jsx";
 import { TitulationProvider } from "./context/TitulationProvider.jsx";
 
+import { registerSW } from "virtual:pwa-register";
+registerSW();
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <TitulationProvider>
