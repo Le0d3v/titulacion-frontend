@@ -32,7 +32,11 @@ export default defineConfig({
             type: "image/png",
           },
         ],
-        workbox: { navigateFallback: "/index.html" },
+        workbox: {
+          navigateFallback: "/index.html",
+          clientsClaim: true,
+          skipWaiting: true,
+        },
       },
     }),
   ],
