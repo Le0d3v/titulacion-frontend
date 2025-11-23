@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { ClipLoader } from "react-spinners";
 import { useEffect } from "react";
 import useOnlineStatus from "../../hooks/useOnlineStatus";
-import OfflinePage from "../layouts/OfflinePage";s
+import OfflinePage from "../layouts/OfflinePage";
 
 export default function Login() {
   const matriculaRef = createRef();
