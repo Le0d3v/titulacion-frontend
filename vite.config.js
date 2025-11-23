@@ -12,9 +12,9 @@ export default defineConfig({
       registerType: "autoUpdate",
       includeAssets: ["favicon.ico", "robots.txt"],
       manifest: {
-        name: "Nombre de tu App",
-        short_name: "MiApp",
-        description: "Mi aplicación como PWA.",
+        name: "UTH - Modulo de Titulacion",
+        short_name: "UTH Titulacion",
+        description: "Aplicacion PWA para gestionar procesos de titulacion",
         theme_color: "#0f172a",
         background_color: "#ffffff",
         display: "standalone",
