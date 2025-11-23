@@ -32,6 +32,7 @@ export default defineConfig({
             type: "image/png",
           },
         ],
+        workbox: { navigateFallback: "/index.html" },
       },
     }),
   ],

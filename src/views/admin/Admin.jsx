@@ -45,6 +45,10 @@ export default function Admin() {
             {" " + admins.length}
           </span>
         </p>
+
+
+
+        
         <div className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto">
           <Search />
           <input
