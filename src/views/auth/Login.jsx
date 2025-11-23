@@ -11,13 +11,10 @@ export default function Login() {
   const matriculaRef = createRef();
   const passwordRef = createRef();
 
-  const isOnline = useOnlineStatus(() => {
-    // cuando vuelve el internet
-    console.log("Internet volvió, regresando a login...");
-  });
+  const online = useOnlineStatus();
 
   // si NO hay conexión → offline view
-  if (!isOnline) {
+  if (!online) {
     return <OfflinePage />;
   }
 
