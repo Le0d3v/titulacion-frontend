@@ -6,11 +6,20 @@ import router from "./router.jsx";
 import { TitulationProvider } from "./context/TitulationProvider.jsx";
 import { SWRConfig } from "swr";
 
+import useOnlineStatus from "./hooks/useOnlineStatus";
+import OfflinePage from "./views/layouts/OfflinePage";
+
 import { registerSW } from "virtual:pwa-register";
 registerSW();
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
+function AppRoot() {
+  const online = useOnlineStatus();
+
+  if (!online) {
+    return <OfflinePage />;
+  }
+
+  return (
     <SWRConfig
       value={{
         revalidateOnFocus: true,
@@ -23,5 +32,11 @@ createRoot(document.getElementById("root")).render(
         <RouterProvider router={router} />
       </TitulationProvider>
     </SWRConfig>
+  );
+}
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <AppRoot />
   </StrictMode>
 );

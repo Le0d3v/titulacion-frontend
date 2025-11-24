@@ -4,16 +4,8 @@ import Alerta from "../components/Alerta";
 import { useAuth } from "../../hooks/useAuth";
 import { ClipLoader } from "react-spinners";
 import { useEffect } from "react";
-import useOnlineStatus from "../../hooks/useOnlineStatus";
-import OfflinePage from "../layouts/OfflinePage";
 
 export default function Login() {
-  const online = useOnlineStatus();
-
-  if (!online) {
-    return <OfflinePage />;
-  }
-
   const matriculaRef = createRef();
   const passwordRef = createRef();
   const [errores, setErrores] = useState([]);
