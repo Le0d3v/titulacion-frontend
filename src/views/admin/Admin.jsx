@@ -10,11 +10,18 @@ export default function Admin() {
   const token = localStorage.getItem("AUTH_TOKEN");
   const { modal, itemModal, openModal, closeModal } = useTitulation();
   const [searchAdmins, setSearchAdmins] = useState([]);
+
   const fetcher = () => clienteAxios("/api/admins").then((data) => data.data);
 
   const { data, error, isLoading } = useSWR("/api/admins", fetcher, {
     refreshInterval: 1000,
   });
+
+  useEffect(() => {
+    if (data) {
+      setSearchAdmins(data.data);
+    }
+  }, [data]);
 
   if (isLoading) return <Loader />;
 
@@ -30,12 +37,6 @@ export default function Admin() {
     setSearchAdmins(filteredAdmins);
   };
 
-  useEffect(() => {
-    if (data) {
-      setSearchAdmins(data.data);
-    }
-  }, [data]);
-
   return (
     <>
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center">
@@ -44,7 +45,7 @@ export default function Admin() {
           <span className="text-lg text-emerald-500 font-black">
             {" " + admins.length}
           </span>
-        </p>        
+        </p>
         <div className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto">
           <Search />
           <input
