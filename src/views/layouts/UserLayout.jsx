@@ -5,12 +5,10 @@ import { User } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useAuth } from "../../hooks/useAuth";
-import useOnlineStatus from "../../hooks/useOnlineStatus";
 
 export default function UserLayout() {
   const { user } = useAuth({ middleware: "auth" });
   const mediaQuery = window.matchMedia("(max-width: 768px)");
-  const online = useOnlineStatus();
 
   return (
     <div className="h-screen flex">
@@ -50,15 +48,7 @@ export default function UserLayout() {
         <Header index="0" />
         <main className="flex-1 overflow-auto bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 p-2 md:p-5 max-w-auto">
           <div className="bg-white/10 text-white h-full rounded-2xl p-1 md:p-5 max-w-auto md:ml-16 lg:ml-0 overflow-y-scroll">
-            {online ? (
-              <Outlet />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                <h2 className="text-xl font-bold text-gray-500">
-                  Sin conexión
-                </h2>
-              </div>
-            )}
+            <Outlet />
           </div>
         </main>
       </div>

@@ -55,11 +55,6 @@ export default function Login() {
           </h1>
           <p className="text-green-200">Iniciar Sesión</p>
         </div>
-        {!online && (
-          <div className="w-full p-3 bg-red-900/40 text-center rounded mb-4 text-white">
-            Sin conexión a internet
-          </div>
-        )}
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
           <form
             className="space-y-6"
