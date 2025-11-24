@@ -32,17 +32,15 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
 
   const baseURL = import.meta.env.VITE_API_URL;
 
-  const handleSubmitAprobarMemoria = async (e) => {
+  const handleSubmitProceso = async (e, type, action, setLoading) => {
     e.preventDefault();
-    setMemoriaAceptarLoading(true);
+    setLoading(true);
 
-    const datos = {
-      id: proceso.id,
-    };
+    const datos = { id: proceso.id };
 
     try {
       const { data } = await clienteAxios.post(
-        "/api/proceso/memoria/aprobar",
+        `/api/proceso/${type}/${action}`,
         datos,
         {
           headers: {
@@ -51,208 +49,12 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
         }
       );
 
-      setMemoriaAceptarLoading(false);
       toast.success(data.message);
     } catch (error) {
-      console.log(error);
-      setMemoriaAceptarLoading(false);
       toast.error(error?.response?.data?.message || "Error");
-    }
-  };
-
-  const handleSubmitRechazarMemoria = async (e) => {
-    e.preventDefault();
-    setMemoriaRechazarLoading(true);
-
-    const datos = {
-      id: proceso.id,
-    };
-
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/proceso/memoria/rechazar",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setMemoriaRechazarLoading(false);
-      toast.success(data.message);
-    } catch (error) {
       console.log(error);
-      setMemoriaRechazarLoading(false);
-      toast.error(error?.response?.data?.message || "Error");
-    }
-  };
-
-  const handleSubmitAprobarComprobante = async (e) => {
-    e.preventDefault();
-    setComprobanteAceptarLoading(true);
-
-    const datos = {
-      id: proceso.id,
-    };
-
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/proceso/comprobante/aprobar",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setComprobanteAceptarLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
-      setComprobanteAceptarLoading(false);
-      toast.error(error?.response?.data?.message || "Error");
-    }
-  };
-
-  const handleSubmitRechazarComprobante = async (e) => {
-    e.preventDefault();
-    setComprobanteRechazarLoading(true);
-
-    const datos = {
-      id: proceso.id,
-    };
-
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/proceso/comprobante/rechazar",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setComprobanteRechazarLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
-      setComprobanteRechazarLoading(false);
-      toast.error(error?.response?.data?.message || "Error");
-    }
-  };
-
-  const handleSubmitAprobarImagen = async (e) => {
-    e.preventDefault();
-    setImagenAceptarLoading(true);
-
-    const datos = {
-      id: proceso.id,
-    };
-
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/proceso/imagen/aprobar",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setImagenAceptarLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
-      setImagenAceptarLoading(false);
-      toast.error(error?.response?.data?.message || "Error");
-    }
-  };
-
-  const handleSubmitRechazarImagen = async (e) => {
-    e.preventDefault();
-    setImagenRechazarLoading(true);
-
-    const datos = {
-      id: proceso.id,
-    };
-
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/proceso/imagen/rechazar",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setImagenRechazarLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
-      setImagenRechazarLoading(false);
-      toast.error(error?.response?.data?.message || "Error");
-    }
-  };
-
-  const handleSubmitAprobarReferencia = async (e) => {
-    e.preventDefault();
-    setReferenciaAceptarLoading(true);
-
-    const datos = {
-      id: proceso.id,
-    };
-
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/proceso/referencia/aprobar",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setReferenciaAceptarLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
-      setReferenciaAceptarLoading(false);
-      toast.error(error?.response?.data?.message || "Error");
-    }
-  };
-
-  const handleSubmitRechazarReferencia = async (e) => {
-    e.preventDefault();
-    setReferenciaRechazarLoading(true);
-
-    const datos = {
-      id: proceso.id,
-    };
-
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/proceso/referencia/rechazar",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setReferenciaRechazarLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
-      setReferenciaRechazarLoading(false);
-      toast.error(error?.response?.data?.message || "Error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -315,7 +117,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitRechazarMemoria}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "memoria",
+                              "rechazar",
+                              setMemoriaRechazarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={memoriaRechazarLoading}
@@ -332,7 +143,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                           </button>
                         </form>
 
-                        <form onSubmit={handleSubmitAprobarMemoria}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "memoria",
+                              "aprobar",
+                              setMemoriaAceptarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={memoriaAceptarLoading}
@@ -417,7 +237,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitRechazarComprobante}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "comprobante",
+                              "rechazar",
+                              setComprobanteRechazarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={comprobanteRechazarLoading}
@@ -434,7 +263,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                           </button>
                         </form>
 
-                        <form onSubmit={handleSubmitAprobarComprobante}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "comprobante",
+                              "aprobar",
+                              setComprobanteAceptarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={comprobanteAceptarLoading}
@@ -495,7 +333,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitRechazarImagen}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "imagen",
+                              "rechazar",
+                              setImagenRechazarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={imagenRechazarLoading}
@@ -512,7 +359,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                           </button>
                         </form>
 
-                        <form onSubmit={handleSubmitAprobarImagen}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "imagen",
+                              "aprobar",
+                              setImagenAceptarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={imagenAceptarLoading}
@@ -567,7 +423,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
 
                     <div className="flex justify-center p-1">
                       <div className="flex gap-1">
-                        <form onSubmit={handleSubmitRechazarReferencia}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "referencia",
+                              "rechazar",
+                              setReferenciaRechazarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={referenciaRechazarLoading}
@@ -584,7 +449,16 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                           </button>
                         </form>
 
-                        <form onSubmit={handleSubmitAprobarReferencia}>
+                        <form
+                          onSubmit={(e) =>
+                            handleSubmitProceso(
+                              e,
+                              "referencia",
+                              "aprobar",
+                              setReferenciaAceptarLoading
+                            )
+                          }
+                        >
                           <button
                             type="submit"
                             disabled={referenciaAceptarLoading}
