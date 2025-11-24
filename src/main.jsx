@@ -8,8 +8,6 @@ import { SWRConfig } from "swr";
 import { registerSW } from "virtual:pwa-register";
 import OfflinePage from "./views/layouts/OfflinePage";
 
-registerSW();
-
 function AppRoot() {
   const [online, setOnlineStatus] = useState(true);
 
