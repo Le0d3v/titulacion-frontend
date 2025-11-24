@@ -4,16 +4,21 @@ import { useAuth } from "../../hooks/useAuth";
 import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
 import PDFViewer from "../components/PDFViewer";
-import { Trash } from "lucide-react";
+import { Download, File, Trash } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Alerta from "../components/Alerta";
 import { NavLink } from "react-router-dom";
+import { useRef } from "react";
+import CartaExcencionPdf from "../pdf/CartaExcencionPdf";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export default function Files() {
   const { user } = useAuth({ withMiddleware: "auth" });
   const token = localStorage.getItem("AUTH_TOKEN");
   const shouldFetch = Boolean(user?.id);
+  const pdfRef = useRef();
 
   const [memoriaLoading, setMemoriaLoading] = useState(false);
   const [comprobanteLoading, setComprobanteLoading] = useState(false);
@@ -35,6 +40,7 @@ export default function Files() {
   if (error) return <div>Error al cargar los datos.</div>;
 
   const archivo = data?.data?.[0]?.archivo ?? null;
+  const usuario = data?.data?.[0] ?? null;
 
   // Cambia esta base URL a la de tu servidor
   const baseURL = import.meta.env.VITE_API_URL;
@@ -102,6 +108,38 @@ export default function Files() {
       toast.success(data.message);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const generarPDF = async () => {
+    const element = pdfRef.current;
+    if (!element) return console.error("Elemento no encontrado.");
+
+    try {
+      // Obtiene tamaño real del div
+      const elementWidth = element.offsetWidth;
+      const elementHeight = element.offsetHeight;
+
+      // Captura el div
+      const canvas = await html2canvas(element, {
+        scale: 2, // mejora la resolución
+        width: elementWidth,
+        height: elementHeight,
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      // Obtiene dimensiones del PDF en mm
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("carta_excencion.pdf");
+      await toast.success("Archivo Descargado");
+    } catch (error) {
+      console.error("Error al generar el PDF:", error);
     }
   };
 
@@ -269,6 +307,72 @@ export default function Files() {
             </div>
           )}
         </div>
+      </div>
+      <div>
+        {usuario.proceso.completado == 1 ? (
+          <div className="w-full mt-5 p-3 rounded-xl bg-white border-4 border-gray-300 text-black">
+            <h1 className="font-bold text-3xl">
+              Carta de Excención de Titulación
+            </h1>
+            <div className="flex justify-between items-center gap- mt-5 flex-col md:flex-row">
+              <div className="mt-5 md:w-1/2 w-full">
+                <div className="flex justify-center">
+                  <File size={65} />
+                </div>
+                <p className="mt-5">
+                  La
+                  <span className="font-bold text-emerald-400 text-lg">
+                    {" "}
+                    Carta de Exención de Titulación{" "}
+                  </span>
+                  es un documento oficial que se solicita en el contexto
+                  académico, generalmente en instituciones de educación
+                  superior. Su propósito es liberar a un estudiante de la
+                  obligación de presentar un examen de titulación o de realizar
+                  un trabajo final para obtener su grado académico.
+                </p>
+              </div>
+              <div className="mt-5 md:w-1/2 w-full">
+                <h2 className="text-xl text-emerald-400 font-bold text-center">
+                  Archivo Aquí:
+                </h2>
+                <div className="mt-1">
+                  <div
+                    ref={pdfRef}
+                    style={{
+                      position: "absolute", // saca el div de la pantalla
+                      left: "-9999px", // fuera del viewport
+                      top: "0",
+                      width: "800px", // ancho fijo para PDF
+                      backgroundColor: "#ffffff", // fondo blanco
+                      padding: "40px", // padding opcional para que se vea bien
+                    }}
+                  >
+                    <CartaExcencionPdf usuario={usuario} />
+                  </div>
+
+                  <div className="flex justify-center text-red-500">
+                    <File size={65} />
+                  </div>
+                  <p className="text-center text-sm text-gray-400">
+                    Carta_Excencion.pdf
+                  </p>
+                  <div className="mt-5 flex justify-center">
+                    <button
+                      onClick={generarPDF}
+                      className="bg-blue-600 text-white px-4 py-2 rounded flex gap-2 cursor-pointer hover:bg-blue-700 hover:-translate-y-1 transition"
+                    >
+                      <Download />
+                      <p>Descargar PDF</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </>
   );
