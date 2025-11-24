@@ -5,6 +5,9 @@ export default function OfflinePage() {
         <div className="mx-auto flex items-center justify-center">
           <img src="/img/logo_dark.png" className="w-40" />
         </div>
+        <h1 className="text-3xl font-bold text-white mb-4 w-full mt-1">
+          Universidad Tecnológica de Huejotzingo
+        </h1>
 
         <h1 className="text-xl font-semibold mb-3">Sin conexión</h1>
 
