@@ -7,6 +7,7 @@ import { TitulationProvider } from "./context/TitulationProvider.jsx";
 import { SWRConfig } from "swr";
 import { registerSW } from "virtual:pwa-register";
 import OfflinePage from "./views/layouts/OfflinePage";
+import { useState } from "react";
 
 function AppRoot() {
   const [online, setOnlineStatus] = useState(true);
