@@ -13,6 +13,7 @@ import { registerSW } from "virtual:pwa-register";
 registerSW();
 
 function AppRoot() {
+  
   const online = useOnlineStatus(() => {
     console.log("Conexión a internet reestablecida");
   });
