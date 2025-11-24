@@ -4,14 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
 import PDFViewer from "../components/PDFViewer";
-import {
-  Download,
-  File,
-  GraduationCap,
-  HardHat,
-  Info,
-  Trash,
-} from "lucide-react";
+import { Download, File, GraduationCap, Info, Trash } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Alerta from "../components/Alerta";
@@ -49,16 +42,15 @@ export default function Files() {
   const archivo = data?.data?.[0]?.archivo ?? null;
   const usuario = data?.data?.[0] ?? null;
 
-  // Cambia esta base URL a la de tu servidor
   const baseURL = import.meta.env.VITE_API_URL;
 
-  const handleSubmitDeleteMemoria = async (e) => {
+  const handleSubmitDelete = async (e, type, setLoading) => {
     e.preventDefault();
-    setMemoriaLoading(true);
+    setLoading(true);
 
     try {
       const { data } = await clienteAxios.post(
-        `/api/archivo/memoria/destroy/${user.id}`,
+        `/api/archivo/${type}/destroy/${user.id}`,
         null,
         {
           headers: {
@@ -67,54 +59,11 @@ export default function Files() {
         }
       );
 
-      setMemoriaLoading(false);
       toast.success(data.message);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const handleSubmitDeleteComprobante = async (e) => {
-    e.preventDefault();
-    setComprobanteLoading(true);
-
-    try {
-      const { data } = await clienteAxios.post(
-        `/api/archivo/comprobante/destroy/${user.id}`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setComprobanteLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSubmitDeleteImagen = async (e) => {
-    e.preventDefault();
-    setImagenLoading(true);
-
-    try {
-      const { data } = await clienteAxios.post(
-        `/api/archivo/imagen/destroy/${user.id}`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setImagenLoading(false);
-      toast.success(data.message);
-    } catch (error) {
-      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -178,7 +127,11 @@ export default function Files() {
                 </h2>
                 <div className="flex justify-center p-1">
                   <div className="flex gap-1">
-                    <form onSubmit={handleSubmitDeleteMemoria}>
+                    <form
+                      onSubmit={(e) =>
+                        handleSubmitDelete(e, "memoria", setMemoriaLoading)
+                      }
+                    >
                       <button
                         type="submit"
                         disabled={memoriaLoading}
@@ -232,7 +185,15 @@ export default function Files() {
                 </h2>
                 <div className="flex justify-center p-1">
                   <div className="flex gap-1">
-                    <form onSubmit={handleSubmitDeleteComprobante}>
+                    <form
+                      onSubmit={(e) =>
+                        handleSubmitDelete(
+                          e,
+                          "comprobante",
+                          setComprobanteLoading
+                        )
+                      }
+                    >
                       <button
                         type="submit"
                         disabled={comprobanteLoading}
@@ -280,7 +241,11 @@ export default function Files() {
                 </h2>
                 <div className="flex justify-center p-1">
                   <div className="flex gap-1">
-                    <form onSubmit={handleSubmitDeleteImagen}>
+                    <form
+                      onSubmit={(e) =>
+                        handleSubmitDelete(e, "imagen", setImagenLoading)
+                      }
+                    >
                       <button
                         type="submit"
                         disabled={imagenLoading}
