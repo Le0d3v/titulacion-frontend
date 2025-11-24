@@ -5,18 +5,23 @@ import { RouterProvider } from "react-router-dom";
 import router from "./router.jsx";
 import { TitulationProvider } from "./context/TitulationProvider.jsx";
 import { SWRConfig } from "swr";
-
-import useOnlineStatus from "./hooks/useOnlineStatus";
+import { registerSW } from "virtual:pwa-register";
 import OfflinePage from "./views/layouts/OfflinePage";
 
-import { registerSW } from "virtual:pwa-register";
 registerSW();
 
 function AppRoot() {
-  
-  const online = useOnlineStatus(() => {
-    console.log("Conexión a internet reestablecida");
-  });
+  const [online, setOnlineStatus] = useState(true);
+
+  useEffect(() => {
+    registerSW();
+
+    navigator.serviceWorker.addEventListener("message", (event) => {
+      if (event.data.type === "NETWORK_STATUS") {
+        setOnlineStatus(event.data.isOnline);
+      }
+    });
+  }, []);
 
   if (!online) {
     return <OfflinePage />;
