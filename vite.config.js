@@ -17,9 +17,8 @@ export default defineConfig({
         "img/logo_dark.png",
       ],
       devOptions: {
-        enabled: true, // <= esto activa el SW en modo dev
+        enabled: true,
       },
-
       manifest: {
         name: "UTH - Modulo de Titulacion",
         short_name: "UTH Titulacion",
@@ -43,6 +42,7 @@ export default defineConfig({
         ],
       },
       workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png,svg,jpg,jpeg,json}"],
         navigateFallback: "/index.html",
         clientsClaim: true,
         skipWaiting: true,
