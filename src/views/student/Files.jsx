@@ -4,7 +4,14 @@ import { useAuth } from "../../hooks/useAuth";
 import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
 import PDFViewer from "../components/PDFViewer";
-import { Download, File, Trash } from "lucide-react";
+import {
+  Download,
+  File,
+  GraduationCap,
+  HardHat,
+  Info,
+  Trash,
+} from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import Alerta from "../components/Alerta";
@@ -309,33 +316,41 @@ export default function Files() {
         </div>
       </div>
       <div>
-        {usuario.proceso.completado == 1 ? (
-          <div className="w-full mt-5 p-3 rounded-xl bg-white border-4 border-gray-300 text-black">
+        <div className="w-full mt-5 p-3 rounded-xl bg-white border-4 border-gray-300 text-black">
+          <div className="flex gap-1 items-center">
+            <div className="p-1 rounded-full bg-blue-200 border-1 border-blue-600 flex justify-center items-center">
+              <GraduationCap size={35} />
+            </div>
             <h1 className="font-bold text-3xl">
               Carta de Excención de Titulación
             </h1>
-            <div className="flex justify-between items-center gap- mt-5 flex-col md:flex-row">
-              <div className="mt-5 md:w-1/2 w-full">
-                <div className="flex justify-center">
-                  <File size={65} />
-                </div>
-                <p className="mt-5">
-                  La
-                  <span className="font-bold text-emerald-400 text-lg">
-                    {" "}
-                    Carta de Exención de Titulación{" "}
-                  </span>
-                  es un documento oficial que se solicita en el contexto
-                  académico, generalmente en instituciones de educación
-                  superior. Su propósito es liberar a un estudiante de la
-                  obligación de presentar un examen de titulación o de realizar
-                  un trabajo final para obtener su grado académico.
-                </p>
+          </div>
+          <div className="flex justify-between gap- mt-5 flex-col md:flex-row">
+            <div className="mt-5 md:w-1/2 w-full">
+              <div className="flex justify-center text-red-500">
+                <File size={65} />
               </div>
-              <div className="mt-5 md:w-1/2 w-full">
-                <h2 className="text-xl text-emerald-400 font-bold text-center">
-                  Archivo Aquí:
-                </h2>
+              <p className="text-center text-sm text-gray-400">
+                Carta_Excencion.pdf
+              </p>
+              <p className="mt-5">
+                La
+                <span className="font-bold text-emerald-400 text-lg">
+                  {" "}
+                  Carta de Exención de Titulación{" "}
+                </span>
+                es un documento oficial que se solicita en el contexto
+                académico, generalmente en instituciones de educación superior.
+                Su propósito es liberar a un estudiante de la obligación de
+                presentar un examen de titulación o de realizar un trabajo final
+                para obtener su grado académico.
+              </p>
+            </div>
+            <div className="mt-1 md:w-1/2 w-full">
+              <h2 className="text-2xl text-emerald-400 font-bold text-center">
+                Archivo Aquí:
+              </h2>
+              {usuario.proceso.completado === 1 ? (
                 <div className="mt-1">
                   <div
                     ref={pdfRef}
@@ -367,12 +382,19 @@ export default function Files() {
                     </button>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="w-full mt-3 flex justify-center">
+                  <div className="p-3 rounded-lg bg-red-200 border-2 border-red-600 text-white max-w-100 flex justify-center">
+                    <div className="flex gap-1 text-red-500">
+                      <Info />
+                      <p>Completa tu proceso de titulación para obtener</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-        ) : (
-          ""
-        )}
+        </div>
       </div>
     </>
   );

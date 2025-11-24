@@ -34,18 +34,26 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 flex items-center justify-center p-5">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-emerald-100 to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-emerald-900 dark:to-gray-900 flex items-center justify-center p-5 transition-colors">
       <div className="w-full max-w-md">
+        {/* Logo + encabezado */}
         <div className="text-center mb-5">
           <div className="mx-auto flex items-center justify-center">
-            <img src="/img/logo_dark.png" className="w-40" />
+            <img src="/img/logo_dark.png" className="w-40 dark:block hidden" />
+            <img src="/img/logo.png" className="w-40 block dark:hidden" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-4 w-full">
+
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 w-full transition-colors">
             Universidad Tecnológica de Huejotzingo
           </h1>
-          <p className="text-green-200">Iniciar Sesión</p>
+
+          <p className="text-gray-700 dark:text-green-200 transition-colors">
+            Iniciar Sesión
+          </p>
         </div>
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
+
+        {/* Card */}
+        <div className="bg-white/10 dark:bg-white/10 dark:backdrop-blur-md rounded-2xl p-8 border border-gray-300 dark:border-white/20 shadow-xl transition-colors">
           <form
             className="space-y-6"
             autoComplete="off"
@@ -54,18 +62,17 @@ export default function Login() {
             {errores.map((error, i) => (
               <Alerta key={i}>{error}</Alerta>
             ))}
+
+            {/* MATRÍCULA */}
             <div>
-              <label
-                className="block text-white text-sm font-medium mb-3"
-                htmlFor="matricula"
-              >
+              <label className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 Matrícula
               </label>
               <div className="relative group">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-700 dark:text-white transition-colors" />
                 <input
                   type="text"
-                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  className="w-full pl-10 pr-4 py-3 bg-white dark:bg-white/5 border border-gray-300 dark:border-white/20 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 transition-all"
                   placeholder="Ej: 3522110000"
                   required
                   name="matricula"
@@ -73,18 +80,17 @@ export default function Login() {
                 />
               </div>
             </div>
+
+            {/* CONTRASEÑA */}
             <div>
-              <label
-                className="block text-white text-sm font-medium mb-3"
-                htmlFor="password"
-              >
+              <label className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 Contraseña
               </label>
               <div className="relative group">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-700 dark:text-white transition-colors" />
                 <input
-                  type={showPassword ? "text" : "password"} // Cambiar tipo basado en estado
-                  className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  type={showPassword ? "text" : "password"}
+                  className="w-full pl-10 pr-10 py-3 bg-white dark:bg-white/5 border border-gray-300 dark:border-white/20 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 transition-all"
                   placeholder="••••••••"
                   required
                   name="password"
@@ -92,20 +98,22 @@ export default function Login() {
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                  className="absolute right-3 top-1/2 -translate-y-1/2"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="text-white hover:cursor-pointer" />
+                    <EyeOff className="text-gray-900 dark:text-white" />
                   ) : (
-                    <Eye className="text-white hover:cursor-pointer" />
+                    <Eye className="text-gray-900 dark:text-white" />
                   )}
                 </button>
               </div>
             </div>
+
+            {/* BOTÓN */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
               disabled={cargando}
             >
               {cargando ? (
@@ -116,8 +124,10 @@ export default function Login() {
             </button>
           </form>
         </div>
+
+        {/* Footer */}
         <div className="text-center py-5">
-          <p className="text-green-200 text-sm">
+          <p className="text-gray-600 dark:text-green-200 text-sm">
             Sistema Institucional Integral UTH © 2025
           </p>
         </div>
