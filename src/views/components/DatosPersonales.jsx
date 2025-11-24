@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function DatosPersonales() {
-  const { user } = useAuth({ middleware: "guest" });
+  const { user } = useAuth({ middleware: "" });
 
   return (
     <div className="border-gray-400 border-2 w-full p-3 rounded-xl mb-7">

@@ -8,7 +8,7 @@ import "react-toastify/ReactToastify.css";
 
 export default function AdminLayout() {
   const mediaQuery = window.matchMedia("(max-width: 768px)");
-  const { user, error } = useAuth({ middleware: "auth" });
+  const { user, error, loading } = useAuth({ middleware: "auth" });
 
   return (
     <>
