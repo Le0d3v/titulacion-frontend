@@ -2,7 +2,9 @@ import PDFViewer from "../components/PDFViewer";
 import Estado from "../components/Estado";
 import Alerta from "../components/Alerta";
 import { ClipLoader } from "react-spinners";
-import { X, CircleCheck } from "lucide-react";
+import { X, CircleCheck, Send } from "lucide-react";
+import { createRef } from "react";
+import clienteAxios from "../../config/axios";
 
 export default function ProcesoCard({
   title,
@@ -15,7 +17,18 @@ export default function ProcesoCard({
   loadingReject,
   onApprove,
   onReject,
+  comentarioProceso,
+  comentarioLoading,
 }) {
+  const comentarioRef = createRef();
+
+  const handleSubmitComentario = async (e) => {
+    e.preventDefault();
+
+    try {
+    } catch (error) {}
+  };
+
   return (
     <div
       className="p-5 border border-emerald-300 rounded-xl w-full shadow-md 
@@ -58,7 +71,7 @@ export default function ProcesoCard({
                 hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
               >
                 {loadingReject ? (
-                  <ClipLoader size={20} />
+                  <ClipLoader size={20} className="text-white" />
                 ) : (
                   <>
                     <X size={17} /> Rechazar
@@ -72,7 +85,7 @@ export default function ProcesoCard({
                 hover:bg-green-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-28"
               >
                 {loadingApprove ? (
-                  <ClipLoader size={20} />
+                  <ClipLoader size={20} className="text-white" />
                 ) : (
                   <>
                     <CircleCheck size={17} /> Aprobar
@@ -80,6 +93,46 @@ export default function ProcesoCard({
                 )}
               </button>
             </div>
+          </div>
+          <div className="mt-5">
+            <form
+              onSubmit={handleSubmitComentario}
+              className="p-3 rounded shadow-xl"
+            >
+              <legend className="text-lg text-emerald-400 font-bold">
+                Redacta un comentario
+              </legend>
+              <div className="w-full mt-3">
+                <label
+                  htmlFor="comentario"
+                  className="text-sm text-gray-500 font-bold"
+                >
+                  Comentario:
+                </label>
+                <textarea
+                  name="comentario"
+                  id="comentario"
+                  className="p-2 w-full bg-gray-200 border-2 rounded border-gray-500 text-black mt-1"
+                  ref={comentarioRef}
+                ></textarea>
+              </div>
+              <div className="flex justify-end mt-3">
+                <button
+                  type="submit"
+                  disabled={comentarioLoading}
+                  className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+          hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
+                >
+                  {comentarioLoading ? (
+                    <ClipLoader color="#ffffff" size={24} />
+                  ) : (
+                    <>
+                      <Send size={18} /> Enviar
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
         </>
       )}
