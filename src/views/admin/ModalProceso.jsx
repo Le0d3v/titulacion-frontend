@@ -31,6 +31,14 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
   const [referenciaRechazarLoading, setReferenciaRechazarLoading] =
     useState(false);
 
+  const [comentarioMemoriaLoading, setComentarioMemoriaLoading] =
+    useState(false);
+  const [comentarioComprobanteLoading, setComentarioComprobanteLoading] =
+    useState(false);
+  const [comentarioImagenLoading, setComentarioImagenLoading] = useState(false);
+  const [comentarioReferenciaLoading, setComentarioReferenciaLoading] =
+    useState(false);
+
   const baseURL = import.meta.env.VITE_API_URL;
 
   const handleSubmitProceso = async (e, type, action, setLoading) => {
@@ -105,6 +113,10 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                   setMemoriaRechazarLoading
                 )
               }
+              subproceso={"memoria"}
+              comentarioLoading={comentarioMemoriaLoading}
+              setComentarioLoading={setComentarioMemoriaLoading}
+              proceso_id={proceso.id}
             />
 
             <div
@@ -159,6 +171,10 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                   setComprobanteRechazarLoading
                 )
               }
+              subproceso={"comprobante"}
+              comentarioLoading={comentarioComprobanteLoading}
+              setComentarioLoading={setComentarioComprobanteLoading}
+              proceso_id={proceso.id}
             />
 
             <ProcesoCard
@@ -186,6 +202,10 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                   setImagenRechazarLoading
                 )
               }
+              subproceso={"imagen"}
+              comentarioLoading={comentarioImagenLoading}
+              setComentarioLoading={setComentarioImagenLoading}
+              proceso_id={proceso.id}
             />
 
             <ProcesoCard
@@ -212,6 +232,10 @@ export default function ModalProceso({ open, onClose, procesoId, procesos }) {
                   setReferenciaRechazarLoading
                 )
               }
+              subproceso={"referencia"}
+              comentarioLoading={comentarioReferenciaLoading}
+              setComentarioLoading={setComentarioReferenciaLoading}
+              proceso_id={proceso.id}
             />
           </div>
         </div>

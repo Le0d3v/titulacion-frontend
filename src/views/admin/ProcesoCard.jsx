@@ -5,6 +5,7 @@ import { ClipLoader } from "react-spinners";
 import { X, CircleCheck, Send } from "lucide-react";
 import { createRef } from "react";
 import clienteAxios from "../../config/axios";
+import { toast } from "react-toastify";
 
 export default function ProcesoCard({
   title,
@@ -17,16 +18,37 @@ export default function ProcesoCard({
   loadingReject,
   onApprove,
   onReject,
-  comentarioProceso,
+  subproceso,
   comentarioLoading,
+  setComentarioLoading,
+  proceso_id,
 }) {
+  const token = localStorage.getItem("AUTH_TOKEN");
   const comentarioRef = createRef();
 
   const handleSubmitComentario = async (e) => {
     e.preventDefault();
+    setComentarioLoading(true);
+
+    const datos = {
+      proceso_id: proceso_id,
+      subproceso: subproceso,
+      comentario: comentarioRef.current.value,
+    };
 
     try {
-    } catch (error) {}
+      const { data } = await clienteAxios.post("/api/comentario/store", datos, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success(data.message);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setComentarioLoading(false);
+    }
   };
 
   return (
