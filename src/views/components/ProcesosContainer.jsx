@@ -7,10 +7,37 @@ export default function ProcesosContainer({ procesos }) {
   const [showModalProceso, setShowModalProceso] = useState(false);
   const [procesoSeleccionadoId, setProcesoSeleccionadoId] = useState(null);
 
+  const [search, setSearch] = useState("");
+
   const handleVerMas = (proceso) => {
     setProcesoSeleccionadoId(proceso.id);
     setShowModalProceso(true);
   };
+
+  // ---------- FILTRO DINÁMICO ----------
+  const procesosFiltrados = procesos.filter((proceso) => {
+    if (!search) return true;
+
+    const texto = search.toLowerCase();
+
+    const nombreCompleto = [
+      proceso?.name,
+      proceso?.apellido_paterno,
+      proceso?.apellido_materno,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+
+    const matricula = (proceso?.datos_escolares?.matricula ?? "").toLowerCase();
+    const carrera = (proceso?.datos_escolares?.carrera ?? "").toLowerCase();
+
+    return (
+      nombreCompleto.includes(texto) ||
+      matricula.includes(texto) ||
+      carrera.includes(texto)
+    );
+  });
 
   return (
     <div className="w-full">
@@ -19,18 +46,24 @@ export default function ProcesosContainer({ procesos }) {
           <p className="text-md">
             Procesos Totales:
             <span className="text-emerald-400 font-bold text-lg">
-              {" " + procesos.length}
+              {" " + procesosFiltrados.length}
             </span>
           </p>
 
           <div className="flex p-1 gap-1 bg-gray-800/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto">
             <Search />
-            <input type="text" placeholder="Buscar Proceso" className="p-1" />
+            <input
+              type="text"
+              placeholder="Buscar Proceso"
+              className="p-1 bg-transparent outline-none text-white placeholder-gray-400"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
           </div>
         </div>
 
         <div className="mt-3 max-h-100 overflow-y-scroll pl-1 pr-3 py-2">
-          {procesos.map((proceso, index) => (
+          {procesosFiltrados.map((proceso, index) => (
             <div key={index} className="p-2 bg-white rounded-lg my-2">
               <div className="flex justify-between text-black">
                 <div>
@@ -89,6 +122,7 @@ export default function ProcesosContainer({ procesos }) {
           ))}
         </div>
       </div>
+
       <ModalProceso
         open={showModalProceso}
         onClose={() => setShowModalProceso(false)}

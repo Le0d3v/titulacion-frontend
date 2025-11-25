@@ -300,9 +300,7 @@ export default function MyProcess() {
               inputRef={imagenRef}
             />
 
-            <Comentarios
-              comentarios={usuario.comentarios.comentarios_comprobante}
-            />
+            <Comentarios comentarios={usuario.comentarios.comentarios_imagen} />
           </div>
         </div>
 
