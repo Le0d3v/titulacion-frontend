@@ -37,7 +37,7 @@ export default function Home() {
         <h1 className="text-center text-4xl font-black">
           Bienvenido {usuario.name}
         </h1>
-        <p className="text-center text-gray-200 mt-1">
+        <p className="text-center dark:text-gray-200 mt-1 text-black">
           Universidad Tecnológica de Huejozingo. Módulo de Titulación
         </p>
       </div>

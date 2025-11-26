@@ -45,7 +45,7 @@ export default function BarraProgreso({ proceso }) {
   }, [proceso]);
 
   return (
-    <div className="flex gap-5 w-full md:flex-row flex-col md:p-0 px-5"> 
+    <div className="flex gap-5 w-full md:flex-row flex-col md:p-0 px-5 "> 
       <div
         id="my-proceso-completadas"
         className="md:w-1/4 w-full p-3 bg-gray-100 rounded-xl text-black"

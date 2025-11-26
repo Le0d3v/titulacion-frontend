@@ -206,7 +206,7 @@ export default function MyProcess() {
 
         <div className="w-full p-1 flex flex-col md:flex-row gap-5 mt-3">
           <div
-            className="w-full p-5 rounded-lg bg-white text-black"
+            className="w-full p-4 rounded-lg shadow-lg border-4 border-emerald-400 bg-white text-black"
             id="my-proceso-card"
           >
             <h1
@@ -245,7 +245,7 @@ export default function MyProcess() {
             />
           </div>
 
-          <div className="w-full p-2 rounded-lg bg-white text-black">
+          <div className="w-full p-4 rounded-lg shadow-lg border-4 border-emerald-400 bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Validación de Datos Personales
             </h1>
@@ -278,7 +278,7 @@ export default function MyProcess() {
           </div>
         </div>
         <div className="w-full p-1 flex flex-col md:flex-row gap-5 mt-3">
-          <div className="w-full p-2 rounded-lg bg-white text-black">
+          <div className="w-full p-4 rounded-lg shadow-lg border-4 border-emerald-400 bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Encuesta de Egresados
             </h1>
@@ -309,7 +309,7 @@ export default function MyProcess() {
             <Comentarios comentarios={[]} />
           </div>
 
-          <div className="w-full p-2 rounded-lg bg-white text-black">
+          <div className="w-full p-4 rounded-lg shadow-lg border-4 border-emerald-400 bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Carga de Imágen para Titulación
             </h1>
@@ -331,7 +331,7 @@ export default function MyProcess() {
         </div>
 
         <div className="w-full p-1 flex flex-col md:flex-row gap-5 mt-3">
-          <div className="w-full p-2 rounded-lg bg-white text-black">
+          <div className="w-full p-4 rounded-lg shadow-lg border-4 border-emerald-400 bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Comprobante de Pago de Donación
             </h1>
@@ -364,7 +364,7 @@ export default function MyProcess() {
               />
             </div>
           </div>
-          <div className="w-full p-2 rounded-lg bg-white text-black">
+          <div className="w-full p-4 rounded-lg shadow-lg border-4 border-emerald-400 bg-white text-black">
             <h1 className="text-center text-2xl font-bold text-emerald-500">
               Registro de Pago de Titulo Universitario
             </h1>
@@ -390,8 +390,8 @@ export default function MyProcess() {
                   placeholder="Coloca tu referencia"
                   required
                   ref={referenciaRef}
-                  className="block w-full text-sm text-gray-700 bg-gray-50 border border-gray-300 rounded-lg p-2 
-                      focus:border-blue-600 focus:ring-blue-600"
+                  className="block w-full text-sm text-gray-700 bg-gray-50 border border-gray-300 rounded-lg shadow-xl dark:p-2 
+    bg-gray-100                   focus:border-blue-600 focus:ring-blue-600"
                   defaultValue={data?.data?.[0]?.archivo?.referencia_pago}
                 />
               </div>

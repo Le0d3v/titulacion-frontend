@@ -7,16 +7,18 @@ export default function DatosPersonales() {
 
   return (
     <div
-      className="border-gray-400 border-2 w-full p-3 rounded-xl mb-7"
+      className="dark:border-gray-400 border-2 w-full p-3 rounded-xl mb-7 border-emerald-400"
       id="datos-personales"
     >
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-full bg-gray-500/70">
+        <div className="p-2 rounded-full dark:bg-gray-500/70 bg-emerald-500/70">
           <User className="text-white" />
         </div>
-        <h1 className="text-xl font-bold text-white">Datos Personales</h1>
+        <h1 className="text-xl font-bold dark:text-white text-emerald-500">
+          Datos Personales
+        </h1>
       </div>
-      <div className="text-gray-300 my-3 text-center md:text-start md:flex md:gap-1">
+      <div className="dark:text-gray-300 my-3 text-center md:text-start md:flex md:gap-1 text-black">
         <p>
           Si algún dato es incorrecto, intenta modificarlo en la Validación de
           Datos Personales o contacta con
@@ -98,9 +100,9 @@ export default function DatosPersonales() {
 
 const UserData = ({ label, value }) => (
   <div className="w-full">
-    <label className="text-sm text-gray-300">{label}</label>
-    <div className="w-full p-2 bg-emerald-600/50 rounded font-500">
-      <p className="text-lg font-bold">{value}</p>
+    <label className="text-sm dark:text-gray-300 text-black">{label}</label>
+    <div className="w-full p-2 dark:bg-emerald-600/50 rounded font-500 bg-emerald-600">
+      <p className="text-lg font-bold text-white">{value}</p>
     </div>
   </div>
 );

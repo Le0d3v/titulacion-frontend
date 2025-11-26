@@ -51,18 +51,20 @@ export default function CambiarPassword() {
 
   return (
     <div
-      className="border-gray-500 border-2 w-full p-3 rounded-xl mb-5"
+      className="dark:border-gray-500 border-2 w-full p-3 rounded-xl mb-5 border-emerald-500"
       id="cambiar-password"
     >
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-full bg-gray-500/70">
-          <Lock />
+        <div className="p-2 rounded-full dark:bg-gray-500/70 bg-emerald-500">
+          <Lock className="text-white dark:text-black" />
         </div>
-        <h1 className="text-xl font-bold">Cambiar Contraseña</h1>
+        <h1 className="text-xl font-bold text-emerald-400 dark:text-white">
+          Cambiar Contraseña
+        </h1>
       </div>
       <div className="mt-1">
         <form method="post" className="mt-1" onSubmit={handleSubmit}>
-          <legend className="text-blue-300 text-center md:text-start flex gap-1 mt-3 items-center">
+          <legend className="dark:text-blue-300 text-blue-500 text-center md:text-start flex gap-1 mt-3 items-center">
             <CircleCheck className="h-5 w-5" />
             <p>Modifica tu contraseña llenando el siguiente formulario</p>
           </legend>
@@ -77,7 +79,7 @@ export default function CambiarPassword() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                 placeholder="••••••••"
                 required
                 name="current_password"
@@ -105,7 +107,7 @@ export default function CambiarPassword() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                 placeholder="••••••••"
                 required
                 name="password"
@@ -132,7 +134,7 @@ export default function CambiarPassword() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                 placeholder="••••••••"
                 required
                 name="password_confirmation"

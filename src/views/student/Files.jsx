@@ -122,9 +122,12 @@ export default function Files() {
         </button>
       </div>
       <div className="flex flex-col md:flex-row gap-5 mt-5">
-        <div className="p-2 bg-white rounded w-full text-black" id="files-card">
+        <div
+          className="p-2 bg-white rounded-xl w-full text-black border-4 border-gray-300 hover:-translate-y-2 transition"
+          id="files-card"
+        >
           <h2
-            className="text-center text-emerald-500 font-bold text-2xl"
+            className="text-center text-emerald-500 font-bold text-2xl "
             id="files-nombre"
           >
             Memoria de Estadía
@@ -192,7 +195,7 @@ export default function Files() {
             </>
           )}
         </div>
-        <div className="p-2 bg-white rounded w-full text-black">
+        <div className="p-2 bg-white rounded-xl w-full text-black border-4 border-gray-300 hover:-translate-y-2 transition">
           <h2 className="text-center text-emerald-500 font-bold text-2xl">
             Comprobante de Donación
           </h2>
@@ -254,7 +257,7 @@ export default function Files() {
             </>
           )}
         </div>
-        <div className="p-2 bg-white rounded w-full text-black">
+        <div className="p-2 bg-white rounded-xl w-full text-black border-4 border-gray-300 hover:-translate-y-2 transition">
           <h2 className="text-center text-emerald-500 font-bold text-2xl">
             Imágen para Titulación
           </h2>
@@ -313,7 +316,7 @@ export default function Files() {
       </div>
       <div>
         <div
-          className="w-full mt-5 p-3 rounded-xl bg-white border-4 border-gray-300 text-black"
+          className="w-full mt-5 p-3 rounded-xl bg-white border-4 border-gray-300 text-black hover:-translate-y-1 transition"
           id="carta-excencion"
         >
           <div className="flex gap-1 items-center">
