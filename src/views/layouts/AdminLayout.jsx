@@ -9,7 +9,6 @@ import "react-toastify/ReactToastify.css";
 export default function AdminLayout() {
   const mediaQuery = window.matchMedia("(max-width: 768px)");
   const { user, error, loading } = useAuth({ middleware: "auth" });
-
   return (
     <>
       <div className="h-screen flex">
@@ -28,6 +27,7 @@ export default function AdminLayout() {
               />
             </div>
           </div>
+          
           <Navigation index="1" />
           <div className="absolute bottom-5 left-2 right-2">
             <div

@@ -36,7 +36,6 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-emerald-100 to-gray-100 dark:bg-gradient-to-br dark:from-gray-900 dark:via-emerald-900 dark:to-gray-900 flex items-center justify-center p-5 transition-colors">
       <div className="w-full max-w-md">
-        {/* Logo + encabezado */}
         <div className="text-center mb-5">
           <div className="mx-auto flex items-center justify-center">
             <img src="/img/logo_dark.png" className="w-40 dark:block hidden" />
@@ -51,8 +50,6 @@ export default function Login() {
             Iniciar Sesión
           </p>
         </div>
-
-        {/* Card */}
         <div className="bg-white/10 dark:bg-white/10 dark:backdrop-blur-md rounded-2xl p-8 border border-gray-300 dark:border-white/20 shadow-xl transition-colors">
           <form
             className="space-y-6"
@@ -62,8 +59,6 @@ export default function Login() {
             {errores.map((error, i) => (
               <Alerta key={i}>{error}</Alerta>
             ))}
-
-            {/* MATRÍCULA */}
             <div>
               <label className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 Matrícula
@@ -80,8 +75,6 @@ export default function Login() {
                 />
               </div>
             </div>
-
-            {/* CONTRASEÑA */}
             <div>
               <label className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 Contraseña
@@ -109,8 +102,6 @@ export default function Login() {
                 </button>
               </div>
             </div>
-
-            {/* BOTÓN */}
             <button
               type="submit"
               className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
@@ -124,8 +115,6 @@ export default function Login() {
             </button>
           </form>
         </div>
-
-        {/* Footer */}
         <div className="text-center py-5">
           <p className="text-gray-600 dark:text-green-200 text-sm">
             Sistema Institucional Integral UTH © 2025
