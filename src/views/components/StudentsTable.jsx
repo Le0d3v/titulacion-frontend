@@ -29,13 +29,19 @@ export default function StudentsTable({ datos }) {
   return (
     <>
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm text-gray-100 mt-5 md:mt-0">
+        <p
+          className="text-sm text-gray-100 mt-5 md:mt-0"
+          id="estudiantes-total"
+        >
           Estudiantes Totales:
           <span className="text-lg text-emerald-500 font-black">
             {" " + datos.length}
           </span>
         </p>
-        <div className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto">
+        <div
+          className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
+          id="buscador-estudiantes"
+        >
           <Search />
           <input
             type="text"
@@ -46,7 +52,7 @@ export default function StudentsTable({ datos }) {
         </div>
       </div>
       <div className="mt-5">
-        <div className="p-1">
+        <div className="p-1" id="estudiantes-tabla">
           <table className="w-full overflow-x-scroll md:overflow-x-auto">
             <thead className="">
               <tr className=" bg-emerald-500 text-white rounded ">
@@ -57,7 +63,7 @@ export default function StudentsTable({ datos }) {
                 <th className="p-2">Acciones</th>
               </tr>
             </thead>
-            <tbody className="">
+            <tbody className="" id="estudiantes-contenedor">
               {searchStudents.map((student) => (
                 <tr key={student.id}>
                   <td className="text-center py-4 border-b border-gray-500">
@@ -81,6 +87,7 @@ export default function StudentsTable({ datos }) {
                       <button
                         type="button"
                         className="p-1 rounded bg-emerald-400 cursor-pointer hover:bg-emerald-500 transition-all hover:-translate-y-1 mx-auto font-bold flex gap-1"
+                        id="ver-mas-estudiante"
                         onClick={() => {
                           openModal(student);
                         }}

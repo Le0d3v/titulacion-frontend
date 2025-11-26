@@ -13,6 +13,7 @@ export default function StudentModal({ open, onClose, student }) {
         className={`bg-white rounded-2xl shadow-xl w-full max-w-5xl max-h-[90vh] overflow-hidden transform transition-all duration-300 ${
           open ? "scale-100" : "scale-95"
         }`}
+        id="estudiante-modal"
       >
         {/* Header */}
         <div className="flex items-center gap-3 p-6 border-b border-gray-200 bg-gray-50 justify-between">

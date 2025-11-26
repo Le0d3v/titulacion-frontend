@@ -50,7 +50,10 @@ export default function CambiarPassword() {
   };
 
   return (
-    <div className="border-gray-500 border-2 w-full p-3 rounded-xl mb-5">
+    <div
+      className="border-gray-500 border-2 w-full p-3 rounded-xl mb-5"
+      id="cambiar-password"
+    >
       <div className="flex items-center gap-3">
         <div className="p-2 rounded-full bg-gray-500/70">
           <Lock />
@@ -66,7 +69,7 @@ export default function CambiarPassword() {
           {errores.map((error, i) => (
             <Alerta key={i}>{error}</Alerta>
           ))}
-          <div className="mt-5 px-1">
+          <div className="mt-5 px-1" id="cambiar-password-input">
             <label htmlFor="" className="font-bold">
               Contraseña Actual
             </label>
@@ -84,6 +87,7 @@ export default function CambiarPassword() {
                 type="button"
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
                 onClick={() => setShowPassword(!showPassword)}
+                id="ver-password"
               >
                 {showPassword ? (
                   <EyeOff className="text-white hover:cursor-pointer" />
@@ -152,6 +156,7 @@ export default function CambiarPassword() {
               type="submit"
               className="flex items-center justify-center w-52 gap-1 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold p-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 cursor-pointer"
               disabled={cargando}
+              id="boton-cambiar-passwor"
             >
               {cargando ? (
                 <ClipLoader color="#ffffff" size={24} className="m-0" />

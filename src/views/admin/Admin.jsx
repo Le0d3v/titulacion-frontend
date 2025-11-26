@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import useTitulation from "../../hooks/useTitulation";
 import AdminModal from "./AdminModal";
+import { useAdminTour } from "../../hooks/useAdminTour";
+import { Video } from "lucide-react";
 
 export default function Admin() {
   const token = localStorage.getItem("AUTH_TOKEN");
   const { modal, itemModal, openModal, closeModal } = useTitulation();
   const [searchAdmins, setSearchAdmins] = useState([]);
+  const { adminsTour } = useAdminTour();
 
   const fetcher = () => clienteAxios("/api/admins").then((data) => data.data);
 
@@ -38,15 +41,34 @@ export default function Admin() {
   };
 
   return (
-    <>
+    <div>
+      <div className="text-center text-3xl font-black" id="admins-header">
+        Administradores
+      </div>
+      <div className="flex w-full justify-end px-5">
+        <button
+          onClick={() => {
+            adminsTour().drive();
+          }}
+          id="tutorial-admins"
+          className="p-2 bg-blue-400 text-white rounded cursor-pointer hover:bg-blue-500 
+            flex gap-1 hover:-translate-y-1 transition"
+        >
+          <Video />
+          <p>Tutorial</p>
+        </button>
+      </div>
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm text-gray-100 mt-5 md:mt-0">
+        <p className="text-sm text-gray-100 mt-5 md:mt-0" id="total-admins">
           Administradores Totales:
           <span className="text-lg text-emerald-500 font-black">
             {" " + admins.length}
           </span>
         </p>
-        <div className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto">
+        <div
+          className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
+          id="buscador-admins"
+        >
           <Search />
           <input
             type="text"
@@ -57,7 +79,7 @@ export default function Admin() {
         </div>
       </div>
       <div className="mt-5">
-        <div className="p-1">
+        <div className="p-1" id="admins-tabla">
           <table className="w-full overflow-x-scroll md:overflow-x-auto">
             <thead>
               <tr className="bg-emerald-500 text-white rounded">
@@ -68,7 +90,7 @@ export default function Admin() {
                 <th className="p-2">Acciones</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="admins-contenedor">
               {searchAdmins.map((admin) => (
                 <tr key={admin.id}>
                   <td className="text-center py-4 border-b border-gray-500">
@@ -92,6 +114,7 @@ export default function Admin() {
                       <button
                         type="button"
                         className="p-1 rounded bg-emerald-400 cursor-pointer hover:bg-emerald-500 transition-all hover:-translate-y-1 mx-auto font-bold flex gap-1"
+                        id="ver-mas-admin"
                         onClick={() => {
                           openModal(admin);
                         }}
@@ -112,6 +135,6 @@ export default function Admin() {
           ></AdminModal>
         </div>
       </div>
-    </>
+    </div>
   );
 }

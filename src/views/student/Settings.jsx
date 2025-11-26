@@ -8,6 +8,7 @@ export default function Settings() {
       <div className="mt-5 md:px-8 p-1">
         <DatosPersonales />
         <CambiarPassword />
+        <Tour tour="student" />
       </div>
     </div>
   );

@@ -43,14 +43,17 @@ export default function ProcesosContainer({ procesos }) {
     <div className="w-full">
       <div className="mt-3 w-full p-3 bg-gray-400/50 rounded-xl">
         <div className="flex justify-between items-center">
-          <p className="text-md">
+          <p className="text-md" id="proceso-container-total">
             Procesos Totales:
             <span className="text-emerald-400 font-bold text-lg">
               {" " + procesosFiltrados.length}
             </span>
           </p>
 
-          <div className="flex p-1 gap-1 bg-gray-800/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto">
+          <div
+            className="flex p-1 gap-1 bg-gray-800/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
+            id="proceso-container-buscador"
+          >
             <Search />
             <input
               type="text"
@@ -64,7 +67,11 @@ export default function ProcesosContainer({ procesos }) {
 
         <div className="mt-3 max-h-100 overflow-y-scroll pl-1 pr-3 py-2">
           {procesosFiltrados.map((proceso, index) => (
-            <div key={index} className="p-2 bg-white rounded-lg my-2">
+            <div
+              key={index}
+              className="p-2 bg-white rounded-lg my-2"
+              id="proceso-card-1"
+            >
               <div className="flex justify-between text-black">
                 <div>
                   <h1 className="font-bold text-emerald-300 text-lg">

@@ -5,14 +5,18 @@ import {
   HardHat,
   Lock,
   User,
+  Video,
 } from "lucide-react";
 
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import PieChart from "../components/PieChart";
 import clienteAxios from "../../config/axios";
+import { useAdminTour } from "../../hooks/useAdminTour";
 
 export default function Dashboard() {
+  const { dashboardTour } = useAdminTour();
+
   const [tsu, setTsu] = useState([]);
   const [ing, setIng] = useState([]);
   const [procesosIng, setProcesosIng] = useState([]);
@@ -56,15 +60,33 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-center text-3xl font-black">
-        Panel de Administración
-      </h1>
-      <p className="text-center text-sm text-gray-300 mt-2">
-        Bienvenido al Sistema de Gestión de Titulación
-      </p>
-      <div className="w-full flex flex-col md:flex-row gap-5 mt-3 md:mt-5 px-10 py-5 md:p-5">
-        <div className="w-full p-3 bg-blue-400  rounded-xl">
+    <div id="dashboard">
+      <div id="dashboard-header">
+        <h1 className="text-center text-3xl font-black">
+          Panel de Administración
+        </h1>
+        <p className="text-center text-sm text-gray-300 mt-2">
+          Bienvenido al Sistema de Gestión de Titulación
+        </p>
+      </div>
+      <div className="flex w-full justify-end px-5">
+        <button
+          onClick={() => {
+            dashboardTour().drive();
+          }}
+          id="tutorial-dashboard"
+          className="p-2 bg-blue-400 text-white rounded cursor-pointer hover:bg-blue-500 
+          flex gap-1 hover:-translate-y-1 transition"
+        >
+          <Video />
+          <p>Tutorial</p>
+        </button>
+      </div>
+      <div
+        className="w-full flex flex-col md:flex-row gap-5 mt-3 md:mt-5 px-10 py-3 md:p-5"
+        id="dashboard-main"
+      >
+        <div className="w-full p-3 bg-blue-400 rounded-xl">
           <div className="flex justify-center p-1">
             <GraduationCap className="w-14 h-14" />
           </div>
@@ -76,6 +98,7 @@ export default function Dashboard() {
             <NavLink
               to={"/admin/students"}
               className="p-2 rounded bg-blue-600 hover:bg-blue-800 cursor-pointer hover:-translate-y-1 transition-all"
+              id="vermas-link"
             >
               Ver Más
             </NavLink>
@@ -132,10 +155,13 @@ export default function Dashboard() {
       <div className="mt-5 p-5 md:p-1">
         <h1 className="text-center  text-2xl font-bold">Procesos</h1>
         <div className="flex flex-col md:flex-row gap-5 w-full mt-3">
-          <div className="w-full bg-gray-100/30 rounded-2xl p-3 ">
+          <div className="w-full bg-gray-100/30 rounded-2xl p-3">
             <h1 className="text-center font-bold text-xl">TSU</h1>
             <div>
-              <div className="mt-3 flex flex-col md:flex-row gap-5 p-1">
+              <div
+                className="mt-3 flex flex-col md:flex-row gap-5 p-1"
+                id="dashboard-tsu"
+              >
                 <div className="p-3 rounded bg-white w-full text-black">
                   <div className="flex justify-center">
                     <GraduationCap className="w-10 h-10 text-blue-400" />
@@ -176,7 +202,7 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className="mt-1 p-3">
+              <div className="mt-1 p-3" id="grafica-tsu">
                 <h1 className="text-center font-bold my-1">
                   Gráfico de Procesos
                 </h1>
@@ -190,7 +216,10 @@ export default function Dashboard() {
           </div>
           <div className="w-full bg-gray-100/30 rounded-2xl p-3 ">
             <h1 className="text-center font-bold text-xl">Ingeniería</h1>
-            <div className="mt-3 flex flex-col md:flex-row gap-5 p-1">
+            <div
+              className="mt-3 flex flex-col md:flex-row gap-5 p-1"
+              id="dashboard-ing"
+            >
               <div className="p-3 rounded bg-white w-full text-black">
                 <div className="flex justify-center">
                   <GraduationCap className="w-10 h-10 text-blue-400" />
@@ -231,7 +260,7 @@ export default function Dashboard() {
                 </div>
               </div>
             </div>
-            <div className="mt-1 p-3">
+            <div className="mt-1 p-3" id="grafica-ing">
               <h1 className="text-center font-bold my-1">
                 Gráfico de Procesos
               </h1>

@@ -1,3 +1,4 @@
+// router.jsx
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "./views/auth/Login";
 import UserLayout from "./views/layouts/UserLayout";
@@ -27,27 +28,27 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/admin/processes",
+        path: "processes",
         element: <Processes />,
       },
       {
-        path: "/admin/processes/:proceso",
+        path: "processes/:proceso",
         element: <Processes />,
       },
       {
-        path: "/admin/students",
+        path: "students",
         element: <Students />,
       },
       {
-        path: "/admin/enginiers",
+        path: "enginiers",
         element: <Enginiers />,
       },
       {
-        path: "/admin/admins",
+        path: "admins",
         element: <Admin />,
       },
       {
-        path: "/admin/settings",
+        path: "settings",
         element: <Setings />,
       },
     ],
@@ -61,15 +62,15 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/home/my-process",
+        path: "my-process",
         element: <MyProcess />,
       },
       {
-        path: "/home/my-files",
+        path: "my-files",
         element: <Files />,
       },
       {
-        path: "/home/settings",
+        path: "settings",
         element: <Settings />,
       },
     ],

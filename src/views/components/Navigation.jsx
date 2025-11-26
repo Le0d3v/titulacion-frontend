@@ -15,7 +15,7 @@ export default function Navigation({ index }) {
   const { user } = useAuth({ middleware: "auth" });
 
   return (
-    <nav className="mt-5 px-2">
+    <nav className="mt-5 px-2" id="navegacion">
       <div className="hidden lg:block">
         <p className="text-sm text-white dark:text-gray-400 text-center my-2 transition-colors">
           Navegación
@@ -24,27 +24,31 @@ export default function Navigation({ index }) {
 
       {index == 1 ? (
         <>
-          <NavLink
-            to="/admin"
-            end
-            className={({ isActive }) =>
-              `flex items-center p-5 md:p-3 mb-1 rounded-lg gap-1 transition-all duration-200 group 
-           text-wite dark:text-white text-sm
-          ${
-            isActive
-              ? "bg-gray-800 dark:bg-emerald-500/30 border-l-4 border-white font-black text-white dark:text-white"
-              : "hover:-translate-y-1"
-          }`
-            }
-          >
-            <Home className="w-6 h-6 lg:mr-3" />
-            <span className="sm:block md:hidden lg:block text-xl md:text-sm">
-              Inicio
-            </span>
-          </NavLink>
+          <div>
+            <NavLink
+              to="/admin"
+              end
+              id="dashboard-link"
+              className={({ isActive }) =>
+                `flex items-center p-5 md:p-3 mb-1 rounded-lg gap-1 transition-all duration-200 group 
+             text-wite dark:text-white text-sm
+            ${
+              isActive
+                ? "bg-gray-800 dark:bg-emerald-500/30 border-l-4 border-white font-black text-white dark:text-white"
+                : "hover:-translate-y-1"
+            }`
+              }
+            >
+              <Home className="w-6 h-6 lg:mr-3" />
+              <span className="sm:block md:hidden lg:block text-xl md:text-sm">
+                Inicio
+              </span>
+            </NavLink>
+          </div>
 
           <NavLink
             to="/admin/processes"
+            id="procesos-link"
             className={({ isActive }) =>
               `flex items-center p-5 md:p-3 mb-1 rounded-lg gap-1 transition-all duration-200 group 
            text-wite dark:text-white text-sm
@@ -63,6 +67,7 @@ export default function Navigation({ index }) {
 
           <NavLink
             to="/admin/students"
+            id="tsu-link"
             className={({ isActive }) =>
               `flex items-center p-5 md:p-3 mb-1 rounded-lg gap-1 transition-all duration-200 group 
            text-wite dark:text-white text-sm
@@ -81,6 +86,7 @@ export default function Navigation({ index }) {
 
           <NavLink
             to="/admin/enginiers"
+            id="ing-link"
             className={({ isActive }) =>
               `flex items-center p-5 md:p-3 mb-1 rounded-lg gap-1 transition-all duration-200 group 
            text-wite dark:text-white text-sm
@@ -99,6 +105,7 @@ export default function Navigation({ index }) {
 
           <NavLink
             to="/admin/admins"
+            id="admins-link"
             className={({ isActive }) =>
               `flex items-center p-5 md:p-3 mb-1 rounded-lg gap-1 transition-all duration-200 group 
            text-wite dark:text-white text-sm
@@ -117,6 +124,7 @@ export default function Navigation({ index }) {
 
           <NavLink
             to="/admin/settings"
+            id="settings-link"
             className={({ isActive }) =>
               `flex items-center p-5 md:p-3 mb-1 rounded-lg gap-1 transition-all duration-200 group 
            text-wite dark:text-white text-sm

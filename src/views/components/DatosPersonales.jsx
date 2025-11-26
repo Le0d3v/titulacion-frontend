@@ -6,7 +6,10 @@ export default function DatosPersonales() {
   const { user } = useAuth({ middleware: "" });
 
   return (
-    <div className="border-gray-400 border-2 w-full p-3 rounded-xl mb-7">
+    <div
+      className="border-gray-400 border-2 w-full p-3 rounded-xl mb-7"
+      id="datos-personales"
+    >
       <div className="flex items-center gap-3">
         <div className="p-2 rounded-full bg-gray-500/70">
           <User className="text-white" />
@@ -22,6 +25,7 @@ export default function DatosPersonales() {
           <NavLink
             className="flex hover:cursor-pointer hover:underline hover:text-emerald-500"
             to="https://www.uth.edu.mx/index.php/servicios/alumnos/contacto"
+            id="sa-link"
           >
             <p>Servicios Escolares</p>
             <ExternalLink className="w-4 h-4" />

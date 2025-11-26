@@ -5,7 +5,10 @@ export default function DeleteAcount() {
   const [button, setButton] = useState(false);
 
   return (
-    <div className="border-gray-500 border-2 w-full p-3 rounded-xl mb-5">
+    <div
+      className="border-gray-500 border-2 w-full p-3 rounded-xl mb-5"
+      id="eliminar-cuenta"
+    >
       <div className="flex items-center gap-3">
         <div className="p-2 rounded-full bg-gray-500/70">
           <Trash />
@@ -13,20 +16,22 @@ export default function DeleteAcount() {
         <h1 className="text-xl font-bold">Eliminar Cuenta</h1>
       </div>
       <div className="mt-2">
-        <div className="flex gap-1 md:items-center">
-          <CircleAlert className="text-yellow-400 md:h-5 md:w-5 h-13 w-13" />
-          <p className="text-center md:text-start text-yellow-400">
-            Para eliminar tu cuentes debes confirmar tu identidad colocando tu
-            contraseña
+        <div id="advertencia">
+          <div className="flex gap-1 md:items-center">
+            <CircleAlert className="text-yellow-400 md:h-5 md:w-5 h-13 w-13" />
+            <p className="text-center md:text-start text-yellow-400">
+              Para eliminar tu cuentes debes confirmar tu identidad colocando tu
+              contraseña
+            </p>
+          </div>
+          <p className="text-center md:text-start mt-3">
+            Al eliminar la cuenta se eliminarán todos los datos relacionados con
+            ella (Credenciales de Inicio de Sesión, Datos Personales, etc.).
           </p>
         </div>
-        <p className="text-center md:text-start mt-3">
-          Al eliminar la cuenta se eliminarán todos los datos relacionados con
-          ella (Credenciales de Inicio de Sesión, Datos Personales, etc.).
-        </p>
         <div className="mt-5 w-full">
           <form className="">
-            <div className="mt-5 px-1 w-full">
+            <div className="mt-5 px-1 w-full" id="eliminar-cuenta-input">
               <label htmlFor="" className="font-bold">
                 Contraseña
               </label>
@@ -60,6 +65,7 @@ export default function DeleteAcount() {
               <button
                 type="submit"
                 className="flex gap-1 items-center p-2 bg-red-500 font-bold text-white rounded hover:cursor-pointer hover:bg-red-700 transition hover:-translate-y-1"
+                id="eliminar-cuenta-boton"
               >
                 <Trash />
                 <p>Eliminar Cuenta</p>
