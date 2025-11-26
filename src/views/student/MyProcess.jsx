@@ -13,11 +13,14 @@ import FormularioValidacion from "./FormularioValidacion";
 import FormularioArchivo from "../components/FormularioArchivo";
 import Encuesta from "./Encuesta";
 import Comentarios from "../components/Comentarios";
+import { useStudentTour } from "../../hooks/useStudentTour";
+import { Video } from "lucide-react";
 
 export default function MyProcess() {
   const { user } = useAuth({ middleware: "auth" });
   const token = localStorage.getItem("AUTH_TOKEN");
   const shouldFetch = Boolean(user?.id);
+  const { procesoTour } = useStudentTour();
 
   const [erroresMemoria, setErroresMemoria] = useState([]);
   const [cargandoMemoria, setCargandoMemoria] = useState(false);
@@ -176,9 +179,23 @@ export default function MyProcess() {
 
   return (
     <>
-      <div className="text-center text-3xl font-black">Mi Proceso</div>
-
-      <div className="w-full my-3">
+      <div className="text-center text-3xl font-black" id="my-proceso-header">
+        Mi Proceso
+      </div>
+      <div className="flex w-full justify-end px-5">
+        <button
+          onClick={() => {
+            procesoTour().drive();
+          }}
+          id="my-proceso-tutorial"
+          className="p-2 bg-blue-400 text-white rounded cursor-pointer hover:bg-blue-500 
+                      flex gap-1 hover:-translate-y-1 transition"
+        >
+          <Video />
+          <p>Tutorial</p>
+        </button>
+      </div>
+      <div className="w-full my-3" id="my-proceso-general">
         {proceso && <BarraProgreso proceso={proceso} />}
       </div>
 
@@ -188,33 +205,41 @@ export default function MyProcess() {
         </h1>
 
         <div className="w-full p-1 flex flex-col md:flex-row gap-5 mt-3">
-          <div className="w-full p-5 rounded-lg bg-white text-black">
-            <h1 className="text-center text-2xl font-bold text-emerald-500">
+          <div
+            className="w-full p-5 rounded-lg bg-white text-black"
+            id="my-proceso-card"
+          >
+            <h1
+              className="text-center text-2xl font-bold text-emerald-500"
+              id="my-proceso-nombre"
+            >
               Validación de Memoria de Estadía
             </h1>
-            <p className="mt-3 font-bold">
+            <p className="mt-3 font-bold" id="my-proceso-estado">
               Estado: <Estado estado={proceso.validacion_memoria_estadia} />
             </p>
-            <div>
-              <p className="text-xl font-bold text-gray-600 mt-5">
-                Cargar Archivo
-              </p>
-              <div className="flex gap-1 text-blue-400 text-sm mt-1 items-center">
-                <Info size={20} />
-                <p>
-                  Incluir el formato de nombre: (Memoria_Estadia_[tu
-                  matricula].pdf).
+            <div id="my-proceso-cargar">
+              <div>
+                <p className="text-xl font-bold text-gray-600 mt-5">
+                  Cargar Archivo
                 </p>
+                <div className="flex gap-1 text-blue-400 text-sm mt-1 items-center">
+                  <Info size={20} />
+                  <p>
+                    Incluir el formato de nombre: (Memoria_Estadia_[tu
+                    matricula].pdf).
+                  </p>
+                </div>
               </div>
+              <FormularioArchivo
+                label="Memoria de Estadía (Archivo PDF)"
+                accept="application/pdf"
+                loading={cargandoMemoria}
+                errors={erroresMemoria}
+                onSubmit={handleSubmitMemoria}
+                inputRef={memoriaRef}
+              />
             </div>
-            <FormularioArchivo
-              label="Memoria de Estadía (Archivo PDF)"
-              accept="application/pdf"
-              loading={cargandoMemoria}
-              errors={erroresMemoria}
-              onSubmit={handleSubmitMemoria}
-              inputRef={memoriaRef}
-            />
             <Comentarios
               comentarios={usuario.comentarios.comentarios_memoria}
             />
@@ -275,6 +300,7 @@ export default function MyProcess() {
             <div className="mt-5 w-full flex justify-center p-3">
               <button
                 className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center"
+                id="my-proceso-enlace"
                 onClick={() => setModalEncuestaOpen(true)}
               >
                 <NotebookPen /> Realizar Encuesta
@@ -355,23 +381,26 @@ export default function MyProcess() {
                 <Alerta key={i}>{error}</Alerta>
               ))}
 
-              <label className="block text-gray-700 font-semibold">
-                Refrencia de Pago (20 digitos):
-              </label>
-              <input
-                type="tel"
-                placeholder="Coloca tu referencia"
-                required
-                ref={referenciaRef}
-                className="block w-full text-sm text-gray-700 bg-gray-50 border border-gray-300 rounded-lg p-2 
-                    focus:border-blue-600 focus:ring-blue-600"
-                defaultValue={data?.data?.[0]?.archivo?.referencia_pago}
-              />
+              <div id="my-proceso-referencia">
+                <label className="block text-gray-700 font-semibold">
+                  Refrencia de Pago (20 digitos):
+                </label>
+                <input
+                  type="tel"
+                  placeholder="Coloca tu referencia"
+                  required
+                  ref={referenciaRef}
+                  className="block w-full text-sm text-gray-700 bg-gray-50 border border-gray-300 rounded-lg p-2 
+                      focus:border-blue-600 focus:ring-blue-600"
+                  defaultValue={data?.data?.[0]?.archivo?.referencia_pago}
+                />
+              </div>
               <button
                 type="submit"
                 disabled={cargandoReferencia}
                 className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 
                 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
+                id="my-proceso-referencia-boton"
               >
                 {cargandoReferencia ? (
                   <ClipLoader color="#ffffff" size={24} />

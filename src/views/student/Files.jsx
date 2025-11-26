@@ -13,12 +13,15 @@ import { useRef } from "react";
 import CartaExcencionPdf from "../pdf/CartaExcencionPdf";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useStudentTour } from "../../hooks/useStudentTour";
+import { Video } from "lucide-react";
 
 export default function Files() {
   const { user } = useAuth({ withMiddleware: "auth" });
   const token = localStorage.getItem("AUTH_TOKEN");
   const shouldFetch = Boolean(user?.id);
   const pdfRef = useRef();
+  const { filesTour } = useStudentTour();
 
   const [memoriaLoading, setMemoriaLoading] = useState(false);
   const [comprobanteLoading, setComprobanteLoading] = useState(false);
@@ -101,27 +104,53 @@ export default function Files() {
 
   return (
     <>
-      <h1 className="text-center text-3xl font-black">Mis Archivos</h1>
+      <h1 className="text-center text-3xl font-black" id="files-header">
+        Mis Archivos
+      </h1>
       <h1 className="text-center my-3">Visualiza tus archivos adjuntados</h1>
+      <div className="flex w-full justify-end px-5">
+        <button
+          onClick={() => {
+            filesTour().drive();
+          }}
+          id="files-tutorial"
+          className="p-2 bg-blue-400 text-white rounded cursor-pointer hover:bg-blue-500 
+                            flex gap-1 hover:-translate-y-1 transition"
+        >
+          <Video />
+          <p>Tutorial</p>
+        </button>
+      </div>
       <div className="flex flex-col md:flex-row gap-5 mt-5">
-        <div className="p-2 bg-white rounded w-full text-black">
-          <h2 className="text-center text-emerald-500 font-bold text-2xl">
+        <div className="p-2 bg-white rounded w-full text-black" id="files-card">
+          <h2
+            className="text-center text-emerald-500 font-bold text-2xl"
+            id="files-nombre"
+          >
             Memoria de Estadía
           </h2>
           {archivo?.memoria_estadia === null ||
           archivo?.memoria_estadia === undefined ? (
-            <div className="mt-5">
-              <Alerta>No hay archivo adjuntado.</Alerta>
+            <div className="files-archivo">
+              <div className="mt-5" id="files-alerta">
+                <Alerta>No hay archivo adjuntado.</Alerta>
+              </div>
             </div>
           ) : (
             <>
-              <p className="my-3 text-gray-600">Archivo Adjunto:</p>
-              <PDFViewer
-                url={
-                  baseURL + "/storage/pdfs/memorias/" + archivo.memoria_estadia
-                }
-              />
-              <div className="mt-5">
+              <div className="files-archivo">
+                <p className="my-3 text-gray-600">Archivo Adjunto:</p>
+                <div>
+                  <PDFViewer
+                    url={
+                      baseURL +
+                      "/storage/pdfs/memorias/" +
+                      archivo.memoria_estadia
+                    }
+                  />
+                </div>
+              </div>
+              <div className="mt-5" id="files-acciones">
                 <h2 className="text-center text-blue-400 font-bold">
                   Acciones
                 </h2>
@@ -137,6 +166,7 @@ export default function Files() {
                         disabled={memoriaLoading}
                         className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
                       hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
+                        id="files-eliminar"
                       >
                         {memoriaLoading ? (
                           <ClipLoader color="#ffffff" size={24} />
@@ -151,6 +181,7 @@ export default function Files() {
                       <p
                         className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
                     hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
+                        id="files-nuevo"
                       >
                         Enviar Otro Archivo
                       </p>
@@ -281,7 +312,10 @@ export default function Files() {
         </div>
       </div>
       <div>
-        <div className="w-full mt-5 p-3 rounded-xl bg-white border-4 border-gray-300 text-black">
+        <div
+          className="w-full mt-5 p-3 rounded-xl bg-white border-4 border-gray-300 text-black"
+          id="carta-excencion"
+        >
           <div className="flex gap-1 items-center">
             <div className="p-1 rounded-full bg-blue-200 border-1 border-blue-600 flex justify-center items-center">
               <GraduationCap size={35} />
@@ -341,6 +375,7 @@ export default function Files() {
                     <button
                       onClick={generarPDF}
                       className="bg-blue-600 text-white px-4 py-2 rounded flex gap-2 cursor-pointer hover:bg-blue-700 hover:-translate-y-1 transition"
+                      id="files-descargar"
                     >
                       <Download />
                       <p>Descargar PDF</p>

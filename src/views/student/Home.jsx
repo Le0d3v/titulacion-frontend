@@ -5,8 +5,11 @@ import clienteAxios from "../../config/axios";
 import BarraProgreso from "../components/BarraProgreso";
 import { User } from "lucide-react";
 import Estado from "../components/Estado";
+import { useStudentTour } from "../../hooks/useStudentTour";
+import { Video } from "lucide-react";
 
 export default function Home() {
+  const { homeTour } = useStudentTour();
   const { user } = useAuth({ middleware: "auth" });
   const token = localStorage.getItem("AUTH_TOKEN");
   const shouldFetch = Boolean(user?.id);
@@ -30,17 +33,38 @@ export default function Home() {
 
   return (
     <>
-      <h1 className="text-center text-4xl font-black">
-        Bienvenido {usuario.name}
-      </h1>
-      <p className="text-center text-gray-200 mt-1">
-        Universidad Tecnológica de Huejozingo. Módulo de Titulación
-      </p>
+      <div id="home-header">
+        <h1 className="text-center text-4xl font-black">
+          Bienvenido {usuario.name}
+        </h1>
+        <p className="text-center text-gray-200 mt-1">
+          Universidad Tecnológica de Huejozingo. Módulo de Titulación
+        </p>
+      </div>
+      <div className="flex w-full justify-end px-5">
+        <button
+          onClick={() => {
+            homeTour().drive();
+          }}
+          id="home-tutorial"
+          className="p-2 bg-blue-400 text-white rounded cursor-pointer hover:bg-blue-500 
+                  flex gap-1 hover:-translate-y-1 transition"
+        >
+          <Video />
+          <p>Tutorial</p>
+        </button>
+      </div>
       <h2 className="text-center font-bold text-emerald-400 my-4 text-xl">
         Información General
       </h2>
-      <div className="flex flex-col md:flex-row gap-5 w-full mt-2 md:mt-5 p-3 md:p-0">
-        <div className="w-full xl:w-1/3 p-3 bg-cyan-100 border-4 border-cyan-300 rounded-3xl shadow">
+      <div
+        className="flex flex-col md:flex-row gap-5 w-full mt-2 md:mt-5 p-3 md:p-0"
+        id="home-main"
+      >
+        <div
+          className="w-full xl:w-1/3 p-3 bg-cyan-100 border-4 border-cyan-300 rounded-3xl shadow"
+          id="home-contenedor-1"
+        >
           <div className="w-full flex justify-center">
             <div>
               <div
@@ -117,12 +141,18 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full xl:w-2/3">
-          <div className="bg-emerald-100 border-4 border-emerald-300 rounded-xl p-3">
+          <div
+            className="bg-emerald-100 border-4 border-emerald-300 rounded-xl p-3"
+            id="home-contenedor-2"
+          >
             <div>
               <BarraProgreso proceso={usuario.proceso} />
             </div>
           </div>
-          <div className="mt-5 bg-indigo-100 border-4 border-indigo-300 rounded-xl p-3">
+          <div
+            className="mt-5 bg-indigo-100 border-4 border-indigo-300 rounded-xl p-3"
+            id="home-contenedor-3"
+          >
             <h2 className="text-center text-xl font-bold text-black">
               Actividades:
             </h2>

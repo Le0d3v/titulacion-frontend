@@ -1,6 +1,6 @@
 export default function Comentarios({ comentarios }) {
   return (
-    <div className="mt-5">
+    <div className="mt-5" id="my-proceso-comentarios">
       <p className="font-bold text-gray-800 text-xl mb-1 mb-3">Comentarios:</p>
       {comentarios.length > 0 ? (
         <>

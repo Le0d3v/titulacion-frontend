@@ -29,7 +29,10 @@ export default function UserLayout() {
         </div>
         <Navigation index="0" />
         <div className="absolute bottom-5 left-2 right-2">
-          <div className="flex items-center justify-center lg:justify-start p-3 rounded-lg">
+          <div
+            className="flex items-center justify-center lg:justify-start p-3 rounded-lg"
+            id="layout-user"
+          >
             <div className="w-8 h-8 bg-emerald-700 rounded-full flex items-center justify-center">
               <User className="w-4 h-4 text-gray-300" />
             </div>
@@ -49,7 +52,10 @@ export default function UserLayout() {
       </div>
       <div className="flex-1 flex flex-col overflow-hidden">
         <Header index="0" />
-        <main className=" text-black flex-1 overflow-auto bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 p-2 md:p-5 max-w-auto">
+        <main
+          className="text-black flex-1 overflow-auto bg-gradient-to-br from-gray-900 via-emerald-900 to-gray-900 p-2 md:p-5 max-w-auto"
+          id="admin-outlet"
+        >
           <div className="bg-white text-black dark:bg-white/10 dark:text-white h-full rounded-2xl p-1 md:p-5 max-w-auto md:ml-16 lg:ml-0 overflow-y-scroll">
             <Outlet />
           </div>
