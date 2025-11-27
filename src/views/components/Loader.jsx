@@ -1,19 +1,28 @@
-import { ClipLoader } from "react-spinners";
+import { PacmanLoader } from "react-spinners";
 import { useState } from "react";
 
 export default function Loader() {
   return (
     <div className="w-full h-100 flex justify-center items-center">
-      <div>
-        <div className="my-2 flex justify-center">
-          <ClipLoader
-            color="emerald"
-            size={80}
-            aria-label="Loading Spinner"
-            data-testid="loader"
+      <div className="">
+        <div className="mx-auto mt-1 w-full">
+          <img
+            src={"/img/logo_dark.png"}
+            className="w-66 dark:block hidden mx-auto"
+            alt="imagen-logo"
+          />
+          <img
+            src="/img/logo.png"
+            className="w-66 block dark:hidden mx-auto"
+            alt="imagen-logo"
           />
         </div>
-        <h1 className="text-sm">Cargando Información...</h1>
+        <div className="mt-7">
+          <div className="flex justify-center">
+            <PacmanLoader color="#30bb95" size={20} />
+          </div>
+          <h1 className="text-lg text-center mt-3">Cargando Información...</h1>
+        </div>
       </div>
     </div>
   );

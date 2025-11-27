@@ -13,23 +13,20 @@ import { NavLink } from "react-router-dom";
 import PieChart from "../components/PieChart";
 import clienteAxios from "../../config/axios";
 import { useAdminTour } from "../../hooks/useAdminTour";
+import Loader from "../components/Loader";
 
 export default function Dashboard() {
   const { dashboardTour } = useAdminTour();
 
   const [tsu, setTsu] = useState([]);
   const [ing, setIng] = useState([]);
-  const [procesosIng, setProcesosIng] = useState([]);
-  const [procesosTsu, setProcesosTsu] = useState([]);
   const [admins, setAdmins] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const obtenerTsu = async () => {
     try {
       const { data } = await clienteAxios("/api/students/tsu");
       setTsu(data.data);
-
-      // Establecer los datos filtrados en procesosTsu
-      setProcesosTsu(filteredData);
     } catch (error) {
       console.log(error);
     }
@@ -54,10 +51,15 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    obtenerTsu();
-    obtenerIng();
-    obtenerAdmins();
+    const fetchAll = async () => {
+      await Promise.all([obtenerTsu(), obtenerIng(), obtenerAdmins()]);
+      setLoading(false);
+    };
+
+    fetchAll();
   }, []);
+
+  if (loading) return <Loader />;
 
   return (
     <div id="dashboard">
