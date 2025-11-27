@@ -182,7 +182,7 @@ export default function MyProcess() {
       <div className="text-center text-3xl font-black" id="my-proceso-header">
         Mi Proceso
       </div>
-      <div className="flex w-full justify-end px-5">
+      <div className="flex w-full justify-center md:justify-end px-5 mt-5 md:mt-0 mb-5 md:m-0">
         <button
           onClick={() => {
             procesoTour().drive();
@@ -390,16 +390,16 @@ export default function MyProcess() {
                   placeholder="Coloca tu referencia"
                   required
                   ref={referenciaRef}
-                  className="block w-full text-sm text-gray-700 bg-gray-50 border border-gray-300 rounded-lg shadow-xl dark:p-2 
-    bg-gray-100                   focus:border-blue-600 focus:ring-blue-600"
+                  className="block w-full text-sm text-gray-700  border border-gray-300 rounded-lg shadow-xl dark:p-2 
+                  bg-gray-100 focus:border-blue-600 focus:ring-blue-600"
                   defaultValue={data?.data?.[0]?.archivo?.referencia_pago}
                 />
               </div>
               <button
                 type="submit"
                 disabled={cargandoReferencia}
-                className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer hover:bg-blue-600 
-                hover:-translate-y-1 transition flex gap-1 items-center justify-center w-26"
+                className="px-2 py-2 md:py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+                hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-full md:w-22"
                 id="my-proceso-referencia-boton"
               >
                 {cargandoReferencia ? (

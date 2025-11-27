@@ -38,7 +38,7 @@ export default function Header({ index }) {
               <div className="block md:hidden">
                 <img src="/img/logo.png" alt="imagen-logo" className="w-22" />
               </div>
-              <h1 className="text-md md:text-xl text-gray-900">
+              <h1 className="text-md md:text-xl text-gray-900 hidden md:block">
                 Universidad Tecnológica de Huejotzingo
               </h1>
             </div>

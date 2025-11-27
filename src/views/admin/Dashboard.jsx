@@ -65,7 +65,7 @@ export default function Dashboard() {
         <h1 className="text-center text-3xl font-black">
           Panel de Administración
         </h1>
-        <p className="text-center text-sm text-gray-300 mt-2">
+        <p className="text-center text-sm text-gray-800 dark:text-gray-300 mt-2">
           Bienvenido al Sistema de Gestión de Titulación
         </p>
       </div>
@@ -86,7 +86,7 @@ export default function Dashboard() {
         className="w-full flex flex-col md:flex-row gap-5 mt-3 md:mt-5 px-10 py-3 md:p-5"
         id="dashboard-main"
       >
-        <div className="w-full p-3 bg-blue-400 rounded-xl">
+        <div className="w-full p-3 bg-blue-400 rounded-xl text-white">
           <div className="flex justify-center p-1">
             <GraduationCap className="w-14 h-14" />
           </div>
@@ -104,7 +104,7 @@ export default function Dashboard() {
             </NavLink>
           </div>
         </div>
-        <div className="w-full p-3 bg-emerald-400 500 rounded-xl">
+        <div className="w-full p-3 bg-emerald-400 500 rounded-xl text-white">
           <div className="flex justify-center p-1">
             <User className="w-14 h-14" />
           </div>
@@ -119,7 +119,7 @@ export default function Dashboard() {
             </NavLink>
           </div>
         </div>
-        <div className="w-full p-3 bg-purple-400  rounded-xl">
+        <div className="w-full p-3 bg-purple-400  rounded-xl text-white">
           <div className="flex justify-center p-1">
             <HardHat className="w-14 h-14" />
           </div>
@@ -134,7 +134,7 @@ export default function Dashboard() {
             </NavLink>
           </div>
         </div>
-        <div className="w-full p-3 bg-red-400 rounded-xl">
+        <div className="w-full p-3 bg-red-400 rounded-xl text-white">
           <div className="flex justify-center p-1">
             <Lock className="w-14 h-14" />
           </div>
@@ -155,14 +155,14 @@ export default function Dashboard() {
       <div className="mt-5 p-5 md:p-1">
         <h1 className="text-center  text-2xl font-bold">Procesos</h1>
         <div className="flex flex-col md:flex-row gap-5 w-full mt-3">
-          <div className="w-full bg-gray-100/30 rounded-2xl p-3">
+          <div className="w-full bg-gray-100/30 rounded-2xl p-3 border-4 border-emerald-400 shadow-lg">
             <h1 className="text-center font-bold text-xl">TSU</h1>
             <div>
               <div
                 className="mt-3 flex flex-col md:flex-row gap-5 p-1"
                 id="dashboard-tsu"
               >
-                <div className="p-3 rounded bg-white w-full text-black">
+                <div className="p-3 rounded-lg bg-white w-full text-black border-4 border-gray-500">
                   <div className="flex justify-center">
                     <GraduationCap className="w-10 h-10 text-blue-400" />
                   </div>
@@ -175,7 +175,7 @@ export default function Dashboard() {
                     </span>
                   </div>
                 </div>
-                <div className="p-3 rounded bg-white w-full text-black">
+                <div className="p-3 rounded-lg bg-white w-full text-black border-4 border-gray-500">
                   <div className="flex justify-center">
                     <CircleCheck className="w-10 h-10 text-green-400" />
                   </div>
@@ -188,7 +188,7 @@ export default function Dashboard() {
                     </span>
                   </div>
                 </div>
-                <div className="p-3 rounded bg-white w-full text-black">
+                <div className="p-3 rounded-lg bg-white w-full text-black border-4 border-gray-500">
                   <div className="flex justify-center">
                     <CircleAlert className="w-10 h-10 text-yellow-400" />
                   </div>
@@ -214,13 +214,13 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="w-full bg-gray-100/30 rounded-2xl p-3 ">
+          <div className="w-full bg-gray-100/30 rounded-2xl p-3 border-4 border-emerald-400 shadow-lg">
             <h1 className="text-center font-bold text-xl">Ingeniería</h1>
             <div
               className="mt-3 flex flex-col md:flex-row gap-5 p-1"
               id="dashboard-ing"
             >
-              <div className="p-3 rounded bg-white w-full text-black">
+              <div className="p-3 rounded-lg bg-white w-full text-black border-4 border-gray-500">
                 <div className="flex justify-center">
                   <GraduationCap className="w-10 h-10 text-blue-400" />
                 </div>
@@ -233,7 +233,7 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className="p-3 rounded bg-white w-full text-black">
+              <div className="p-3 rounded-lg bg-white w-full text-black border-4 border-gray-500">
                 <div className="flex justify-center">
                   <CircleCheck className="w-10 h-10 text-green-400" />
                 </div>
@@ -246,7 +246,7 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className="p-3 rounded bg-white w-full text-black">
+              <div className="p-3 rounded-lg bg-white w-full text-black border-4 border-gray-500">
                 <div className="flex justify-center">
                   <CircleAlert className="w-10 h-10 text-yellow-400" />
                 </div>

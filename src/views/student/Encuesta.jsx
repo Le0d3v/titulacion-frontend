@@ -49,7 +49,7 @@ export default function Encuesta({ open, onClose, user, token }) {
   return (
     <div className="fixed inset-0 bg-gray-900/70 bg-opacity-60 flex items-center justify-center z-50 md:px-44">
       <div
-        className="bg-white w-full max-w-7xl p-6 rounded-xl shadow-xl text-black 
+        className="bg-white/90 w-full max-w-7xl p-6 rounded-xl shadow-xl text-black 
        max-h-[90vh] overflow-y-auto"
       >
         <div className="flex items-center gap-3">

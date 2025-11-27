@@ -83,6 +83,7 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
             <User className="text-white" />
           </div>
           <h1 className="text-xl font-bold text-black">
+            Validar Datos Personales
           </h1>
         </div>
         <div className="text-gray-700 my-3 text-center md:text-start md:flex md:gap-1">

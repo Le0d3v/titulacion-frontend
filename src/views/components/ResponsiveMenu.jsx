@@ -19,7 +19,7 @@ export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 h-full w-full bg-gray-900 text-white transform transition-transform duration-300 p-3 overflow-y-scroll ${
+        className={`fixed top-0 left-0 h-full w-full bg-emerald-900 dark:bg-gray-900 text-white transform transition-transform duration-300 p-3 overflow-y-scroll ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -31,17 +31,17 @@ export default function ResponsiveMenu({ isOpen, closeMenu, index }) {
           </div>
         </div>
         <div className="mt-3">
-          <img
-            src="/img/logo_dark.png"
-            alt="imagen-logo"
-            className="mx-auto w-32"
-          />
+          <img src="/img/logo.png" alt="imagen-logo" className="mx-auto w-32" />
           <h1 className="text-white text-2xl font-bold text-center mt-1">
             Universidad Tecnológica de Huejotzingo
           </h1>
         </div>
         <p className="text-lg text-gray-300 mt-10">Navegación</p>
-        {index == "1" ? <Navigation index="1" /> : <Navigation index="0" />}
+        {index == "1" ? (
+          <Navigation index="1" closeMenu={closeMenu ?? null} />
+        ) : (
+          <Navigation index="0" closeMenu={closeMenu ?? null} />
+        )}
         <div className="flex items-center justify-center lg:justify-start p-3 rounded-lg">
           <div className="w-8 h-8 bg-emerald-700 rounded-full flex items-center justify-center">
             <User className="w-4 h-4 text-gray-300" />
