@@ -76,16 +76,33 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-gray-900/70 bg-opacity-60 flex items-center justify-center z-50">
-      <div className="bg-white w-full max-w-7xl p-6 rounded-xl shadow-xl text-black">
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-full bg-emerald-500">
-            <User className="text-white" />
+    <div className="fixed inset-0 bg-gray-900/70 bg-opacity-60 flex items-center justify-center z-50 p-3 md:px-5">
+      <div
+        className="
+    bg-white w-full max-w-7xl p-6 rounded-xl shadow-xl text-black
+    max-h-[80vh] overflow-y-scroll
+    md:max-h-none md:overflow-visible
+  "
+      >
+        <div className="flex justify-between w-full items-center">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-full bg-emerald-500">
+              <User className="text-white" />
+            </div>
+            <h1 className="text-xl font-bold text-black">
+              Validar Datos Personales
+            </h1>
           </div>
-          <h1 className="text-xl font-bold text-black">
-            Validar Datos Personales
-          </h1>
+
+          <button
+            onClick={onClose}
+            className="p-2 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer
+      hover:-translate-y-1 transition hover:bg-gray-300"
+          >
+            <X className="text-black" />
+          </button>
         </div>
+
         <div className="text-gray-700 my-3 text-center md:text-start md:flex md:gap-1">
           <p>
             Verifica que tus datos personales sean correctos y coincidan con tus
@@ -185,12 +202,12 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
             />
           </div>
 
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-start md:justify-end gap-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
-          hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
+              className="px-2 py-2 md:py-1 rounded bg-red-500 text-white font-bold cursor-pointer
+          hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-1/2 md:w-22"
             >
               <X size={18} /> Cancelar
             </button>
@@ -199,7 +216,7 @@ export default function FormularioValidacion({ open, onClose, user, token }) {
               type="submit"
               disabled={cargandoValidacion}
               className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
-          hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
+          hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-1/2 md:w-22"
             >
               {cargandoValidacion ? (
                 <ClipLoader color="#ffffff" size={24} />

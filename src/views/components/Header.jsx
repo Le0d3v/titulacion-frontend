@@ -54,7 +54,7 @@ export default function Header({ index }) {
           <div className="md:flex items-center space-x-8 hidden">
             <div className="flex gap-5 items-center">
               <button
-                className="relative text-white bg-blue-400 hover:bg-blue-500 hover:cursor-pointer p-1 flex gap-1 hover:-translate-y-1 transition rounded text-sm items-center"
+                className="relative text-black hover:cursor-pointer p-1 flex gap-1 hover:-translate-y-1 transition rounded text-sm items-center"
                 id="tutorial-layout"
                 onClick={() => {
                   layoutTour().drive();

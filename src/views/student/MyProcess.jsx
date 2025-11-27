@@ -390,7 +390,7 @@ export default function MyProcess() {
                   placeholder="Coloca tu referencia"
                   required
                   ref={referenciaRef}
-                  className="block w-full text-sm text-gray-700  border border-gray-300 rounded-lg shadow-xl dark:p-2 
+                  className="block w-full text-sm text-gray-700 p-3 mt-2 border border-gray-300 rounded-lg shadow-xl dark:p-2 
                   bg-gray-100 focus:border-blue-600 focus:ring-blue-600"
                   defaultValue={data?.data?.[0]?.archivo?.referencia_pago}
                 />

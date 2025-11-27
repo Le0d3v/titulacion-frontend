@@ -108,7 +108,7 @@ export default function Files() {
         Mis Archivos
       </h1>
       <h1 className="text-center my-3">Visualiza tus archivos adjuntados</h1>
-      <div className="flex w-full justify-end px-5">
+      <div className="flex w-full justify-center md:justify-end px-5 mt-5 md:mt-0 mb-5 md:m-0">
         <button
           onClick={() => {
             filesTour().drive();
@@ -121,7 +121,7 @@ export default function Files() {
           <p>Tutorial</p>
         </button>
       </div>
-      <div className="flex flex-col md:flex-row gap-5 mt-5">
+      <div className="flex flex-col md:flex-row gap-5 mt-5 overflow-auto">
         <div
           className="p-2 bg-white rounded-xl w-full text-black border-4 border-gray-300 hover:-translate-y-2 transition"
           id="files-card"
@@ -167,7 +167,7 @@ export default function Files() {
                       <button
                         type="submit"
                         disabled={memoriaLoading}
-                        className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
+                        className="p-2 rounded bg-red-500 text-white font-bold cursor-pointer
                       hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
                         id="files-eliminar"
                       >
@@ -182,7 +182,7 @@ export default function Files() {
                     </form>
                     <NavLink to={"/home/my-process"}>
                       <p
-                        className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+                        className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer
                     hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
                         id="files-nuevo"
                       >
@@ -231,7 +231,7 @@ export default function Files() {
                       <button
                         type="submit"
                         disabled={comprobanteLoading}
-                        className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
+                        className="p-2 rounded bg-red-500 text-white font-bold cursor-pointer
                       hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
                       >
                         {comprobanteLoading ? (
@@ -245,7 +245,7 @@ export default function Files() {
                     </form>
                     <NavLink to={"/home/my-process"}>
                       <p
-                        className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+                        className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer
                       hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
                       >
                         Enviar Otro Archivo
@@ -283,7 +283,7 @@ export default function Files() {
                       <button
                         type="submit"
                         disabled={imagenLoading}
-                        className="px-2 py-1 rounded bg-red-500 text-white font-bold cursor-pointer
+                        className="p-2 rounded bg-red-500 text-white font-bold cursor-pointer
                       hover:bg-red-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center w-22"
                       >
                         {imagenLoading ? (
@@ -297,7 +297,7 @@ export default function Files() {
                     </form>
                     <NavLink to={"/home/my-process"}>
                       <p
-                        className="px-2 py-1 rounded bg-blue-500 text-white font-bold cursor-pointer
+                        className="p-2 rounded bg-blue-500 text-white font-bold cursor-pointer
                     hover:bg-blue-600 hover:-translate-y-1 transition flex gap-1 items-center justify-center"
                       >
                         Enviar Otro Archivo

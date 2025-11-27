@@ -49,16 +49,26 @@ export default function Encuesta({ open, onClose, user, token }) {
   return (
     <div className="fixed inset-0 bg-gray-900/70 bg-opacity-60 flex items-center justify-center z-50 md:px-44">
       <div
-        className="bg-white/90 w-full max-w-7xl p-6 rounded-xl shadow-xl text-black 
+        className="bg-white w-full max-w-7xl p-6 rounded-xl shadow-xl text-black 
        max-h-[90vh] overflow-y-auto"
       >
-        <div className="flex items-center gap-3">
-          <div className="p-2 rounded-full bg-emerald-500">
-            <ClipboardList className="text-white" />
+        <div className="flex justify-between w-full items-center">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-full bg-emerald-500">
+              <ClipboardList className="text-white" />
+            </div>
+            <h1 className="text-xl font-bold text-black">
+              Validar Datos Personales
+            </h1>
           </div>
-          <h1 className="text-xl font-bold text-black">
-            Encuesta de Egresados
-          </h1>
+
+          <button
+            onClick={onClose}
+            className="p-2 bg-gray-200 rounded-full flex items-center justify-center cursor-pointer
+      hover:-translate-y-1 transition hover:bg-gray-300"
+          >
+            <X className="text-black" />
+          </button>
         </div>
         {erroresEncuesta.length > 0 && (
           <div className="my-3">

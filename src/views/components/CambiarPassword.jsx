@@ -79,7 +79,7 @@ export default function CambiarPassword() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-white dark:md:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                 placeholder="••••••••"
                 required
                 name="current_password"
@@ -107,7 +107,7 @@ export default function CambiarPassword() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-white dark:md:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                 placeholder="••••••••"
                 required
                 name="password"
@@ -134,7 +134,7 @@ export default function CambiarPassword() {
               <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
               <input
                 type={showPassword ? "text" : "password"}
-                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-white dark:md:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                 placeholder="••••••••"
                 required
                 name="password_confirmation"

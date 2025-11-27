@@ -15,22 +15,6 @@ export const useStudentTour = () => {
           },
         },
         {
-          element: "#home-header",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el Header para corroborar que te encuentres en la sección correcta.",
-          },
-        },
-        {
-          element: "#home-tutorial",
-          popover: {
-            title: "Iniciar Tour",
-            description:
-              "Inicia este tour las veces que necesites utilziando este botón.",
-          },
-        },
-        {
           element: "#home-main",
           popover: {
             title: "Información General",
@@ -77,22 +61,6 @@ export const useStudentTour = () => {
             title: "Bienvenido al Tour por la sección de Configuración",
             description:
               "Completa este tour para conocer la gestión de Administradores.",
-          },
-        },
-        {
-          element: "#config-header-admin",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el header para comprobar que te localices en la sección correcta.",
-          },
-        },
-        {
-          element: "#tutorial-config-admin",
-          popover: {
-            title: "Iniciar Tour",
-            description:
-              "Arranca este tutorial las veces que lo necesites con este botón.",
           },
         },
         {
@@ -161,21 +129,6 @@ export const useStudentTour = () => {
           },
         },
         {
-          element: "#files-header",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el header para comprobar que te localices en la sección correcta.",
-          },
-        },
-        {
-          element: "#files-tutorial",
-          popover: {
-            title: "Iniciar Tour",
-            description: "Vuelve a visualizar este tour accionando este botón.",
-          },
-        },
-        {
           element: "#files-card",
           popover: {
             title: "Archivo",
@@ -188,7 +141,7 @@ export const useStudentTour = () => {
           popover: {
             title: "Nombre del Archivo",
             description:
-              "Localiza que archivo subiste a través de su nombre dentro de tu proceso.",
+              "Localiza el archivo que subiste a través de su nombre dentro de tu proceso.",
           },
         },
         {
@@ -263,21 +216,6 @@ export const useStudentTour = () => {
             title: "Bienvenido al Tour por la sección de Tu Proceso",
             description:
               "A través de esta sección realizarás las actividades que conforman tu proceso de titulación.",
-          },
-        },
-        {
-          element: "#my-proceso-header",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el header para comprobar que te localices en la sección correcta.",
-          },
-        },
-        {
-          element: "#my-proceso-tutorial",
-          popover: {
-            title: "Iniciar Tour",
-            description: "Vuelve a visualizar este tour accionando este botón.",
           },
         },
         {

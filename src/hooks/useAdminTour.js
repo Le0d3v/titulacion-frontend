@@ -97,14 +97,6 @@ export const useAdminTour = () => {
           },
         },
         {
-          element: "#header",
-          popover: {
-            title: "Header",
-            description:
-              "Aquí encontrarás el nombre de la insttución y algunos botónes importantes.",
-          },
-        },
-        {
           element: "#tutorial-layout",
           popover: {
             title: "Iniciar Tour",
