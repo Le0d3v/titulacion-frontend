@@ -1,9 +1,8 @@
 import { useState, createRef } from "react";
-import useSWR from "swr";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
-import { Info, NotebookPen, Send, User } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
+import { Info, NotebookPen, Send, User, Video } from "lucide-react";
+import { useStudentData } from "../../hooks/useStudentData";
 import clienteAxios from "../../config/axios";
 import Loader from "../components/Loader";
 import BarraProgreso from "../components/BarraProgreso";
@@ -14,167 +13,121 @@ import FormularioArchivo from "../components/FormularioArchivo";
 import Encuesta from "./Encuesta";
 import Comentarios from "../components/Comentarios";
 import { useStudentTour } from "../../hooks/useStudentTour";
-import { Video } from "lucide-react";
 
 export default function MyProcess() {
-  const { user } = useAuth({ middleware: "auth" });
-  const token = localStorage.getItem("AUTH_TOKEN");
-  const shouldFetch = Boolean(user?.id);
+  const { data, usuario, isLoading, error } = useStudentData();
   const { procesoTour } = useStudentTour();
+
+  const token = localStorage.getItem("AUTH_TOKEN");
+
+  const proceso = usuario?.proceso ?? null;
+
+  const referenciaRef = createRef();
+  const memoriaRef = createRef();
+  const comprobanteRef = createRef();
+  const imagenRef = createRef();
 
   const [erroresMemoria, setErroresMemoria] = useState([]);
   const [cargandoMemoria, setCargandoMemoria] = useState(false);
+
   const [erroresReferencia, setErroresReferencia] = useState([]);
   const [cargandoReferencia, setCargandoReferencia] = useState(false);
+
   const [erroresComprobante, setErroresComprobante] = useState([]);
   const [cargandoComprobante, setCargandoComprobante] = useState(false);
+
   const [erroresImagen, setErroresImagen] = useState([]);
   const [cargandoImagen, setCargandoImagen] = useState(false);
 
   const [modalValidacionOpen, setModalValidacionOpen] = useState(false);
   const [modalEncuestaOpen, setModalEncuestaOpen] = useState(false);
 
-  // Refs
-  const referenciaRef = createRef();
-  const memoriaRef = createRef();
-  const comprobanteRef = createRef();
-  const imagenRef = createRef();
-
-  const fetcher = () =>
-    clienteAxios(`/api/students/all/${user.id}`).then((data) => data.data);
-
-  const { data, error, isLoading } = useSWR(
-    shouldFetch ? `/api/students/all/${user.id}` : null,
-    fetcher,
-    {
-      refreshInterval: 1000,
-    }
-  );
-
-  if (!user) return <Loader />;
-  if (isLoading && shouldFetch) return <Loader />;
+  if (!usuario) return <Loader />;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error al cargar los datos.</div>;
 
-  const proceso = data?.data?.[0]?.proceso ?? null;
-  const usuario = data?.data?.[0];
+  const subirArchivo = async (
+    url,
+    formDataSetter,
+    errorSetter,
+    loadingSetter
+  ) => {
+    loadingSetter(true);
 
-  const hanldeSubmitReferencia = async (e) => {
+    try {
+      const { data } = await clienteAxios.post(url, formDataSetter, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      errorSetter([]);
+      toast.success(data.message);
+    } catch (error) {
+      errorSetter(Object.values(error.response?.data?.errors ?? {}));
+      setTimeout(() => errorSetter([]), 5000);
+    }
+
+    loadingSetter(false);
+  };
+
+  const handleSubmitReferencia = (e) => {
     e.preventDefault();
-    setCargandoReferencia(true);
 
     const datos = {
-      id: user.id,
+      id: usuario.id,
       referencia_pago: referenciaRef.current.value,
     };
 
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/archivo/referencia/store",
-        datos,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setErroresReferencia([]);
-      setCargandoReferencia(false);
-      toast.success(data.message);
-    } catch (error) {
-      setErroresReferencia(Object.values(error.response.data.errors));
-      setCargandoReferencia(false);
-
-      setTimeout(() => setErroresReferencia([]), 5000);
-    }
+    subirArchivo(
+      "/api/archivo/referencia/store",
+      datos,
+      setErroresReferencia,
+      setCargandoReferencia
+    );
   };
 
-  const handleSubmitMemoria = async (e) => {
+  const handleSubmitMemoria = (e) => {
     e.preventDefault();
-    setCargandoMemoria(true);
 
     const formData = new FormData();
-    formData.append("id", user.id);
+    formData.append("id", usuario.id);
     formData.append("pdf", memoriaRef.current.files[0]);
 
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/archivo/memoria/store",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setErroresMemoria([]);
-      setCargandoMemoria(false);
-      toast.success(data.message);
-    } catch (error) {
-      setErroresMemoria(Object.values(error.response.data.errors));
-      setCargandoMemoria(false);
-      setTimeout(() => setErroresMemoria([]), 5000);
-    }
+    subirArchivo(
+      "/api/archivo/memoria/store",
+      formData,
+      setErroresMemoria,
+      setCargandoMemoria
+    );
   };
 
-  const handleSubmitComprobante = async (e) => {
+  const handleSubmitComprobante = (e) => {
     e.preventDefault();
-    setCargandoComprobante(true);
 
     const formData = new FormData();
-    formData.append("id", user.id);
+    formData.append("id", usuario.id);
     formData.append("pdf", comprobanteRef.current.files[0]);
 
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/archivo/comprobante/store",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setErroresComprobante([]);
-      setCargandoComprobante(false);
-      toast.success(data.message);
-    } catch (error) {
-      setErroresComprobante(Object.values(error.response.data.errors));
-      setCargandoComprobante(false);
-      setTimeout(() => setErroresComprobante([]), 5000);
-    }
+    subirArchivo(
+      "/api/archivo/comprobante/store",
+      formData,
+      setErroresComprobante,
+      setCargandoComprobante
+    );
   };
 
-  const handleSubmitImagen = async (e) => {
+  const handleSubmitImagen = (e) => {
     e.preventDefault();
-    setCargandoImagen(true);
 
     const formData = new FormData();
-    formData.append("id", user.id);
+    formData.append("id", usuario.id);
     formData.append("imagen", imagenRef.current.files[0]);
 
-    try {
-      const { data } = await clienteAxios.post(
-        "/api/archivo/imagen/store",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      console.log(data);
-      setErroresImagen([]);
-      setCargandoImagen(false);
-      toast.success(data.message);
-    } catch (error) {
-      setErroresImagen(Object.values(error.response.data.errors));
-      setCargandoImagen(false);
-      setTimeout(() => setErroresImagen([]), 5000);
-    }
+    subirArchivo(
+      "/api/archivo/imagen/store",
+      formData,
+      setErroresImagen,
+      setCargandoImagen
+    );
   };
 
   return (
@@ -375,7 +328,7 @@ export default function MyProcess() {
             <form
               encType="multipart/form-data"
               className="w-full max-w-md mx-auto space-y-4 p-4 bg-gray-200 mt-3 shadow-md rounded-xl"
-              onSubmit={hanldeSubmitReferencia}
+              onSubmit={handleSubmitReferencia}
             >
               {erroresReferencia.map((error, i) => (
                 <Alerta key={i}>{error}</Alerta>
@@ -420,7 +373,7 @@ export default function MyProcess() {
       <FormularioValidacion
         open={modalValidacionOpen}
         onClose={() => setModalValidacionOpen(false)}
-        user={user}
+        user={usuario}
         token={token}
       />
 

@@ -1,35 +1,16 @@
-import { useAuth } from "../../hooks/useAuth";
-import Loader from "../components/Loader";
-import useSWR from "swr";
-import clienteAxios from "../../config/axios";
-import BarraProgreso from "../components/BarraProgreso";
-import { User } from "lucide-react";
-import Estado from "../components/Estado";
+import { useStudentData } from "../../hooks/useStudentData";
 import { useStudentTour } from "../../hooks/useStudentTour";
-import { Video } from "lucide-react";
+import Loader from "../components/Loader";
+import BarraProgreso from "../components/BarraProgreso";
+import Estado from "../components/Estado";
+import { Video, User } from "lucide-react";
 
 export default function Home() {
   const { homeTour } = useStudentTour();
-  const { user } = useAuth({ middleware: "auth" });
-  const token = localStorage.getItem("AUTH_TOKEN");
-  const shouldFetch = Boolean(user?.id);
+  const { usuario, isLoading, error } = useStudentData();
 
-  const fetcher = () =>
-    clienteAxios(`/api/students/all/${user.id}`).then((data) => data.data);
-
-  const { data, error, isLoading } = useSWR(
-    shouldFetch ? `/api/students/all/${user.id}` : null,
-    fetcher,
-    {
-      refreshInterval: 1000,
-    }
-  );
-
-  if (!user) return <Loader />;
-  if (isLoading && shouldFetch) return <Loader />;
+  if (isLoading || !usuario) return <Loader />;
   if (error) return <div>Error al cargar los datos.</div>;
-
-  const usuario = data?.data?.[0];
 
   return (
     <>
@@ -62,7 +43,7 @@ export default function Home() {
         id="home-main"
       >
         <div
-          className="w-full xl:w-1/3 p-3 bg-cyan-100 border-4 border-cyan-300 rounded-3xl shadow"
+          className="w-full xl:w-2/5 p-3 bg-cyan-100 border-4 border-cyan-300 rounded-3xl shadow"
           id="home-contenedor-1"
         >
           <div className="w-full flex justify-center">
@@ -140,7 +121,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full xl:w-2/3">
+        <div className="w-full xl:w-3/5">
           <div
             className="bg-emerald-100 border-4 border-emerald-300 rounded-xl p-3"
             id="home-contenedor-2"

@@ -15,37 +15,24 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useStudentTour } from "../../hooks/useStudentTour";
 import { Video } from "lucide-react";
+import { useStudentData } from "../../hooks/useStudentData";
 
 export default function Files() {
-  const { user } = useAuth({ withMiddleware: "auth" });
-  const token = localStorage.getItem("AUTH_TOKEN");
-  const shouldFetch = Boolean(user?.id);
-  const pdfRef = useRef();
+  const { usuario, isLoading, error } = useStudentData();
   const { filesTour } = useStudentTour();
+
+  const pdfRef = useRef();
 
   const [memoriaLoading, setMemoriaLoading] = useState(false);
   const [comprobanteLoading, setComprobanteLoading] = useState(false);
   const [imagenLoading, setImagenLoading] = useState(false);
 
-  const fetcher = () =>
-    clienteAxios(`/api/students/all/${user.id}`).then((data) => data.data);
+  const token = localStorage.getItem("AUTH_TOKEN");
+  const baseURL = import.meta.env.VITE_API_URL;
 
-  const { data, error, isLoading } = useSWR(
-    shouldFetch ? `/api/students/all/${user.id}` : null,
-    fetcher,
-    {
-      refreshInterval: 1000,
-    }
-  );
-
-  if (!user) return <Loader />;
+  if (!usuario) return <Loader />;
   if (isLoading && shouldFetch) return <Loader />;
   if (error) return <div>Error al cargar los datos.</div>;
-
-  const archivo = data?.data?.[0]?.archivo ?? null;
-  const usuario = data?.data?.[0] ?? null;
-
-  const baseURL = import.meta.env.VITE_API_URL;
 
   const handleSubmitDelete = async (e, type, setLoading) => {
     e.preventDefault();
@@ -53,7 +40,7 @@ export default function Files() {
 
     try {
       const { data } = await clienteAxios.post(
-        `/api/archivo/${type}/destroy/${user.id}`,
+        `/api/archivo/${type}/destroy/${usuario.id}`,
         null,
         {
           headers: {
@@ -132,8 +119,8 @@ export default function Files() {
           >
             Memoria de Estadía
           </h2>
-          {archivo?.memoria_estadia === null ||
-          archivo?.memoria_estadia === undefined ? (
+          {usuario.archivo?.memoria_estadia === null ||
+          usuario.archivo?.memoria_estadia === undefined ? (
             <div className="files-archivo">
               <div className="mt-5" id="files-alerta">
                 <Alerta>No hay archivo adjuntado.</Alerta>
@@ -148,7 +135,7 @@ export default function Files() {
                     url={
                       baseURL +
                       "/storage/pdfs/memorias/" +
-                      archivo.memoria_estadia
+                      usuario.archivo.memoria_estadia
                     }
                   />
                 </div>
@@ -199,7 +186,7 @@ export default function Files() {
           <h2 className="text-center text-emerald-500 font-bold text-2xl">
             Comprobante de Donación
           </h2>
-          {!archivo?.comprobante_donacion ? (
+          {!usuario.archivo?.comprobante_donacion ? (
             <div className="mt-5">
               <Alerta>No hay comprobante adjuntado.</Alerta>
             </div>
@@ -210,7 +197,7 @@ export default function Files() {
                 url={
                   baseURL +
                   "/storage/pdfs/comprobantes/" +
-                  archivo.comprobante_donacion
+                  usuario.archivo.comprobante_donacion
                 }
               />
               <div className="mt-5">
@@ -261,11 +248,15 @@ export default function Files() {
           <h2 className="text-center text-emerald-500 font-bold text-2xl">
             Imágen para Titulación
           </h2>
-          {archivo?.imagen_titulacion ? (
+          {usuario.archivo?.imagen_titulacion ? (
             <>
               <p className="my-3 text-gray-600">Archivo Adjunto:</p>
               <img
-                src={baseURL + `/storage/imagenes/` + archivo.imagen_titulacion}
+                src={
+                  baseURL +
+                  `/storage/imagenes/` +
+                  usuario.archivo.imagen_titulacion
+                }
                 alt="imagen-titulacion"
                 className="w-full h-72"
               />

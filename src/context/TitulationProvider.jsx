@@ -5,8 +5,6 @@ const TitulationContext = createContext();
 const TitulationProvider = ({ children }) => {
   const [modal, setModalOpen] = useState(false);
   const [itemModal, setItemModal] = useState(null);
-  const [studentsTsu, setStudentsTsu] = useState([]);
-  const [studentsIng, setStudentsIng] = useState([]);
 
   const openModal = (item) => {
     setModalOpen(true);
