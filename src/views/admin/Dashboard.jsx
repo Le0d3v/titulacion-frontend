@@ -69,7 +69,7 @@ export default function Dashboard() {
           Bienvenido al Sistema de Gestión de Titulación
         </p>
       </div>
-      <div className="flex w-full justify-end px-5">
+      <div className="flex w-full justify-center md:justify-end px-5 mt-5 md:mt-0">
         <button
           onClick={() => {
             dashboardTour().drive();

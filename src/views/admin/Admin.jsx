@@ -45,7 +45,7 @@ export default function Admin() {
       <div className="text-center text-3xl font-black" id="admins-header">
         Administradores
       </div>
-      <div className="flex w-full justify-end px-5">
+      <div className="flex w-full justify-center md:justify-end px-5 mt-5 md:mt-0">
         <button
           onClick={() => {
             adminsTour().drive();
@@ -59,21 +59,24 @@ export default function Admin() {
         </button>
       </div>
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center">
-        <p className="text-sm text-gray-100 mt-5 md:mt-0" id="total-admins">
+        <p
+          className="text-sm dark:text-gray-100 mt-5 md:mt-0 text-blacks"
+          id="total-admins"
+        >
           Administradores Totales:
           <span className="text-lg text-emerald-500 font-black">
             {" " + admins.length}
           </span>
         </p>
         <div
-          className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
+          className="flex p-1 gap-1 bg-emerald-400 dark:bg-gray-800/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
           id="buscador-admins"
         >
-          <Search />
+          <Search className="text-white" />
           <input
             type="text"
             placeholder="Buscar Administrador"
-            className="p-1"
+            className="p-1 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-400"
             onChange={handleSearchAdmin}
           />
         </div>
@@ -113,7 +116,7 @@ export default function Admin() {
                     <div className="flex justify-center w-auto">
                       <button
                         type="button"
-                        className="p-1 rounded bg-emerald-400 cursor-pointer hover:bg-emerald-500 transition-all hover:-translate-y-1 mx-auto font-bold flex gap-1"
+                        className="p-1 rounded bg-emerald-400 cursor-pointer hover:bg-emerald-500 transition-all hover:-translate-y-1 mx-auto font-bold flex gap-1 text-white"
                         id="ver-mas-admin"
                         onClick={() => {
                           openModal(admin);

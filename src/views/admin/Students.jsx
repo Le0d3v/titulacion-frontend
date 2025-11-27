@@ -25,7 +25,7 @@ export default function Students() {
       <div className="text-center text-3xl font-black" id="estudiantes-header">
         Estudiantes (TSU)
       </div>
-      <div className="flex w-full justify-end px-5">
+      <div className="flex w-full justify-center md:justify-end px-5 mt-5 md:mt-0">
         <button
           onClick={() => {
             studentsTour().drive();

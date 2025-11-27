@@ -12,7 +12,7 @@ export default function Setings() {
       <h1 className="text-center text-3xl font-black" id="config-header-admin">
         Configuración
       </h1>
-      <div className="flex w-full justify-end px-5">
+      <div className="flex w-full justify-center md:justify-end px-5 mt-5 md:mt-0">
         <button
           onClick={() => {
             configTour().drive();

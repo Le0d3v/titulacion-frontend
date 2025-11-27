@@ -30,7 +30,7 @@ export default function StudentsTable({ datos }) {
     <>
       <div className="mt-5 flex flex-col md:flex-row justify-between items-center">
         <p
-          className="text-sm text-gray-100 mt-5 md:mt-0"
+          className="text-sm dark:text-gray-100 mt-5 md:mt-0 text-black"
           id="estudiantes-total"
         >
           Estudiantes Totales:
@@ -39,14 +39,14 @@ export default function StudentsTable({ datos }) {
           </span>
         </p>
         <div
-          className="flex p-1 gap-1 bg-gray-500/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
+          className="flex p-1 gap-1 bg-emerald-400 dark:bg-gray-800/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
           id="buscador-estudiantes"
         >
-          <Search />
+          <Search className="text-white" />
           <input
             type="text"
             placeholder="Buscar Estudiante"
-            className="p-1"
+            className="p-1 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-400"
             onChange={handleSearchStudent}
           />
         </div>
@@ -86,7 +86,7 @@ export default function StudentsTable({ datos }) {
                     <div className="flex justify-center w-auto">
                       <button
                         type="button"
-                        className="p-1 rounded bg-emerald-400 cursor-pointer hover:bg-emerald-500 transition-all hover:-translate-y-1 mx-auto font-bold flex gap-1"
+                        className="p-1 rounded bg-emerald-400 cursor-pointer hover:bg-emerald-500 transition-all hover:-translate-y-1 mx-auto font-bold flex gap-1 text-white"
                         id="ver-mas-estudiante"
                         onClick={() => {
                           openModal(student);

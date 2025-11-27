@@ -41,7 +41,7 @@ export default function ProcesosContainer({ procesos }) {
 
   return (
     <div className="w-full">
-      <div className="mt-3 w-full p-3 bg-gray-400/50 rounded-xl">
+      <div className="mt-3 w-full p-3 bg-gray-100 dark:bg-gray-400/50 rounded-xl">
         <div className="flex justify-between items-center">
           <p className="text-md" id="proceso-container-total">
             Procesos Totales:
@@ -51,14 +51,14 @@ export default function ProcesosContainer({ procesos }) {
           </p>
 
           <div
-            className="flex p-1 gap-1 bg-gray-800/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
+            className="flex p-1 gap-1 bg-emerald-400 dark:bg-gray-800/50 rounded-lg items-center mt-5 md:mt-0 md:w-auto"
             id="proceso-container-buscador"
           >
-            <Search />
+            <Search className="text-white" />
             <input
               type="text"
               placeholder="Buscar Proceso"
-              className="p-1 bg-transparent outline-none text-white placeholder-gray-400"
+              className="p-1 bg-transparent outline-none text-white placeholder-white dark:placeholder-gray-400"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />

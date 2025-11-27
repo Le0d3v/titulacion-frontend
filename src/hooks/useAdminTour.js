@@ -15,22 +15,6 @@ export const useAdminTour = () => {
           },
         },
         {
-          element: "#dashboard-header",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el Header para corroborar que te encuentres en la sección correcta.",
-          },
-        },
-        {
-          element: "#tutorial-dashboard",
-          popover: {
-            title: "Iniciar Tour",
-            description:
-              "Inicia este tour las veces que lo necesites utilziando este botón.",
-          },
-        },
-        {
           element: "#dashboard-main",
           popover: {
             title: "Conteo genérico",
@@ -49,31 +33,15 @@ export const useAdminTour = () => {
         {
           element: "#dashboard-tsu",
           popover: {
-            title: "Procesos (TSU)",
+            title: "Procesos (TSU / Ingeniería)",
             description:
-              "Visualiza información genérica sobre los procesos de titulación en TSU",
-          },
-        },
-        {
-          element: "#dashboard-ing",
-          popover: {
-            title: "Procesos (Ingeniería)",
-            description:
-              "Visualiza información genérica sobre los procesos de titulación en Ingeniería",
+              "Visualiza información genérica sobre los procesos de titulación. Cada ficha contiene los procesosde cada ciclo.",
           },
         },
         {
           element: "#grafica-tsu",
           popover: {
-            title: "Gráfica de Procesos (TSU)",
-            description:
-              "Visualiza información de manera más gráfica con este gráfico.",
-          },
-        },
-        {
-          element: "#grafica-ing",
-          popover: {
-            title: "Gráfica de Procesos (Ingeniería)",
+            title: "Gráfica de Procesos (TSU / Ingeniería)",
             description:
               "Visualiza información de manera más gráfica con este gráfico.",
           },
@@ -155,29 +123,6 @@ export const useAdminTour = () => {
           },
         },
         {
-          element: "#procesos-header",
-          popover: {
-            title: "Header",
-            description:
-              "Usa el Header para comprobar que te encuentres en la sección correcta.",
-          },
-        },
-        {
-          element: "#procesos-total",
-          popover: {
-            title: "Procesos totales",
-            description: "Consulta el número total de procesos.",
-          },
-        },
-        {
-          element: "#tutorial-procesos",
-          popover: {
-            title: "Iniciar Tour",
-            description:
-              "Si olvidas alguna funcionalidad, utilizia este botón para realizar este tour.",
-          },
-        },
-        {
           element: "#proceso-container",
           popover: {
             title: "Prcoesos",
@@ -224,22 +169,6 @@ export const useAdminTour = () => {
             title: "Bienvenido al Tour por la sección de Estudiantes",
             description:
               "Sigue este tour para conocer la gestión de estudiantes.",
-          },
-        },
-        {
-          element: "#estudiantes-header",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el header para comprobar que te localices en la sección correcta.",
-          },
-        },
-        {
-          element: "#tutorial-estudiantes",
-          popover: {
-            title: "Iniciar Tour",
-            description:
-              "Utiliza el botón para iniciar el tour las veces que lo necesites.",
           },
         },
         {
@@ -310,22 +239,6 @@ export const useAdminTour = () => {
           },
         },
         {
-          element: "#admins-header",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el header para comprobar que te localices en la sección correcta.",
-          },
-        },
-        {
-          element: "#tutorial-admins",
-          popover: {
-            title: "Iniciar Tour",
-            description:
-              "Utiliza el botón para iniciar el tour las veces que lo necesites.",
-          },
-        },
-        {
           element: "#total-admins",
           popover: {
             title: "Administradores Totales",
@@ -381,22 +294,6 @@ export const useAdminTour = () => {
             title: "Bienvenido al Tour por la sección de Configuración",
             description:
               "Completa este tour para conocer la gestión de Administradores.",
-          },
-        },
-        {
-          element: "#config-header-admin",
-          popover: {
-            title: "Header",
-            description:
-              "Utiliza el header para comprobar que te localices en la sección correcta.",
-          },
-        },
-        {
-          element: "#tutorial-config-admin",
-          popover: {
-            title: "Iniciar Tour",
-            description:
-              "Arranca este tutorial las veces que lo necesites con este botón.",
           },
         },
         {

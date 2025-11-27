@@ -10,6 +10,7 @@ export default function Header({ index }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { logout } = useAuth({ middleware: "auth" });
   const [cargando, setCargando] = useState(false);
+  const [dark, setDark] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);

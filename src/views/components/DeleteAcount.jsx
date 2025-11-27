@@ -10,15 +10,17 @@ export default function DeleteAcount() {
       id="eliminar-cuenta"
     >
       <div className="flex items-center gap-3">
-        <div className="p-2 rounded-full bg-gray-500/70">
-          <Trash />
+        <div className="p-2 rounded-full dark:bg-gray-500/70 bg-red-400">
+          <Trash className="text-white" />
         </div>
-        <h1 className="text-xl font-bold">Eliminar Cuenta</h1>
+        <h1 className="text-xl font-bold text-red-400 dark:text-white">
+          Eliminar Cuenta
+        </h1>
       </div>
       <div className="mt-2">
         <div id="advertencia">
           <div className="flex gap-1 md:items-center">
-            <CircleAlert className="text-yellow-400 md:h-5 md:w-5 h-13 w-13" />
+            <CircleAlert className="dark:text-yellow-400 md:h-5 md:w-5 h-13 w-13 text-yellow-500" />
             <p className="text-center md:text-start text-yellow-400">
               Para eliminar tu cuentes debes confirmar tu identidad colocando tu
               contraseña
@@ -39,7 +41,7 @@ export default function DeleteAcount() {
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
                 <input
                   type="password"
-                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-white dark:md:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                   placeholder="••••••••"
                   required
                   name="password"
@@ -54,7 +56,7 @@ export default function DeleteAcount() {
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 transition-colors text-white" />
                 <input
                   type="password"
-                  className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                  className="w-full pl-10 pr-10 py-3 dark:bg-white/5 bg-emerald-400 border dark:border-white/20 border-emerald-500 rounded-lg text-white placeholder-white dark:md:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
                   placeholder="••••••••"
                   required
                   name="password"
